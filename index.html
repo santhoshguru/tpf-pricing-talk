@@ -28,20 +28,20 @@
         4   ANIMALS      s03-animals         Janz five animals + Whale
         5   STACK        s02-cost-stack      The Cost Stack (SVG)
         6   ORGCHART     s12-org-chart       Your Price Is an Org Chart (SVG)
-        7   READY        s16-decode-intro    breather — ready for detective work
-        8   SPOTIFY      s11-spotify         decode
-        9   BASECAMP     s05-basecamp        decode
-       10   INTERCOM     s08-intercom        decode
-       11   NOTION       s06-notion          decode
-       12   HUBSPOT      s10-hubspot         decode
-       13   SALESFORCE   s07-salesforce      decode
-       14   FRESHDESK    s09-freshdesk       decode
-       15   CLOSE        s14-close           "Bring your favourite pricing page"
-       16   THANKYOU     s17-thankyou        breather — Questions? / Thank you
-       17   MYTHS        sA1-myths           appendix — pricing myths
-       18   CHECKLIST    sA2-checklist       appendix — start here
-       19   MARGIN       s01-unit-econ       marginal-cost / COGS chart
-       20   BUILD        s13-build           the order that matters (5 steps)
+        7   CRASH        s18-crashcourse     breather — quick crash course (intro to myths+questions)
+        8   MYTHS        sA1-myths           "What product people get wrong" (myth → truth)
+        9   QUESTIONS    sA2-checklist       "The six questions to ask instead" + punchline
+       10   READY        s16-decode-intro    breather — ready for detective work
+       11   SPOTIFY      s11-spotify         decode
+       12   BASECAMP     s05-basecamp        decode
+       13   INTERCOM     s08-intercom        decode
+       14   NOTION       s06-notion          decode
+       15   HUBSPOT      s10-hubspot         decode
+       16   SALESFORCE   s07-salesforce      decode
+       17   FRESHDESK    s09-freshdesk       decode
+       18   CLOSE        s14-close           "Bring your favourite pricing page"
+       19   THANKYOU     s17-thankyou        breather — Questions? / Thank you
+       (removed: MARGIN / unit-econ chart, BUILD / "the order that matters")
      ===================================================================== -->
 
 <!-- Chart.js vendored locally (assets/) so the deck works fully offline. -->
@@ -213,6 +213,14 @@ h2{font-family:var(--font-title);font-weight:800;font-size:clamp(2.4rem,5vw,3.9r
 .cmp .myth{color:var(--text-secondary);font-weight:600;text-decoration:line-through;text-decoration-color:color-mix(in srgb,var(--gold) 70%,transparent)}
 .cmp .truth{font-weight:700;color:var(--text-primary)}
 .cmp .truth b{color:var(--accent)}
+.cmp .myth em,.cmp .truth em{font-style:italic;font-weight:inherit}
+/* tight 6-row variant for the repurposed appendix tables (myths / questions) */
+.cmp.tight{margin-top:clamp(1rem,2.6vh,1.8rem)}
+.cmp.tight .cmp-row>*{padding:clamp(.5rem,1.25vh,.85rem) clamp(1rem,1.8vw,1.5rem);font-size:clamp(.98rem,1.32vw,1.22rem);line-height:1.32}
+.cmp.tight .cmp-head{font-size:clamp(.85rem,1.15vw,1rem)}
+.cmp.tight .crit{color:var(--text-secondary);font-weight:600}
+.cmp-punch{margin-top:clamp(1rem,2.4vh,1.7rem);font-family:var(--font-title);font-style:italic;font-weight:600;font-size:clamp(1.15rem,1.9vw,1.55rem);line-height:1.3;color:var(--text-primary);max-width:60ch}
+.cmp-punch b{color:var(--accent);font-style:normal;font-weight:800}
 
 /* ===================== CHECKLIST ===================== */
 .checks{list-style:none;margin-top:clamp(1.8rem,4.5vh,3rem);display:flex;flex-direction:column;gap:clamp(1rem,2.4vh,1.6rem);max-width:1100px}
@@ -331,6 +339,54 @@ h2{font-family:var(--font-title);font-weight:800;font-size:clamp(2.4rem,5vw,3.9r
     </div>
 </section>
 <!-- =====================================================================
+     CRASH — quick crash-course divider (navy bookend). Intro to the myths + questions.  id="s18-crashcourse"
+     ===================================================================== -->
+<section class="slide slide--dark cover" id="s18-crashcourse">
+    <div class="aura"></div>
+    <div class="inner">
+        <h1 class="reveal from-blur">First — a quick <span class="circle-word">crash course<svg class="circle-mark" viewBox="0 0 400 130" preserveAspectRatio="none" aria-hidden="true"><path d="M 364 32 C 286 4, 78 6, 22 34 C -22 60, -4 104, 92 118 C 240 134, 380 118, 392 80 C 402 48, 386 38, 364 32"/></svg></span>.</h1>
+        <p class="sub reveal">For product builders: bust a couple of myths, steal the questions that matter — <em>then</em> we read real pages.</p>
+        <div class="lens-chips reveal stagger">
+            <span><b>Myths to burst</b></span><span><b>Questions to steal</b></span>
+        </div>
+    </div>
+</section>
+<!-- =====================================================================
+     APPENDIX A1 — MYTHS (Slide 1 of the arc: tear down)  id="sA1-myths"
+     Repurposed. Bold (<b>) = gold emphasis word. Comes BEFORE the questions slide.
+     ===================================================================== -->
+<section class="slide" id="sA1-myths">
+    <span class="eyebrow reveal">Pricing · what we get wrong</span>
+    <h2 class="reveal">What product people get wrong about pricing.</h2>
+    <div class="cmp tight reveal">
+        <div class="cmp-row cmp-head"><span>The myth</span><span>What's actually true</span></div>
+        <div class="cmp-row"><span class="myth">&ldquo;Pricing is the price.&rdquo;</span><span class="truth">Price is what you charge. <b>Pricing</b> is everything that decides it — value, segment, packaging, meter. The number is the last 5%.</span></div>
+        <div class="cmp-row"><span class="myth">&ldquo;Get the product right, then price it.&rdquo;</span><span class="truth">Design the product <b>around</b> the price. Willingness-to-pay decides what you build — and what you cut.</span></div>
+        <div class="cmp-row"><span class="myth">&ldquo;Our value is what the product does.&rdquo;</span><span class="truth">Value is the <b>gap</b> between you and their next-best option. That gap is your ceiling — and your roadmap.</span></div>
+        <div class="cmp-row"><span class="myth">&ldquo;Cost tells us what to charge.&rdquo;</span><span class="truth">Cost is the <b>floor</b> you stand on, not the price you charge. Cost goes last, not first.</span></div>
+        <div class="cmp-row"><span class="myth">&ldquo;The big call is seats vs. tokens.&rdquo;</span><span class="truth">The meter is the <b>last mile</b> — derived from the value, not chosen first.</span></div>
+        <div class="cmp-row"><span class="myth">&ldquo;Set the price, ship it, done.&rdquo;</span><span class="truth">Pricing is a <b>product</b> — versioned by geography and segment, re-tested every quarter, owned forever.</span></div>
+    </div>
+</section>
+<!-- =====================================================================
+     APPENDIX A2 — THE SIX QUESTIONS (Slide 2 of the arc: hand back)  id="sA2-checklist"
+     Repurposed. The takeaway artifact. Comes AFTER the myths slide.
+     ===================================================================== -->
+<section class="slide" id="sA2-checklist">
+    <span class="eyebrow reveal">Pricing · ask these first</span>
+    <h2 class="reveal">The six questions to ask instead.</h2>
+    <div class="cmp tight reveal">
+        <div class="cmp-row cmp-head"><span>The question</span><span>What it surfaces</span></div>
+        <div class="cmp-row"><span class="crit">1 · Who is it for — and what job does it win?</span><span>Segment + value — who it's <em>not</em> for</span></div>
+        <div class="cmp-row"><span class="crit">2 · What will they pay more to get more of?</span><span>The value metric &rarr; your meter</span></div>
+        <div class="cmp-row"><span class="crit">3 · What would they do if we didn't exist?</span><span>Willingness-to-pay ceiling — and your roadmap</span></div>
+        <div class="cmp-row"><span class="crit">4 · What's in each box — and why upgrade?</span><span>Packaging</span></div>
+        <div class="cmp-row"><span class="crit">5 · What's our floor — any tier underwater at scale?</span><span>Cost / margin — the AI margin time bomb</span></div>
+        <div class="cmp-row"><span class="crit">6 · How will we know in 90 days the price is wrong?</span><span>Pricing as a living product, not a launch task</span></div>
+    </div>
+    <p class="cmp-punch reveal">Notice what's missing — <b>&ldquo;seats or tokens?&rdquo;</b> That's not a question you ask. It's an answer that falls out of the other six.</p>
+</section>
+<!-- =====================================================================
      READY — "ready for detective work?" breather (navy bookend).  id="s16-decode-intro"
      Section break into the live decodes.
      ===================================================================== -->
@@ -445,60 +501,6 @@ h2{font-family:var(--font-title);font-weight:800;font-size:clamp(2.4rem,5vw,3.9r
         <p class="sub reveal">Thanks for playing detective with me.</p>
     </div>
 </section>
-<!-- =====================================================================
-     APPENDIX A1 — PRICING MYTHS (backup, after live decode)  id="sA1-myths"
-     ===================================================================== -->
-<section class="slide" id="sA1-myths">
-    <span class="eyebrow reveal">Appendix · backup</span>
-    <h2 class="reveal">Pricing myths that hurt PMs.</h2>
-    <div class="cmp reveal">
-        <div class="cmp-row cmp-head"><span>The myth</span><span>What's actually true</span></div>
-        <div class="cmp-row"><span class="myth">Pricing is just the number</span><span class="truth">It's <b>strategy, GTM &amp; cost structure</b> in one artifact</span></div>
-        <div class="cmp-row"><span class="myth">Competitor pricing is the answer</span><span class="truth">It encodes <b>their</b> animal and motion, not yours</span></div>
-        <div class="cmp-row"><span class="myth">More tiers means more choice</span><span class="truth">More tiers usually means more <b>confusion</b></span></div>
-        <div class="cmp-row"><span class="myth">Bundle AI in until adoption</span><span class="truth">Free AI on a per-seat meter is a <b>margin time bomb</b></span></div>
-        <div class="cmp-row"><span class="myth">Pricing is finance's job</span><span class="truth">It's <b>product</b> — behaviour design, not a spreadsheet</span></div>
-    </div>
-</section>
-<!-- =====================================================================
-     APPENDIX A2 — IF YOU HAVE TO BUILD ONE (checklist)  id="sA2-checklist"
-     ===================================================================== -->
-<section class="slide" id="sA2-checklist">
-    <span class="eyebrow reveal">Appendix · backup</span>
-    <h2 class="reveal">Start here.</h2>
-    <ul class="checks stagger">
-        <li><span class="mk">1</span><div>Pick the animal<span class="sub">Who are you hunting?</span></div></li>
-        <li><span class="mk">2</span><div>Choose the meter<span class="sub">What do you charge against?</span></div></li>
-        <li><span class="mk">3</span><div>Choose the motion<span class="sub">How will you acquire and upgrade?</span></div></li>
-        <li><span class="mk">4</span><div>Stress-test the worst-case unit<span class="sub">Will a whale break your margin?</span></div></li>
-        <li><span class="mk">5</span><div>Check the org can deliver the promise<span class="sub">Does the team match the price you picked?</span></div></li>
-    </ul>
-</section>
-<!-- =====================================================================
-     SLIDE 1 — UNIT ECONOMICS (chart)            id="s01-unit-econ"
-     Two curves: classic SaaS (flat ≈0 marginal cost) vs AI-era (rising).
-     ===================================================================== -->
-<section class="slide chart-slide" id="s01-unit-econ">
-    <span class="eyebrow reveal">Unit economics</span>
-    <h2 class="reveal">Marginal cost came back.</h2>
-    <div class="chart-wrap reveal"><canvas id="ch-cost"></canvas></div>
-    <p class="punch reveal">&ldquo;AI didn't lower margins. It made <b>COGS non-deterministic.</b>&rdquo;</p>
-</section>
-<!-- =====================================================================
-     SLIDE 13 — THE BUILD SEQUENCE (Part 3)      id="s13-build"
-     5 steps. Santhosh may rewrite these lines in his own voice.
-     ===================================================================== -->
-<section class="slide" id="s13-build">
-    <span class="eyebrow reveal">If you have to build it</span>
-    <h2 class="reveal">The order that actually matters.</h2>
-    <div class="seq stagger">
-        <div class="seq-row"><span class="seq-num">1</span><div><h3>Animal first</h3><p>Decide who you're hunting — it constrains everything below.</p></div></div>
-        <div class="seq-row"><span class="seq-num">2</span><div><h3>Meter before number</h3><p>The meter is the strategy; the price is just a knob.</p></div></div>
-        <div class="seq-row"><span class="seq-num">3</span><div><h3>Motion before packaging</h3><p>Decide how acquisition and upgrade will really happen.</p></div></div>
-        <div class="seq-row"><span class="seq-num">4</span><div><h3>Price the worst-case unit</h3><p>Not the average — the average bankrupts you on whales.</p></div></div>
-        <div class="seq-row"><span class="seq-num">5</span><div><h3>Make sure the org can keep the promise</h3><p>SLG pricing with no sales team is a lie. So is outcome pricing with no instrumentation.</p></div></div>
-    </div>
-</section>
 
 <script>
 /* ============================ NAVIGATION ============================ */
@@ -587,24 +589,6 @@ document.addEventListener('DOMContentLoaded',()=>{
     document.querySelectorAll('.slide').forEach(s=>Deck._init(s));
 });
 
-/* ---------- Slide 1 chart: marginal cost per request as usage scales ---------- */
-Deck.chart('ch-cost',{
-    type:'line',
-    data:{
-        labels:['','Usage →','','','','','Scale →'],
-        datasets:[
-            {label:'AI-era software',data:[2,5,9,15,23,34,48],borderColor:'var(--chart-3)',backgroundColor:'var(--chart-3)',pointBackgroundColor:'var(--chart-3)',borderWidth:4,tension:.35,fill:false,pointRadius:0},
-            {label:'Classic SaaS',data:[3,3.1,3,3.1,3,3.1,3],borderColor:'#9aa7b8',backgroundColor:'#9aa7b8',pointBackgroundColor:'#9aa7b8',borderWidth:3,borderDash:[7,6],tension:0,fill:false,pointRadius:0}
-        ]
-    },
-    options:{
-        scales:{
-            x:{title:{display:true,text:'Requests / volume',color:'#5b6b82',font:{weight:'700',size:14}},ticks:{display:false}},
-            y:{title:{display:true,text:'Marginal cost per request',color:'#5b6b82',font:{weight:'700',size:14}},ticks:{display:false},beginAtZero:true}
-        },
-        plugins:{legend:{position:'top',align:'end'}}
-    }
-});
 </script>
 </body>
 </html>
