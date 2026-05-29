@@ -31,8 +31,8 @@
         7   READY        s16-decode-intro    breather — ready for detective work
         8   SPOTIFY      s11-spotify         decode
         9   BASECAMP     s05-basecamp        decode
-       10   NOTION       s06-notion          decode
-       11   INTERCOM     s08-intercom        decode
+       10   INTERCOM     s08-intercom        decode
+       11   NOTION       s06-notion          decode
        12   HUBSPOT      s10-hubspot         decode
        13   SALESFORCE   s07-salesforce      decode
        14   FRESHDESK    s09-freshdesk       decode
@@ -156,7 +156,7 @@ h2{font-family:var(--font-title);font-weight:800;font-size:clamp(2.4rem,5vw,3.9r
 .decode-head .eyebrow{margin-bottom:.5rem}
 .decode-head h2{font-size:clamp(1.9rem,3.6vw,3rem);max-width:30ch}
 .decode-fig{flex:1 1 auto;min-height:0;display:flex;justify-content:center;align-items:center;margin:0}
-.decode-fig img{max-height:60vh;max-width:100%;width:auto;height:auto;object-fit:contain;border-radius:12px;border:1px solid var(--border);box-shadow:0 22px 60px rgba(15,30,56,.20)}
+.decode-fig img{max-height:68vh;max-width:100%;width:auto;height:auto;object-fit:contain;border-radius:12px;border:1px solid var(--border);box-shadow:0 22px 60px rgba(15,30,56,.20)}
 .decode-tag{margin-top:clamp(.9rem,2vh,1.4rem);font-size:clamp(1rem,1.4vw,1.28rem);color:var(--text-secondary);line-height:1.4;max-width:none}
 .decode-tag b{color:var(--text-primary);font-weight:700}
 
@@ -348,10 +348,11 @@ h2{font-family:var(--font-title);font-weight:800;font-size:clamp(2.4rem,5vw,3.9r
 <section class="slide decode" id="s11-spotify">
     <div class="decode-head reveal from-left">
         <span class="eyebrow">Spotify · consumer subscription</span>
-        <h2>One product, <span class="hl">four prices</span>.</h2>
+        <h2>Same catalogue. <span class="hl">Two</span> prices.</h2>
     </div>
     <figure class="decode-fig reveal fade-only"><img src="./assets/Spotify.png" alt="Spotify pricing page"></figure>
-    <p class="decode-tag reveal"><b>Meter:</b> per account / household tier · <b>Motion:</b> pure self-serve B2C · <b>Confession:</b> &ldquo;same catalogue, four prices — segmented by who's paying.&rdquo;</p>
+    <!-- SPEAKER NOTE (off-slide on purpose — audience guesses these live; delete or restore as you like):
+         Standard ₹139 / Platinum ₹299 — same music catalogue both tiers. <b>Meter:</b> per account, with the upsell being audio quality + AI + up to 3 seats, not the music · <b>Motion:</b> pure self-serve B2C · <b>Confession:</b> &ldquo;you're not paying for the songs; you're paying for everything around them.&rdquo; -->
 </section>
 <!-- =====================================================================
      PART 2 — READING (decode slides). All share the .decode template.
@@ -366,16 +367,8 @@ h2{font-family:var(--font-title);font-weight:800;font-size:clamp(2.4rem,5vw,3.9r
         <h2>$299 flat. No <span class="hl">Enterprise</span> tier.</h2>
     </div>
     <figure class="decode-fig reveal fade-only"><img src="./assets/Basecamp.png" alt="Basecamp pricing page"></figure>
-    <p class="decode-tag reveal"><b>Meter:</b> flat company-wide access · <b>Motion:</b> self-serve, brand-led · <b>Confession:</b> &ldquo;we'd rather cap complexity than maximize enterprise extraction.&rdquo;</p>
-</section>
-<!-- SLIDE 6 — NOTION -->
-<section class="slide decode" id="s06-notion">
-    <div class="decode-head reveal from-left">
-        <span class="eyebrow">Notion · connected workspace</span>
-        <h2>PLG in. Enterprise <span class="hl">also</span> in.</h2>
-    </div>
-    <figure class="decode-fig reveal fade-only"><img src="./assets/Notion.png" alt="Notion pricing page"></figure>
-    <p class="decode-tag reveal"><b>Meter:</b> seat, with AI as a cost-sensitive add-on · <b>Motion:</b> self-serve PLG, sales-assisted &amp; enterprise — running in parallel · <b>Confession:</b> &ldquo;one pricing page quietly runs several sales motions at once.&rdquo;</p>
+    <!-- SPEAKER NOTE (off-slide on purpose — audience guesses these live; delete or restore as you like):
+         <b>Meter:</b> flat company-wide access · <b>Motion:</b> self-serve, brand-led · <b>Confession:</b> &ldquo;we'd rather cap complexity than maximize enterprise extraction.&rdquo; -->
 </section>
 <!-- SLIDE 8 — INTERCOM FIN -->
 <section class="slide decode" id="s08-intercom">
@@ -384,7 +377,18 @@ h2{font-family:var(--font-title);font-weight:800;font-size:clamp(2.4rem,5vw,3.9r
         <h2><span class="hl">$0.99</span> per resolution.</h2>
     </div>
     <figure class="decode-fig reveal fade-only"><img src="./assets/Intercom.png" alt="Intercom Fin pricing page"></figure>
-    <p class="decode-tag reveal"><b>Meter:</b> outcome — a resolved conversation, not a seat · <b>Motion:</b> product-led with a sales safety net · <b>Confession:</b> &ldquo;we're so confident it works we'll price on the result.&rdquo; (Watch for the whale.)</p>
+    <!-- SPEAKER NOTE (off-slide on purpose — audience guesses these live; delete or restore as you like):
+         <b>Meter:</b> outcome — a resolved conversation, not a seat · <b>Motion:</b> product-led with a sales safety net · <b>Confession:</b> &ldquo;we're so confident it works we'll price on the result.&rdquo; (Watch for the whale.) -->
+</section>
+<!-- SLIDE 6 — NOTION -->
+<section class="slide decode" id="s06-notion">
+    <div class="decode-head reveal from-left">
+        <span class="eyebrow">Notion · connected workspace</span>
+        <h2>PLG in. Enterprise <span class="hl">also</span> in.</h2>
+    </div>
+    <figure class="decode-fig reveal fade-only"><img src="./assets/Notion.png" alt="Notion pricing page"></figure>
+    <!-- SPEAKER NOTE (off-slide on purpose — audience guesses these live; delete or restore as you like):
+         <b>Meter:</b> seat, with AI as a cost-sensitive add-on · <b>Motion:</b> self-serve PLG, sales-assisted &amp; enterprise — running in parallel · <b>Confession:</b> &ldquo;one pricing page quietly runs several sales motions at once.&rdquo; -->
 </section>
 <!-- SLIDE 10 — HUBSPOT -->
 <section class="slide decode" id="s10-hubspot">
@@ -393,7 +397,8 @@ h2{font-family:var(--font-title);font-weight:800;font-size:clamp(2.4rem,5vw,3.9r
         <h2>Free to enter. Priced to <span class="hl">expand</span>.</h2>
     </div>
     <figure class="decode-fig reveal fade-only"><img src="./assets/HubSpot.png" alt="HubSpot pricing page"></figure>
-    <p class="decode-tag reveal"><b>Meter:</b> seats + marketing contacts · <b>Motion:</b> free CRM as the wedge, sales-assisted up the hubs · <b>Confession:</b> &ldquo;the free tier is acquisition; the bill climbs with contacts and seats.&rdquo;</p>
+    <!-- SPEAKER NOTE (off-slide on purpose — audience guesses these live; delete or restore as you like):
+         <b>Meter:</b> seats + marketing contacts · <b>Motion:</b> free CRM as the wedge, sales-assisted up the hubs · <b>Confession:</b> &ldquo;the free tier is acquisition; the bill climbs with contacts and seats.&rdquo; -->
 </section>
 <!-- SLIDE 7 — SALESFORCE -->
 <section class="slide decode" id="s07-salesforce">
@@ -402,16 +407,18 @@ h2{font-family:var(--font-title);font-weight:800;font-size:clamp(2.4rem,5vw,3.9r
         <h2>The published price is the <span class="hl">floor</span> of a negotiation.</h2>
     </div>
     <figure class="decode-fig reveal fade-only"><img src="./assets/Salesforce.png" alt="Salesforce pricing page"></figure>
-    <p class="decode-tag reveal"><b>Meter:</b> seat + platform/AI add-ons · <b>Motion:</b> sales-led enterprise; every gate moves you toward a rep · <b>Confession:</b> &ldquo;the real business happens through procurement, not checkout.&rdquo;</p>
+    <!-- SPEAKER NOTE (off-slide on purpose — audience guesses these live; delete or restore as you like):
+         <b>Meter:</b> seat + platform/AI add-ons · <b>Motion:</b> sales-led enterprise; every gate moves you toward a rep · <b>Confession:</b> &ldquo;the real business happens through procurement, not checkout.&rdquo; -->
 </section>
 <!-- SLIDE 9 — FRESHDESK (Freshworks) -->
 <section class="slide decode" id="s09-freshdesk">
     <div class="decode-head reveal from-left">
-        <span class="eyebrow">Freshdesk · helpdesk (Chennai)</span>
-        <h2>Agent seat <span class="hl">+ AI sessions</span>.</h2>
+        <span class="eyebrow">Freshworks · one of many (Chennai)</span>
+        <h2>The pricing page leaks the <span class="hl">org chart</span>.</h2>
     </div>
-    <figure class="decode-fig reveal fade-only"><img src="./assets/Freshworks.png" alt="Freshdesk pricing page"></figure>
-    <p class="decode-tag reveal"><b>Meter:</b> agent seat <em>and</em> a second AI-session meter · <b>Motion:</b> SMB self-serve, sales-assisted expansion · <b>Confession:</b> &ldquo;classic SaaS wants per-agent pricing, but AI forces a second meter.&rdquo;</p>
+    <figure class="decode-fig reveal fade-only"><img src="./assets/Freshworks.png" alt="Freshworks / Freshservice pricing page"></figure>
+    <!-- SPEAKER NOTE (off-slide on purpose — audience guesses these live; delete or restore as you like):
+         The site foregrounds ONE product (Freshservice), but Freshworks is multi-product — the pricing page quietly exposes the rest (Freshdesk, Freshsales, Freshchat…). <b>Meter:</b> agent/seat + a second AI-session meter underneath · <b>Motion:</b> SMB self-serve, sales-assisted expansion · <b>Confession:</b> &ldquo;we're organized as separate product BUs — and the pricing page shows it; the org chart leaks through.&rdquo; -->
 </section>
 <!-- =====================================================================
      SLIDE 14 — CLOSE + LIVE-DECODE HANDOFF      id="s14-close"
