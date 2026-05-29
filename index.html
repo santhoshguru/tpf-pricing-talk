@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What Pricing Pages Confess — TPF Chennai</title>
+
+<!-- =====================================================================
+     DECK: "What Pricing Pages Confess When Nobody's Watching"
+     The Product Folks · Chennai · GrabChai meetup
+     Speaker: Santhosh Guru
+
+     HOW TO TWEAK THIS DECK (per-slide):
+       • Each slide is one <section class="slide"> with an id like  id="s05-basecamp".
+         Search the id to jump to that slide and edit it in isolation.
+       • Screenshots / SVGs live in ./assets/ — replace a file in that folder
+         (keep the same name) to swap an image without touching the HTML.
+       • Colours: edit the :root variables in the <style> block below.
+       • Highlighted words use <span class="hl">…</span> (italic gold).
+       • To reorder slides, move the whole <section>…</section> block.
+       • To hide a slide, add  hidden  to its <section> (or delete the block).
+
+     SLIDE INDEX — code names (current presentation order):
+        #   CODE NAME    id                  what's on it
+        1   TITLE        s00-cover           "What pricing pages confess…"
+        2   ABOUT        s15-about           speaker intro
+        3   LENS         s04-lens            detective 4 questions
+        4   ANIMALS      s03-animals         Janz five animals + Whale
+        5   STACK        s02-cost-stack      The Cost Stack (SVG)
+        6   ORGCHART     s12-org-chart       Your Price Is an Org Chart (SVG)
+        7   READY        s16-decode-intro    breather — ready for detective work
+        8   SPOTIFY      s11-spotify         decode
+        9   BASECAMP     s05-basecamp        decode
+       10   NOTION       s06-notion          decode
+       11   INTERCOM     s08-intercom        decode
+       12   HUBSPOT      s10-hubspot         decode
+       13   SALESFORCE   s07-salesforce      decode
+       14   FRESHDESK    s09-freshdesk       decode
+       15   CLOSE        s14-close           "Bring your favourite pricing page"
+       16   THANKYOU     s17-thankyou        breather — Questions? / Thank you
+       17   MYTHS        sA1-myths           appendix — pricing myths
+       18   CHECKLIST    sA2-checklist       appendix — start here
+       19   MARGIN       s01-unit-econ       marginal-cost / COGS chart
+       20   BUILD        s13-build           the order that matters (5 steps)
+     ===================================================================== -->
+
+<!-- Chart.js vendored locally (assets/) so the deck works fully offline. -->
+<script src="./assets/chart.umd.min.js"></script>
+<style>
+/* ============================ PALETTE / TOKENS ============================
+   Style: Light + navy/gold — matches the cost-stack & org-chart SVGs.
+   Edit these to re-skin the whole deck.                                    */
+:root{
+    --paper:#ffffff;
+    --ink:#0f1e38;             /* deep navy — headlines, dark slides     */
+    --bg-primary:#ffffff;
+    --text-primary:#0f1e38;
+    --text-secondary:#5b6b82;  /* muted slate label                      */
+    --accent:#a9761c;          /* deep gold — readable on white (text/lines) */
+    --gold:#c9952f;            /* bright gold — fills, pills, discs       */
+    --accent-dim:rgba(201,149,47,.14);
+    --border:#dce3ec;          /* cell border from the SVGs               */
+    --surface:#f4f7fb;         /* cards / panels                          */
+    --on-accent:#ffffff;       /* text on a gold fill                     */
+    --chart-1:#6e4e10; --chart-2:#9a7016; --chart-3:#c9952f; --chart-4:#dcb361; --chart-5:#ecdaa6;
+    --font-title:'Inter',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;
+    --font-body:'Inter',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;
+
+    --slide-padding:clamp(2.4rem,6vw,5.5rem);
+    --content-gap:clamp(0.75rem,2vw,1.5rem);
+}
+/* Dark (navy) slides — cover + closing. Gold goes bright on navy. */
+.slide--dark{
+    --bg-primary:var(--ink);
+    --text-primary:#ffffff;
+    --text-secondary:rgba(255,255,255,.66);
+    --border:rgba(255,255,255,.16);
+    --accent:#d8a93f;
+    --accent-dim:rgba(216,169,63,.22);
+    --surface:rgba(255,255,255,.06);
+    background:var(--ink);
+    color:#ffffff;
+}
+
+/* ============================== BASE CSS =============================== */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{height:100%;scroll-snap-type:y mandatory;scroll-behavior:smooth;overflow-x:hidden}
+body{height:100%;font-family:var(--font-body);background:var(--bg-primary);color:var(--text-primary);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+
+.slide{
+    width:100vw;height:100vh;height:100dvh;overflow:hidden;scroll-snap-align:start;
+    display:flex;flex-direction:column;justify-content:flex-start;position:relative;
+    padding:var(--slide-padding);padding-top:clamp(3rem,7vh,5rem);
+}
+/* centered formats override the top-anchor */
+.slide.cover,.slide.center{justify-content:center}
+
+h1,h2,h3{letter-spacing:-.02em}
+h2{font-family:var(--font-title);font-weight:800;font-size:clamp(2.4rem,5vw,3.9rem);line-height:1.04;max-width:20ch}
+.eyebrow{display:block;font-size:clamp(.95rem,1.3vw,1.18rem);letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:.8rem}
+.lead{font-size:clamp(1.2rem,1.9vw,1.6rem);color:var(--text-secondary);margin-top:1.2rem;max-width:40ch;line-height:1.45}
+.hl{color:var(--accent);font-style:italic}
+.slide--dark .hl{color:var(--accent)}
+
+/* ===================== ANIMATION TOOLKIT ===================== */
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1),filter .6s ease;will-change:opacity,transform}
+.slide.visible .reveal{opacity:1;transform:none;filter:none}
+.reveal.fade-only{transform:none}
+.reveal.from-left{transform:translateX(-24px)}
+.reveal.from-right{transform:translateX(24px)}
+.reveal.from-scale{transform:scale(.96)}
+.reveal.from-blur{filter:blur(8px);transform:none}
+.stagger>*{opacity:0;transform:translateY(14px);transition:opacity .55s cubic-bezier(.16,1,.3,1),transform .55s cubic-bezier(.16,1,.3,1)}
+.slide.visible .stagger>*{opacity:1;transform:none}
+.slide.visible .stagger>*:nth-child(1){transition-delay:.05s}
+.slide.visible .stagger>*:nth-child(2){transition-delay:.13s}
+.slide.visible .stagger>*:nth-child(3){transition-delay:.21s}
+.slide.visible .stagger>*:nth-child(4){transition-delay:.29s}
+.slide.visible .stagger>*:nth-child(5){transition-delay:.37s}
+.slide.visible .stagger>*:nth-child(6){transition-delay:.45s}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.float{animation:floaty 5s ease-in-out infinite}
+
+/* ===================== COVER / CLOSING ===================== */
+.cover{align-items:flex-start}
+.cover .aura{position:absolute;z-index:0;pointer-events:none;width:64vw;height:64vw;left:-10vw;top:50%;
+    background:radial-gradient(circle,color-mix(in srgb,var(--accent) 42%,transparent),color-mix(in srgb,var(--accent) 10%,transparent) 45%,transparent 70%);
+    filter:blur(26px);transform:translateY(-50%);animation:drift 17s ease-in-out infinite}
+@keyframes drift{0%{transform:translateY(-50%) translateX(-2%) scale(1)}50%{transform:translateY(-54%) translateX(4%) scale(1.1)}100%{transform:translateY(-50%) translateX(-2%) scale(1)}}
+.cover .inner{position:relative;z-index:1;max-width:min(94vw,1600px)}
+.cover h1{color:var(--text-primary);font-family:var(--font-title);font-weight:800;font-size:clamp(3.2rem,7.6vw,6.4rem);line-height:1.02;letter-spacing:-.025em}
+.circle-word{position:relative;display:inline-block;font-style:italic;color:var(--text-primary);white-space:nowrap;padding:0 .12em;isolation:isolate}
+.circle-word::before{content:"";position:absolute;inset:-35% -14%;background:radial-gradient(ellipse at center,color-mix(in srgb,var(--accent) 34%,transparent),transparent 65%);filter:blur(24px);z-index:-2;opacity:0;transform:scale(.94);transition:opacity 1.2s cubic-bezier(.16,1,.3,1) 1.4s,transform 1.2s cubic-bezier(.16,1,.3,1) 1.4s;pointer-events:none}
+.cover.visible .circle-word::before{opacity:.78;transform:scale(1);animation:wordGlow 5.4s ease-in-out 2.6s infinite}
+@keyframes wordGlow{0%,100%{opacity:.5;transform:scale(.96)}50%{opacity:.95;transform:scale(1.06)}}
+.circle-mark{position:absolute;left:-7%;top:-22%;width:114%;height:144%;overflow:visible;pointer-events:none;z-index:-1}
+.circle-mark path{fill:none;stroke:var(--accent);stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1100;stroke-dashoffset:1100;transition:stroke-dashoffset 1.5s cubic-bezier(.6,.04,.4,1) 1.1s}
+.cover.visible .circle-mark path{stroke-dashoffset:0}
+.cover .sub{font-size:clamp(1.45rem,2.7vw,2.3rem);margin-top:clamp(1.6rem,3vh,2.4rem);max-width:34ch;color:var(--text-secondary);line-height:1.4}
+.cover .credit{margin-top:clamp(1.8rem,4vh,2.8rem);font-size:clamp(1rem,1.4vw,1.2rem);font-weight:600;color:var(--text-secondary);letter-spacing:.01em}
+.cover.visible h1{transition-delay:.05s}.cover.visible .sub{transition-delay:.22s}.cover.visible .credit{transition-delay:.34s}
+
+/* lens chips reused on closing slide */
+.lens-chips{display:flex;flex-wrap:wrap;gap:clamp(.6rem,1.4vw,1rem);margin-top:clamp(1.8rem,4vh,2.6rem)}
+.lens-chips span{border:1.5px solid var(--border);color:var(--text-primary);font-weight:700;font-size:clamp(1.05rem,1.5vw,1.35rem);padding:.5em 1.1em;border-radius:999px}
+.lens-chips span b{color:var(--accent);font-weight:800}
+
+/* ABOUT — speaker intro (centered hero text, light slide) */
+.about{max-width:min(92vw,1100px);margin:0 auto;text-align:center}
+.about h2{max-width:none;font-size:clamp(3rem,6.4vw,5rem)}
+.about-bio{font-size:clamp(1.35rem,2.3vw,2rem);color:var(--text-secondary);line-height:1.5;margin:1.5rem auto 0;max-width:38ch}
+
+/* ===================== DECODE (screenshot) SLIDES ===================== */
+.decode{justify-content:flex-start;padding-top:clamp(2.2rem,5vh,3.4rem);padding-bottom:clamp(1.6rem,3.5vh,2.6rem)}
+.decode-head{margin-bottom:clamp(.9rem,2vh,1.5rem)}
+.decode-head .eyebrow{margin-bottom:.5rem}
+.decode-head h2{font-size:clamp(1.9rem,3.6vw,3rem);max-width:30ch}
+.decode-fig{flex:1 1 auto;min-height:0;display:flex;justify-content:center;align-items:center;margin:0}
+.decode-fig img{max-height:60vh;max-width:100%;width:auto;height:auto;object-fit:contain;border-radius:12px;border:1px solid var(--border);box-shadow:0 22px 60px rgba(15,30,56,.20)}
+.decode-tag{margin-top:clamp(.9rem,2vh,1.4rem);font-size:clamp(1rem,1.4vw,1.28rem);color:var(--text-secondary);line-height:1.4;max-width:none}
+.decode-tag b{color:var(--text-primary);font-weight:700}
+
+/* ===================== SHOWCASE SVG SLIDES ===================== */
+.showcase{justify-content:center;align-items:center}
+.svg-card{background:#fff;border:1px solid var(--border);border-radius:18px;padding:clamp(1rem,2.4vw,2rem);box-shadow:0 28px 70px rgba(15,30,56,.16);display:flex;justify-content:center;align-items:center;max-width:96%;max-height:90vh}
+/* SVGs ship with only a viewBox (no intrinsic px size), so give <img> an explicit
+   dimension or it collapses to 0 in a flex box. Landscape → width-driven. */
+.svg-card img{display:block;width:min(88vw,1480px);height:auto;max-height:80vh}
+.svg-card.portrait img{width:auto;height:min(80vh,860px);max-width:100%}
+
+/* ===================== TWO-COLUMN ===================== */
+.cols{display:flex;gap:clamp(1.6rem,4vw,3.4rem);align-items:center;width:100%}
+.col-text{flex:1 1 48%}
+.col-media{flex:1 1 52%;display:flex;justify-content:center;align-items:center;min-width:0}
+.col-media img{max-width:100%;max-height:72vh;width:auto;height:auto;border-radius:14px}
+.media-card{background:#fff;border:1px solid var(--border);border-radius:18px;padding:clamp(1rem,2vw,1.6rem);box-shadow:0 24px 64px rgba(15,30,56,.14)}
+
+/* Whale callout on the animals slide */
+.whale{margin-top:1.6rem;border-left:4px solid var(--gold);background:var(--accent-dim);border-radius:0 12px 12px 0;padding:1rem 1.3rem}
+.whale b{color:var(--accent);font-weight:800}
+.whale p{font-size:clamp(1.05rem,1.5vw,1.3rem);line-height:1.4}
+
+/* ===================== CHART ===================== */
+.chart-slide .chart-wrap{position:relative;flex:1;min-height:0;margin-top:clamp(1rem,2.5vh,1.8rem);width:100%}
+.chart-slide canvas{width:100%!important;height:100%!important;max-height:58vh}
+.punch{margin-top:clamp(1rem,2.4vh,1.6rem);font-family:var(--font-title);font-style:italic;font-weight:700;font-size:clamp(1.3rem,2.4vw,2rem);color:var(--text-primary);line-height:1.2}
+.punch b{color:var(--accent);font-style:italic}
+
+/* ===================== DETECTIVE LENS — 2x2 GRID ===================== */
+.lens-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(1rem,2vw,1.6rem);margin-top:clamp(1.6rem,4vh,2.6rem)}
+.lens-card{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:clamp(1.3rem,2.4vw,2rem);display:flex;gap:clamp(1rem,1.8vw,1.4rem);align-items:flex-start}
+.lens-ic{flex:0 0 auto;width:clamp(50px,4.4vw,68px);height:clamp(50px,4.4vw,68px);border-radius:14px;background:var(--accent-dim);display:grid;place-items:center}
+.lens-ic svg{width:58%;height:58%;fill:none;stroke:var(--accent);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.lens-card h3{font-size:clamp(1.4rem,2.1vw,1.85rem);font-weight:800;letter-spacing:-.01em;margin-bottom:.25rem}
+.lens-card p{font-size:clamp(1.02rem,1.4vw,1.25rem);color:var(--text-secondary);line-height:1.38}
+.photo-note{margin-top:clamp(1.2rem,2.6vh,1.8rem);font-size:clamp(1.05rem,1.5vw,1.3rem);color:var(--text-primary);font-weight:600}
+.photo-note b{color:var(--accent)}
+
+/* ===================== BUILD SEQUENCE — numbered list ===================== */
+.seq{margin-top:clamp(1.6rem,4vh,2.6rem);display:flex;flex-direction:column;gap:clamp(.9rem,2.2vh,1.5rem);max-width:1180px}
+.seq-row{display:grid;grid-template-columns:auto 1fr;gap:clamp(1.2rem,2.4vw,2rem);align-items:center}
+.seq-num{width:clamp(58px,5vw,80px);height:clamp(58px,5vw,80px);border-radius:50%;background:var(--gold);color:#1c1404;font-family:var(--font-title);font-weight:800;font-size:clamp(1.4rem,2vw,1.9rem);display:grid;place-items:center;box-shadow:0 12px 30px rgba(201,149,47,.30)}
+.seq-row h3{font-size:clamp(1.5rem,2.4vw,2.1rem);font-weight:800;letter-spacing:-.01em}
+.seq-row p{font-size:clamp(1.05rem,1.45vw,1.28rem);color:var(--text-secondary);line-height:1.35;margin-top:.15rem}
+
+/* ===================== MYTHS COMPARISON ===================== */
+.cmp{margin-top:clamp(1.6rem,4vh,2.6rem);border:1px solid var(--border);border-radius:18px;overflow:hidden;max-width:1240px}
+.cmp-row{display:grid;grid-template-columns:1fr 1.1fr;align-items:center}
+.cmp-row>*{padding:clamp(.9rem,1.9vw,1.4rem) clamp(1.1rem,2vw,1.7rem);font-size:clamp(1.1rem,1.6vw,1.42rem)}
+.cmp-row+.cmp-row{border-top:1px solid var(--border)}
+.cmp-row>*+*{border-left:1px solid var(--border)}
+.cmp-head{font-weight:800;background:var(--surface);font-size:clamp(1rem,1.4vw,1.2rem);letter-spacing:.04em;text-transform:uppercase}
+.cmp .myth{color:var(--text-secondary);font-weight:600;text-decoration:line-through;text-decoration-color:color-mix(in srgb,var(--gold) 70%,transparent)}
+.cmp .truth{font-weight:700;color:var(--text-primary)}
+.cmp .truth b{color:var(--accent)}
+
+/* ===================== CHECKLIST ===================== */
+.checks{list-style:none;margin-top:clamp(1.8rem,4.5vh,3rem);display:flex;flex-direction:column;gap:clamp(1rem,2.4vh,1.6rem);max-width:1100px}
+.checks li{display:flex;gap:1rem;align-items:flex-start;font-size:clamp(1.5rem,2.4vw,2.1rem);font-weight:700;letter-spacing:-.01em}
+.checks .mk{flex:0 0 auto;width:clamp(34px,3vw,46px);height:clamp(34px,3vw,46px);border-radius:10px;background:var(--accent-dim);color:var(--accent);font-weight:800;display:grid;place-items:center;font-size:.62em;margin-top:.05em}
+.checks li span.sub{display:block;font-size:.62em;font-weight:500;color:var(--text-secondary);margin-top:.15rem}
+
+/* ===================== RESPONSIVE ===================== */
+@media (max-width:880px){
+    .cols{flex-direction:column}
+    .lens-grid{grid-template-columns:1fr}
+}
+@media (max-height:700px){
+    :root{--slide-padding:clamp(1.4rem,4vw,3rem)}
+    .slide{padding-top:clamp(1.8rem,4vh,3rem)}
+    .decode-fig img{max-height:54vh}
+}
+@media (max-height:600px){.nav-dots{display:none}}
+@media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.2s!important}
+    html{scroll-behavior:auto}
+    .circle-mark path{stroke-dashoffset:0}
+    .circle-word::before{animation:none;opacity:.6;transform:scale(1)}
+    .float{animation:none}
+}
+</style>
+</head>
+<body>
+
+<!-- =====================================================================
+     SLIDE 0 — COVER (title + thesis)            id="s00-cover"
+     ===================================================================== -->
+<section class="slide slide--dark cover" id="s00-cover">
+    <div class="aura"></div>
+    <div class="inner">
+        <h1 class="reveal from-blur">What pricing pages
+            <span class="circle-word">confess<svg class="circle-mark" viewBox="0 0 400 130" preserveAspectRatio="none" aria-hidden="true"><path d="M 364 32 C 286 4, 78 6, 22 34 C -22 60, -4 104, 92 118 C 240 134, 380 118, 392 80 C 402 48, 386 38, 364 32"/></svg></span>
+            when nobody's watching</h1>
+        <p class="sub reveal">Reading product strategy, GTM motion &amp; business reality straight off the pricing page.</p>
+        <p class="credit reveal">Santhosh Guru · The Product Folks, Chennai</p>
+    </div>
+</section>
+<!-- =====================================================================
+     ABOUT — speaker intro (light, centered). Placeholder copy — swap freely.  id="s15-about"
+     ===================================================================== -->
+<section class="slide center" id="s15-about">
+    <div class="about reveal from-blur">
+        <span class="eyebrow">Who's talking</span>
+        <h2>Santhosh Guru</h2>
+        <p class="about-bio">Co-founder of a son. Two decades building and shipping products — at Freshworks, SAP Labs, and startups like ZEPIC and Zarget. He's been on every side of a pricing page: building them, defending them, and <span class="hl">occasionally crying at them.</span></p>
+    </div>
+</section>
+<!-- =====================================================================
+     SLIDE 4 — THE DETECTIVE LENS (2x2 grid)     id="s04-lens"
+     The takeaway artifact. Tell the room to photograph it.
+     ===================================================================== -->
+<section class="slide" id="s04-lens">
+    <span class="eyebrow reveal">The lens</span>
+    <h2 class="reveal">Read the page like a detective.</h2>
+    <div class="lens-grid stagger">
+        <div class="lens-card">
+            <span class="lens-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2"/><path d="M12 3v2.4M12 18.6V21M3 12h2.4M18.6 12H21M5.6 5.6l1.7 1.7M16.7 16.7l1.7 1.7M18.4 5.6l-1.7 1.7M7.3 16.7l-1.7 1.7"/></svg></span>
+            <div><h3>Animal</h3><p>Who do they hunt? Which customer size and type.</p></div>
+        </div>
+        <div class="lens-card">
+            <span class="lens-ic"><svg viewBox="0 0 24 24"><path d="M3 13a9 9 0 0 1 18 0"/><path d="M12 13l4-3"/><circle cx="12" cy="13" r="1.3" fill="var(--accent)" stroke="none"/></svg></span>
+            <div><h3>Meter</h3><p>What do they charge against — and how close is that to cost?</p></div>
+        </div>
+        <div class="lens-card">
+            <span class="lens-ic"><svg viewBox="0 0 24 24"><path d="M4 7h11M4 7l3-3M4 7l3 3"/><path d="M20 17H9M20 17l-3-3M20 17l-3 3"/></svg></span>
+            <div><h3>Motion</h3><p>How do they acquire and upgrade — self-serve, sales, &ldquo;contact us&rdquo;?</p></div>
+        </div>
+        <div class="lens-card">
+            <span class="lens-ic"><svg viewBox="0 0 24 24"><path d="M5 5h14v11H9l-4 3z"/><path d="M9 9h6M9 12h4"/></svg></span>
+            <div><h3>Confession</h3><p>What does the page admit it can't say out loud?</p></div>
+        </div>
+    </div>
+    <p class="photo-note reveal"><b>&#128247; Photograph this</b> &mdash; it's the whole talk in four questions.</p>
+</section>
+<!-- =====================================================================
+     SLIDE 5 — THE ANIMALS (Janz + Whale)        id="s03-animals"
+     Small image (595px) → two-column treatment.
+     ===================================================================== -->
+<section class="slide center" id="s03-animals">
+    <div class="cols">
+        <div class="col-text reveal from-left">
+            <span class="eyebrow">Christoph Janz · five ways</span>
+            <h2>The animal you hunt sets the price.</h2>
+            <p class="lead">Flies, mice, rabbits, deer, elephants — five ways to build a $100M business, by deal size &times; volume. You can't hunt elephants with self-serve.</p>
+            <div class="whale">
+                <p><b>+ Whale</b> &mdash; the AI-era animal: a customer whose consumption explodes. <em>A whale you didn't know you were hunting.</em></p>
+            </div>
+        </div>
+        <div class="col-media reveal from-right">
+            <div class="media-card"><img src="./assets/janz-five-animals.png" alt="Christoph Janz five animals chart"></div>
+        </div>
+    </div>
+</section>
+<!-- =====================================================================
+     SLIDE 2 — THE COST STACK (showcase SVG)     id="s02-cost-stack"
+     SVG carries its own headline — no on-slide title.
+     ===================================================================== -->
+<section class="slide showcase" id="s02-cost-stack">
+    <div class="svg-card portrait reveal fade-only">
+        <img src="./assets/cost-stack.svg" alt="The Cost Stack — every layer repackages the one below into a new unit you pay for">
+    </div>
+</section>
+<!-- =====================================================================
+     SLIDE 4 — YOUR PRICE IS AN ORG CHART (showcase SVG)  id="s12-org-chart"
+     SVG carries its own headline — no on-slide title.
+     (id kept as s12 for now; ids re-sync after reordering is final.)
+     ===================================================================== -->
+<section class="slide showcase" id="s12-org-chart">
+    <div class="svg-card reveal fade-only">
+        <img src="./assets/your-price-is-an-org-chart.svg" alt="Your Price Is an Org Chart — the price chooses the GTM motion, cost shape and org">
+    </div>
+</section>
+<!-- =====================================================================
+     READY — "ready for detective work?" breather (navy bookend).  id="s16-decode-intro"
+     Section break into the live decodes.
+     ===================================================================== -->
+<section class="slide slide--dark cover" id="s16-decode-intro">
+    <div class="aura"></div>
+    <div class="inner">
+        <h1 class="reveal from-blur">Ready for the <span class="circle-word">detective work?<svg class="circle-mark" viewBox="0 0 400 130" preserveAspectRatio="none" aria-hidden="true"><path d="M 364 32 C 286 4, 78 6, 22 34 C -22 60, -4 104, 92 118 C 240 134, 380 118, 392 80 C 402 48, 386 38, 364 32"/></svg></span></h1>
+        <p class="sub reveal">Seven real pricing pages. One lens. Let's read what they're hiding.</p>
+        <div class="lens-chips reveal stagger">
+            <span><b>Animal</b></span><span><b>Meter</b></span><span><b>Motion</b></span><span><b>Confession</b></span>
+        </div>
+    </div>
+</section>
+<!-- SLIDE 11 — SPOTIFY (B2C contrast / live-decode warm-up) -->
+<section class="slide decode" id="s11-spotify">
+    <div class="decode-head reveal from-left">
+        <span class="eyebrow">Spotify · consumer subscription</span>
+        <h2>One product, <span class="hl">four prices</span>.</h2>
+    </div>
+    <figure class="decode-fig reveal fade-only"><img src="./assets/Spotify.png" alt="Spotify pricing page"></figure>
+    <p class="decode-tag reveal"><b>Meter:</b> per account / household tier · <b>Motion:</b> pure self-serve B2C · <b>Confession:</b> &ldquo;same catalogue, four prices — segmented by who's paying.&rdquo;</p>
+</section>
+<!-- =====================================================================
+     PART 2 — READING (decode slides). All share the .decode template.
+     Edit the eyebrow, h2 (with one <span class="hl">), and .decode-tag.
+     Swap the screenshot by replacing the file in ./assets/.
+     ===================================================================== -->
+
+<!-- SLIDE 5 — BASECAMP -->
+<section class="slide decode" id="s05-basecamp">
+    <div class="decode-head reveal from-left">
+        <span class="eyebrow">Basecamp · project management</span>
+        <h2>$299 flat. No <span class="hl">Enterprise</span> tier.</h2>
+    </div>
+    <figure class="decode-fig reveal fade-only"><img src="./assets/Basecamp.png" alt="Basecamp pricing page"></figure>
+    <p class="decode-tag reveal"><b>Meter:</b> flat company-wide access · <b>Motion:</b> self-serve, brand-led · <b>Confession:</b> &ldquo;we'd rather cap complexity than maximize enterprise extraction.&rdquo;</p>
+</section>
+<!-- SLIDE 6 — NOTION -->
+<section class="slide decode" id="s06-notion">
+    <div class="decode-head reveal from-left">
+        <span class="eyebrow">Notion · connected workspace</span>
+        <h2>PLG in. Enterprise <span class="hl">also</span> in.</h2>
+    </div>
+    <figure class="decode-fig reveal fade-only"><img src="./assets/Notion.png" alt="Notion pricing page"></figure>
+    <p class="decode-tag reveal"><b>Meter:</b> seat, with AI as a cost-sensitive add-on · <b>Motion:</b> self-serve PLG, sales-assisted &amp; enterprise — running in parallel · <b>Confession:</b> &ldquo;one pricing page quietly runs several sales motions at once.&rdquo;</p>
+</section>
+<!-- SLIDE 8 — INTERCOM FIN -->
+<section class="slide decode" id="s08-intercom">
+    <div class="decode-head reveal from-left">
+        <span class="eyebrow">Intercom Fin · AI support agent</span>
+        <h2><span class="hl">$0.99</span> per resolution.</h2>
+    </div>
+    <figure class="decode-fig reveal fade-only"><img src="./assets/Intercom.png" alt="Intercom Fin pricing page"></figure>
+    <p class="decode-tag reveal"><b>Meter:</b> outcome — a resolved conversation, not a seat · <b>Motion:</b> product-led with a sales safety net · <b>Confession:</b> &ldquo;we're so confident it works we'll price on the result.&rdquo; (Watch for the whale.)</p>
+</section>
+<!-- SLIDE 10 — HUBSPOT -->
+<section class="slide decode" id="s10-hubspot">
+    <div class="decode-head reveal from-left">
+        <span class="eyebrow">HubSpot · CRM platform</span>
+        <h2>Free to enter. Priced to <span class="hl">expand</span>.</h2>
+    </div>
+    <figure class="decode-fig reveal fade-only"><img src="./assets/HubSpot.png" alt="HubSpot pricing page"></figure>
+    <p class="decode-tag reveal"><b>Meter:</b> seats + marketing contacts · <b>Motion:</b> free CRM as the wedge, sales-assisted up the hubs · <b>Confession:</b> &ldquo;the free tier is acquisition; the bill climbs with contacts and seats.&rdquo;</p>
+</section>
+<!-- SLIDE 7 — SALESFORCE -->
+<section class="slide decode" id="s07-salesforce">
+    <div class="decode-head reveal from-left">
+        <span class="eyebrow">Salesforce · CRM platform</span>
+        <h2>The published price is the <span class="hl">floor</span> of a negotiation.</h2>
+    </div>
+    <figure class="decode-fig reveal fade-only"><img src="./assets/Salesforce.png" alt="Salesforce pricing page"></figure>
+    <p class="decode-tag reveal"><b>Meter:</b> seat + platform/AI add-ons · <b>Motion:</b> sales-led enterprise; every gate moves you toward a rep · <b>Confession:</b> &ldquo;the real business happens through procurement, not checkout.&rdquo;</p>
+</section>
+<!-- SLIDE 9 — FRESHDESK (Freshworks) -->
+<section class="slide decode" id="s09-freshdesk">
+    <div class="decode-head reveal from-left">
+        <span class="eyebrow">Freshdesk · helpdesk (Chennai)</span>
+        <h2>Agent seat <span class="hl">+ AI sessions</span>.</h2>
+    </div>
+    <figure class="decode-fig reveal fade-only"><img src="./assets/Freshworks.png" alt="Freshdesk pricing page"></figure>
+    <p class="decode-tag reveal"><b>Meter:</b> agent seat <em>and</em> a second AI-session meter · <b>Motion:</b> SMB self-serve, sales-assisted expansion · <b>Confession:</b> &ldquo;classic SaaS wants per-agent pricing, but AI forces a second meter.&rdquo;</p>
+</section>
+<!-- =====================================================================
+     SLIDE 14 — CLOSE + LIVE-DECODE HANDOFF      id="s14-close"
+     ===================================================================== -->
+<section class="slide slide--dark cover" id="s14-close">
+    <div class="aura"></div>
+    <div class="inner">
+        <h1 class="reveal from-blur">Bring your favourite
+            <span class="circle-word">pricing page<svg class="circle-mark" viewBox="0 0 400 130" preserveAspectRatio="none" aria-hidden="true"><path d="M 364 32 C 286 4, 78 6, 22 34 C -22 60, -4 104, 92 118 C 240 134, 380 118, 392 80 C 402 48, 386 38, 364 32"/></svg></span>.</h1>
+        <p class="sub reveal">Now we use the same lens on your pages.</p>
+        <div class="lens-chips reveal stagger">
+            <span><b>Animal</b></span><span><b>Meter</b></span><span><b>Motion</b></span><span><b>Confession</b></span>
+        </div>
+    </div>
+</section>
+<!-- =====================================================================
+     THANKYOU — "Questions? / Thank you" (navy bookend). The real ending;  id="s17-thankyou"
+     appendix slides after this are backup only.
+     ===================================================================== -->
+<section class="slide slide--dark cover" id="s17-thankyou">
+    <div class="aura"></div>
+    <div class="inner">
+        <h1 class="reveal from-blur">Questions? Then <span class="circle-word">thank you<svg class="circle-mark" viewBox="0 0 400 130" preserveAspectRatio="none" aria-hidden="true"><path d="M 364 32 C 286 4, 78 6, 22 34 C -22 60, -4 104, 92 118 C 240 134, 380 118, 392 80 C 402 48, 386 38, 364 32"/></svg></span>.</h1>
+        <p class="sub reveal">Thanks for playing detective with me.</p>
+    </div>
+</section>
+<!-- =====================================================================
+     APPENDIX A1 — PRICING MYTHS (backup, after live decode)  id="sA1-myths"
+     ===================================================================== -->
+<section class="slide" id="sA1-myths">
+    <span class="eyebrow reveal">Appendix · backup</span>
+    <h2 class="reveal">Pricing myths that hurt PMs.</h2>
+    <div class="cmp reveal">
+        <div class="cmp-row cmp-head"><span>The myth</span><span>What's actually true</span></div>
+        <div class="cmp-row"><span class="myth">Pricing is just the number</span><span class="truth">It's <b>strategy, GTM &amp; cost structure</b> in one artifact</span></div>
+        <div class="cmp-row"><span class="myth">Competitor pricing is the answer</span><span class="truth">It encodes <b>their</b> animal and motion, not yours</span></div>
+        <div class="cmp-row"><span class="myth">More tiers means more choice</span><span class="truth">More tiers usually means more <b>confusion</b></span></div>
+        <div class="cmp-row"><span class="myth">Bundle AI in until adoption</span><span class="truth">Free AI on a per-seat meter is a <b>margin time bomb</b></span></div>
+        <div class="cmp-row"><span class="myth">Pricing is finance's job</span><span class="truth">It's <b>product</b> — behaviour design, not a spreadsheet</span></div>
+    </div>
+</section>
+<!-- =====================================================================
+     APPENDIX A2 — IF YOU HAVE TO BUILD ONE (checklist)  id="sA2-checklist"
+     ===================================================================== -->
+<section class="slide" id="sA2-checklist">
+    <span class="eyebrow reveal">Appendix · backup</span>
+    <h2 class="reveal">Start here.</h2>
+    <ul class="checks stagger">
+        <li><span class="mk">1</span><div>Pick the animal<span class="sub">Who are you hunting?</span></div></li>
+        <li><span class="mk">2</span><div>Choose the meter<span class="sub">What do you charge against?</span></div></li>
+        <li><span class="mk">3</span><div>Choose the motion<span class="sub">How will you acquire and upgrade?</span></div></li>
+        <li><span class="mk">4</span><div>Stress-test the worst-case unit<span class="sub">Will a whale break your margin?</span></div></li>
+        <li><span class="mk">5</span><div>Check the org can deliver the promise<span class="sub">Does the team match the price you picked?</span></div></li>
+    </ul>
+</section>
+<!-- =====================================================================
+     SLIDE 1 — UNIT ECONOMICS (chart)            id="s01-unit-econ"
+     Two curves: classic SaaS (flat ≈0 marginal cost) vs AI-era (rising).
+     ===================================================================== -->
+<section class="slide chart-slide" id="s01-unit-econ">
+    <span class="eyebrow reveal">Unit economics</span>
+    <h2 class="reveal">Marginal cost came back.</h2>
+    <div class="chart-wrap reveal"><canvas id="ch-cost"></canvas></div>
+    <p class="punch reveal">&ldquo;AI didn't lower margins. It made <b>COGS non-deterministic.</b>&rdquo;</p>
+</section>
+<!-- =====================================================================
+     SLIDE 13 — THE BUILD SEQUENCE (Part 3)      id="s13-build"
+     5 steps. Santhosh may rewrite these lines in his own voice.
+     ===================================================================== -->
+<section class="slide" id="s13-build">
+    <span class="eyebrow reveal">If you have to build it</span>
+    <h2 class="reveal">The order that actually matters.</h2>
+    <div class="seq stagger">
+        <div class="seq-row"><span class="seq-num">1</span><div><h3>Animal first</h3><p>Decide who you're hunting — it constrains everything below.</p></div></div>
+        <div class="seq-row"><span class="seq-num">2</span><div><h3>Meter before number</h3><p>The meter is the strategy; the price is just a knob.</p></div></div>
+        <div class="seq-row"><span class="seq-num">3</span><div><h3>Motion before packaging</h3><p>Decide how acquisition and upgrade will really happen.</p></div></div>
+        <div class="seq-row"><span class="seq-num">4</span><div><h3>Price the worst-case unit</h3><p>Not the average — the average bankrupts you on whales.</p></div></div>
+        <div class="seq-row"><span class="seq-num">5</span><div><h3>Make sure the org can keep the promise</h3><p>SLG pricing with no sales team is a lie. So is outcome pricing with no instrumentation.</p></div></div>
+    </div>
+</section>
+
+<script>
+/* ============================ NAVIGATION ============================ */
+class SlidePresentation{
+    constructor(){
+        this.slides=document.querySelectorAll('.slide');
+        this.currentSlide=0;this.totalSlides=this.slides.length;
+        this.setupObserver();this.setupKeyboard();this.setupProgress();this.setupDots();
+    }
+    setupObserver(){
+        const observer=new IntersectionObserver((entries)=>{
+            entries.forEach(entry=>{
+                entry.target.classList.toggle('visible',entry.isIntersecting);
+                if(entry.isIntersecting){
+                    this.currentSlide=[...this.slides].indexOf(entry.target);
+                    this.updateProgress();this.updateDots();
+                }
+            });
+        },{threshold:0.5});
+        this.slides.forEach(s=>observer.observe(s));
+    }
+    setupKeyboard(){
+        document.addEventListener('keydown',(e)=>{
+            if(e.key==='ArrowRight'||e.key==='ArrowDown'||e.key===' '){e.preventDefault();this.goTo(this.currentSlide+1);}
+            else if(e.key==='ArrowLeft'||e.key==='ArrowUp'){e.preventDefault();this.goTo(this.currentSlide-1);}
+        });
+    }
+    goTo(i){if(i>=0&&i<this.totalSlides)this.slides[i].scrollIntoView({behavior:'smooth'});}
+    setupProgress(){const bar=document.createElement('div');bar.style.cssText='position:fixed;top:0;left:0;height:3px;background:var(--gold);z-index:100;transition:width .3s ease;';document.body.prepend(bar);this.progressBar=bar;}
+    updateProgress(){this.progressBar.style.width=((this.currentSlide+1)/this.totalSlides*100)+'%';}
+    setupDots(){
+        const nav=document.createElement('nav');nav.className='nav-dots';
+        nav.style.cssText='position:fixed;right:1.25rem;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:.45rem;z-index:100;';
+        this.slides.forEach((_,i)=>{
+            const dot=document.createElement('button');
+            dot.style.cssText='width:8px;height:8px;border-radius:50%;border:none;background:var(--text-secondary);opacity:.4;cursor:pointer;transition:all .3s;padding:0;';
+            dot.addEventListener('click',()=>this.goTo(i));nav.appendChild(dot);
+        });
+        document.body.appendChild(nav);this.dots=nav.querySelectorAll('button');
+    }
+    updateDots(){this.dots.forEach((d,i)=>{d.style.opacity=i===this.currentSlide?'1':'.4';d.style.background=i===this.currentSlide?'var(--gold)':'var(--text-secondary)';});}
+}
+document.addEventListener('DOMContentLoaded',()=>new SlidePresentation());
+
+/* ============================ CHART HELPER ============================ */
+window.Deck=window.Deck||{};Deck._pending={};
+Deck.chart=function(id,cfg){Deck._pending[id]=cfg;};
+Deck._cssVar=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+Deck._resolve=v=>{if(typeof v!=='string')return v;const m=v.match(/^var\((--[^)]+)\)$/);return m?Deck._cssVar(m[1]):v;};
+Deck._theme=function(cfg){
+    const text=Deck._cssVar('--text-secondary'),grid=Deck._cssVar('--border');
+    const font=Deck._cssVar('--font-body').replace(/['"]/g,'').split(',')[0].trim()||'sans-serif';
+    Chart.defaults.font.family=font;Chart.defaults.font.size=15;Chart.defaults.color=text;
+    (cfg.data&&cfg.data.datasets||[]).forEach(ds=>{
+        ['backgroundColor','borderColor','pointBackgroundColor','pointBorderColor'].forEach(k=>{
+            if(Array.isArray(ds[k]))ds[k]=ds[k].map(Deck._resolve);else if(ds[k])ds[k]=Deck._resolve(ds[k]);
+        });
+    });
+    cfg.options=cfg.options||{};
+    if(cfg.type==='bar'||cfg.type==='line'){
+        cfg.options.scales=cfg.options.scales||{};
+        ['x','y'].forEach(ax=>{cfg.options.scales[ax]=Object.assign({ticks:{color:text},grid:{color:grid,drawBorder:false},border:{color:grid}},cfg.options.scales[ax]||{});});
+    }
+    cfg.options.plugins=Object.assign({
+        legend:{labels:{color:Deck._cssVar('--text-primary'),padding:16,boxWidth:14,boxHeight:14,font:{size:15,weight:'700'}}},
+        tooltip:{backgroundColor:Deck._cssVar('--ink'),titleColor:'#fff',bodyColor:'#fff',borderColor:Deck._cssVar('--gold'),borderWidth:1,padding:12,cornerRadius:10,boxPadding:6,titleFont:{weight:'700',size:13},bodyFont:{weight:'500',size:14}}
+    },cfg.options.plugins||{});
+    cfg.options.responsive=true;cfg.options.maintainAspectRatio=false;
+    cfg.options.layout=Object.assign({padding:{top:20,right:18,bottom:6,left:8}},cfg.options.layout||{});
+    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)cfg.options.animation=false;
+    return cfg;
+};
+Deck._init=function(slide){
+    if(typeof Chart==='undefined')return;
+    slide.querySelectorAll('canvas[id]').forEach(cv=>{
+        const cfg=Deck._pending[cv.id];if(!cfg||cv.dataset.done)return;cv.dataset.done='1';
+        new Chart(cv.getContext('2d'),Deck._theme(cfg));
+    });
+};
+document.addEventListener('DOMContentLoaded',()=>{
+    // Init on scroll-into-view (replays nicely) ...
+    document.querySelectorAll('.slide').forEach(s=>{
+        new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)Deck._init(e.target);}),{threshold:0.4}).observe(s);
+    });
+    // ... and a direct fallback so charts always paint (e.g. in static QA renders).
+    document.querySelectorAll('.slide').forEach(s=>Deck._init(s));
+});
+
+/* ---------- Slide 1 chart: marginal cost per request as usage scales ---------- */
+Deck.chart('ch-cost',{
+    type:'line',
+    data:{
+        labels:['','Usage →','','','','','Scale →'],
+        datasets:[
+            {label:'AI-era software',data:[2,5,9,15,23,34,48],borderColor:'var(--chart-3)',backgroundColor:'var(--chart-3)',pointBackgroundColor:'var(--chart-3)',borderWidth:4,tension:.35,fill:false,pointRadius:0},
+            {label:'Classic SaaS',data:[3,3.1,3,3.1,3,3.1,3],borderColor:'#9aa7b8',backgroundColor:'#9aa7b8',pointBackgroundColor:'#9aa7b8',borderWidth:3,borderDash:[7,6],tension:0,fill:false,pointRadius:0}
+        ]
+    },
+    options:{
+        scales:{
+            x:{title:{display:true,text:'Requests / volume',color:'#5b6b82',font:{weight:'700',size:14}},ticks:{display:false}},
+            y:{title:{display:true,text:'Marginal cost per request',color:'#5b6b82',font:{weight:'700',size:14}},ticks:{display:false},beginAtZero:true}
+        },
+        plugins:{legend:{position:'top',align:'end'}}
+    }
+});
+</script>
+</body>
+</html>
