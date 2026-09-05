@@ -22,17 +22,17 @@
        note, page, lock) are <symbol>s in the hidden <svg> at the top of
        <body>; change them once and every slide follows.
 
-     SLIDE INDEX
-        1  s01-question     The wrong question
-        2  s02-cook         Cook, training years, last kitchen, one token
-        3  s03-kitchen      Same cook, different kitchen
-        4  s04-note-page    The note at the door and the notebook page
-        5  s05-stations     One cook, one dish. The wedding kitchen
-        6  s06-sappadu      Eight stations, tasted between each. The pantry
-        7  s07-demo         Live demo agenda
-        8  s08-substitute   What broke: the substitute cook
-        9  s09-tonight      Start tonight: one dish
-       10  s10-recap        Q&A, labelled kitchen
+     SLIDE INDEX (one concept per slide; kitchen analogy is secondary)
+        1  s01-map          The six words (roadmap)
+        2  s02-model        Model
+        3  s03-harness      Harness
+        4  s04-context      Context
+        5  s05-skill        Skill
+        6  s06-agent        Agent
+        7  s07-you          You, the human gate (what broke)
+        8  s08-demo         Live demo agenda
+        9  s09-tonight      Start tonight
+       10  s10-recap        The six words again, Q&A
      ===================================================================== -->
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -178,6 +178,23 @@ html.presenter,html.presenter body{height:100%;overflow:hidden;background:#141b1
 </style>
 </head>
 <body>
+<style>
+/* concept layout: text left, small crude icon right */
+.concept{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:clamp(1.5rem,4vw,4rem);align-items:center;flex:1;min-height:0}
+.eyebrow{font-size:clamp(.95rem,1.3vw,1.2rem);font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+.kitchen{text-wrap:balance;font-family:var(--font-title);font-style:italic;font-size:clamp(1.15rem,1.9vw,1.7rem);color:var(--text-secondary);line-height:1.3;margin-top:.6rem}
+.concept .points{grid-template-columns:1fr;gap:clamp(.6rem,1.2vw,1rem);margin-top:clamp(1rem,2.4vw,2rem);font-size:clamp(1.05rem,1.6vw,1.5rem)}
+.icon{display:flex;align-items:center;justify-content:center;min-height:0;height:100%}
+.icon svg{width:100%;height:auto;max-height:56vh;font-family:var(--font-body);font-weight:700}
+/* the six-word map */
+.map{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(.8rem,1.6vw,1.4rem);flex:1;min-height:0}
+.card{background:var(--surface);border:2px solid var(--border);border-radius:1rem;padding:clamp(.8rem,1.6vw,1.4rem);display:grid;grid-template-columns:auto 1fr;gap:clamp(.6rem,1.2vw,1rem);align-items:center;min-height:0}
+.card svg{width:clamp(64px,8.5vw,130px);height:clamp(64px,8.5vw,130px)}
+.card .w{font-family:var(--font-title);font-size:clamp(1.8rem,3.6vw,3.4rem);line-height:1.05}
+.card .k{display:block;font-size:clamp(1rem,1.5vw,1.4rem);color:var(--text-primary);opacity:.85;font-weight:700;margin-top:.3em;line-height:1.25}
+.card.you .w{color:var(--accent)}
+@media (max-width:820px){.concept{grid-template-columns:1fr}.icon{display:none}.map{grid-template-columns:1fr 1fr}}
+</style>
 <!-- Shared drawings. Every slide reuses these with <use href="#..."> -->
 <svg class="defs" aria-hidden="true" focusable="false">
 <defs>
@@ -267,395 +284,269 @@ html.presenter,html.presenter body{height:100%;overflow:hidden;background:#141b1
   <marker id="arrow-red" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10Z" fill="var(--red)"/></marker>
 </defs>
 </svg>
-<!-- ============================ 1. THE WRONG QUESTION ============================ -->
-<section class="slide slide--dark" id="s01-question" data-minutes="3">
+<!-- ============================ 1. THE MAP ============================ -->
+<section class="slide slide--dark" id="s01-map" data-minutes="3">
   <div class="slide-content">
-    <div class="reveal fade-only" style="display:flex;justify-content:space-between;align-items:center">
-      <svg viewBox="0 0 60 20" style="width:clamp(2.2rem,3.4vw,3rem);height:auto;transform:rotate(-30deg)"><use href="#spoon"/></svg>
-      <span class="sub">AI Nalla AI, session 9</span>
+    <h1 class="title reveal from-blur">Stop picking a winner. <span class="hl">Start assigning jobs.</span></h1>
+    <p class="sub reveal">Six words to understand any AI tool. One kitchen to remember them by.</p>
+    <div class="map stagger">
+      <div class="card"><svg viewBox="0 0 80 130"><use href="#cook" style="color:var(--red)"/></svg><div><span class="w">Model</span><span class="k">the cook</span></div></div>
+      <div class="card"><svg viewBox="0 0 100 90"><use href="#stove"/></svg><div><span class="w">Harness</span><span class="k">the kitchen around him</span></div></div>
+      <div class="card"><svg viewBox="0 0 100 120"><use href="#note"/><g stroke="var(--line)" stroke-width="3"><line x1="22" y1="40" x2="78" y2="40"/><line x1="22" y1="60" x2="78" y2="60"/><line x1="22" y1="80" x2="62" y2="80"/></g></svg><div><span class="w">Context</span><span class="k">the note at the door</span></div></div>
+      <div class="card"><svg viewBox="0 0 100 120"><use href="#page"/><g stroke="var(--border)" stroke-width="3"><line x1="22" y1="45" x2="78" y2="45"/><line x1="22" y1="65" x2="78" y2="65"/><line x1="22" y1="85" x2="78" y2="85"/></g></svg><div><span class="w">Skill</span><span class="k">the notebook page</span></div></div>
+      <div class="card"><svg viewBox="0 0 120 110"><use href="#andaa"/></svg><div><span class="w">Agent</span><span class="k">one cook, one dish</span></div></div>
+      <div class="card you"><svg viewBox="0 0 60 60"><g transform="translate(0 20)"><use href="#spoon" width="60" height="20"/></g></svg><div><span class="w">You</span><span class="k">tasting before it goes out</span></div></div>
     </div>
-    <h1 class="title reveal from-blur">"Which AI tool should I use?" is the <span class="hl">wrong question.</span></h1>
-    <div class="figure">
-      <svg viewBox="0 0 1200 470" role="img" aria-label="A cluttered grid of AI tool names on the left; a wedding kitchen seen from above on the right, with six stations and you tasting at the pass">
-        <g class="reveal from-left" style="transition-delay:.15s">
-          <text x="270" y="330" text-anchor="middle" font-size="380" font-family="Fraunces,Georgia,serif" style="fill:rgba(255,255,255,.07)">?</text>
-          <g font-size="21" font-weight="800" text-anchor="middle">
-            <g transform="rotate(-6 115 72)"><rect x="40" y="40" width="150" height="64" rx="14" fill="var(--surface)" stroke="var(--border)" stroke-width="2"/><text x="115" y="80">ChatGPT</text></g>
-            <g transform="rotate(4 285 62)"><rect x="210" y="30" width="150" height="64" rx="14" fill="var(--surface)" stroke="var(--border)" stroke-width="2"/><text x="285" y="70">Claude</text></g>
-            <g transform="rotate(-3 455 82)"><rect x="380" y="50" width="150" height="64" rx="14" fill="var(--surface)" stroke="var(--border)" stroke-width="2"/><text x="455" y="90">Gemini</text></g>
-            <g transform="rotate(5 135 182)"><rect x="60" y="150" width="150" height="64" rx="14" fill="var(--surface)" stroke="var(--border)" stroke-width="2"/><text x="135" y="190">Codex</text></g>
-            <g transform="rotate(-4 295 172)"><rect x="220" y="140" width="150" height="64" rx="14" fill="var(--surface)" stroke="var(--border)" stroke-width="2"/><text x="295" y="180">NotebookLM</text></g>
-            <g transform="rotate(6 495 182)"><rect x="420" y="150" width="150" height="64" rx="14" fill="var(--surface)" stroke="var(--border)" stroke-width="2"/><text x="495" y="190">AI Studio</text></g>
-            <g transform="rotate(3 105 292)"><rect x="30" y="260" width="150" height="64" rx="14" fill="var(--surface)" stroke="var(--border)" stroke-width="2"/><text x="105" y="300">Perplexity</text></g>
-            <g transform="rotate(-5 305 282)"><rect x="230" y="250" width="150" height="64" rx="14" fill="var(--surface)" stroke="var(--border)" stroke-width="2"/><text x="305" y="290">Copilot</text></g>
-            <g transform="rotate(4 475 287)"><rect x="400" y="255" width="150" height="64" rx="14" fill="var(--surface)" stroke="var(--border)" stroke-width="2"/><text x="475" y="295">Grok</text></g>
-            <g transform="rotate(-4 165 402)"><rect x="90" y="370" width="150" height="64" rx="14" fill="var(--surface)" stroke="var(--border)" stroke-width="2"/><text x="165" y="410">Cursor</text></g>
-            <g transform="rotate(5 335 397)"><rect x="260" y="365" width="150" height="64" rx="14" fill="var(--surface)" stroke="var(--border)" stroke-width="2"/><text x="335" y="405">Midjourney</text></g>
-            <g transform="rotate(-3 515 402)"><rect x="440" y="370" width="150" height="64" rx="14" fill="var(--surface)" stroke="var(--border)" stroke-width="2"/><text x="515" y="410">Sora</text></g>
-          </g>
-        </g>
-        <line x1="610" y1="30" x2="610" y2="440" stroke="var(--border)" stroke-width="2" stroke-dasharray="6 8"/>
-        <g class="reveal from-right" style="transition-delay:.3s">
-          <rect x="640" y="20" width="540" height="440" rx="24" fill="var(--surface)" stroke="var(--border)" stroke-width="2"/>
-          <g font-size="19" font-weight="800" text-anchor="middle">
-            <g><rect x="670" y="50" width="140" height="120" rx="12" fill="var(--surface2)" stroke="var(--border)" stroke-width="2"/><circle cx="740" cy="95" r="28" fill="var(--leaf)" stroke="var(--line)" stroke-width="2.5"/><circle cx="740" cy="95" r="18" fill="var(--leaf-dark)"/><use href="#top" x="772" y="58" width="30" height="30" style="color:var(--leaf)"/><text x="722" y="160">sambar</text></g>
-            <g><rect x="840" y="50" width="140" height="120" rx="12" fill="var(--surface2)" stroke="var(--border)" stroke-width="2"/><circle cx="910" cy="95" r="28" fill="var(--leaf)" stroke="var(--line)" stroke-width="2.5"/><circle cx="910" cy="95" r="18" fill="var(--leaf-dark)"/><use href="#top" x="942" y="58" width="30" height="30" style="color:var(--leaf)"/><text x="892" y="160">rasam</text></g>
-            <g><rect x="1010" y="50" width="140" height="120" rx="12" fill="var(--surface2)" stroke="var(--border)" stroke-width="2"/><circle cx="1080" cy="95" r="28" fill="var(--turmeric)" stroke="var(--line)" stroke-width="2.5"/><circle cx="1080" cy="95" r="18" fill="var(--turmeric-light)"/><use href="#top" x="1112" y="58" width="30" height="30" style="color:var(--leaf)"/><text x="1062" y="160">vadai</text></g>
-            <g><rect x="670" y="200" width="140" height="120" rx="12" fill="var(--surface2)" stroke="var(--border)" stroke-width="2"/><circle cx="740" cy="245" r="28" fill="var(--leaf)" stroke="var(--line)" stroke-width="2.5"/><circle cx="740" cy="245" r="18" fill="var(--leaf-dark)"/><use href="#top" x="772" y="208" width="30" height="30" style="color:var(--leaf)"/><text x="722" y="310">payasam</text></g>
-            <g><rect x="840" y="200" width="140" height="120" rx="12" fill="var(--surface2)" stroke="var(--border)" stroke-width="2"/><circle cx="910" cy="245" r="28" fill="var(--turmeric)" stroke="var(--line)" stroke-width="2.5"/><circle cx="910" cy="245" r="18" fill="var(--turmeric-light)"/><use href="#top" x="942" y="208" width="30" height="30" style="color:var(--leaf)"/><text x="892" y="310">dosa</text></g>
-            <g><rect x="1010" y="200" width="140" height="120" rx="12" fill="var(--surface2)" stroke="var(--border)" stroke-width="2"/><circle cx="1080" cy="245" r="28" fill="var(--leaf)" stroke="var(--line)" stroke-width="2.5"/><circle cx="1080" cy="245" r="18" fill="var(--leaf-dark)"/><use href="#top" x="1112" y="208" width="30" height="30" style="color:var(--leaf)"/><text x="1062" y="310">rice</text></g>
-          </g>
-          <rect x="670" y="350" width="480" height="26" rx="8" fill="var(--surface2)" stroke="var(--border)" stroke-width="2"/>
-          <use href="#top" x="880" y="392" width="56" height="56" style="color:var(--red)"/>
-          <g class="bob"><use href="#spoon" x="932" y="406" width="66" height="22"/></g>
-          <text x="1010" y="428" font-size="26" font-weight="800" class="t-red">You</text>
-          <text x="700" y="428" font-size="18" font-weight="800">the pass</text>
-        </g>
-      </svg>
-    </div>
-    <div class="contact reveal" style="transition-delay:.4s"><span><b>Santhosh Guru</b></span><span>santhoshguru.com</span></div>
+    <div class="contact reveal"><span><b>Santhosh Guru</b> &middot; AI Nalla AI, session 9</span><span>santhoshguru.com</span></div>
   </div>
   <aside class="notes">
     <ul>
-      <li>Open with the question everyone has asked. Say it is reasonable, and say it is exactly why the toolkit feels baffling.</li>
-      <li>The claim: the value is not in any one chatbot. It is in the combination. A cook, a kitchen that gives him hands, your notes as his memory, and you tasting everything.</li>
+      <li>Open with the question everyone has asked: "Which AI tool should I use?" Say it is reasonable, and say it is exactly why the toolkit feels baffling.</li>
+      <li>The claim: the value is not in any one chatbot. It is in the combination. A model, a harness that gives it hands, your context as its memory, skills it can follow, and you checking everything.</li>
       <li>The AI Nalla AI frame: nalla samayal does not come from hiring the most famous cook. It comes from a good kitchen, a clear note, a recipe you trust, and someone tasting before it hits the leaf. Nalla AI is the same.</li>
-      <li>Tell them what they leave with: nine words explained through one kitchen, a way to decide which job goes to which tool, one dish to cook this week, and an honest story about the time it went wrong.</li>
-      <li>Set expectation: mostly show and tell. Four short kitchen slides, then real systems.</li>
+      <li>Walk the six cards once, ten seconds each. These are the six words. Everything tonight is one of these six.</li>
+      <li>Tell them what they leave with: the six words, a way to decide which job goes to which tool, one job to try this week, and an honest story about the time it went wrong.</li>
     </ul>
   </aside>
 </section>
 
-<!-- ============================ 2. THE COOK ============================ -->
-<section class="slide" id="s02-cook" data-minutes="5">
+<!-- ============================ 2. MODEL ============================ -->
+<section class="slide" id="s02-model" data-minutes="5">
   <div class="slide-content">
-    <h2 class="title title--long reveal from-blur">The cook knows every cuisine. He has never been inside your house. And he <span class="hl">forgets you</span> the moment the token is torn.</h2>
-    <div class="figure">
-      <svg viewBox="0 0 1200 400" role="img" aria-label="Three panels: a cook surrounded by dishes; two identical cooks under Udupi hotel and Chettinad mess signs; a mess counter with a torn token">
-        <g class="stagger">
-          <g>
-            <rect x="0" y="0" width="380" height="340" rx="18" fill="var(--surface)" stroke="var(--border)" stroke-width="2"/>
-            <use href="#cook" x="150" y="110" width="80" height="130" style="color:var(--red)"/>
-            <g font-size="14" class="t-muted" text-anchor="middle" font-weight="700">
-              <ellipse cx="70" cy="70" rx="28" ry="12" fill="var(--turmeric)" stroke="var(--line)" stroke-width="2.5"/><text x="70" y="102">sambar</text>
-              <ellipse cx="190" cy="48" rx="28" ry="12" fill="var(--leaf)" stroke="var(--line)" stroke-width="2.5"/><text x="190" y="80">biryani</text>
-              <ellipse cx="310" cy="70" rx="28" ry="12" fill="var(--fill)" stroke="var(--line)" stroke-width="2.5"/><text x="310" y="102">payasam</text>
-              <ellipse cx="50" cy="170" rx="28" ry="12" fill="var(--red)" stroke="var(--line)" stroke-width="2.5"/><text x="50" y="202">rasam</text>
-              <ellipse cx="330" cy="170" rx="28" ry="12" fill="var(--fill)" stroke="var(--line)" stroke-width="2.5"/><text x="330" y="202">idli</text>
-              <ellipse cx="70" cy="265" rx="28" ry="12" fill="var(--turmeric-light)" stroke="var(--line)" stroke-width="2.5"/><text x="70" y="297">dosa</text>
-              <ellipse cx="310" cy="265" rx="28" ry="12" fill="var(--red-dark)" stroke="var(--line)" stroke-width="2.5"/><text x="310" y="297">kuzhambu</text>
-              <ellipse cx="190" cy="290" rx="28" ry="12" fill="var(--leaf-dark)" stroke="var(--line)" stroke-width="2.5"/><text x="190" y="322">poriyal</text>
-            </g>
-            <text x="190" y="382" font-size="22" font-weight="800" text-anchor="middle">30 years of learning <tspan class="t-term">(pretraining)</tspan></text>
-          </g>
-          <g>
-            <rect x="410" y="0" width="380" height="340" rx="18" fill="var(--surface)" stroke="var(--border)" stroke-width="2"/>
-            <rect x="430" y="18" width="150" height="40" rx="6" fill="var(--leaf)"/><text x="505" y="45" font-size="15" font-weight="800" text-anchor="middle" class="t-white">UDUPI HOTEL</text>
-            <rect x="620" y="18" width="150" height="40" rx="6" fill="var(--red)"/><text x="695" y="45" font-size="14" font-weight="800" text-anchor="middle" class="t-white">CHETTINAD MESS</text>
-            <g><rect x="588" y="78" width="6" height="34" rx="3" fill="var(--leaf)" transform="rotate(-20 591 95)"/><circle cx="604" cy="98" r="9" fill="var(--red)" stroke="var(--line)" stroke-width="2"/><ellipse cx="620" cy="92" rx="7" ry="10" fill="var(--leaf-dark)" stroke="var(--line)" stroke-width="2"/></g>
-            <text x="600" y="132" font-size="15" font-weight="800" text-anchor="middle">same vegetables</text>
-            <use href="#cook" x="470" y="125" width="70" height="114" style="color:var(--red)"/>
-            <use href="#cook" x="660" y="125" width="70" height="114" style="color:var(--red)"/>
-            <use href="#bowl" x="472" y="252" width="66" height="38"/>
-            <g><path d="M666 264 Q699 292 732 264Z" fill="var(--fill)" stroke="var(--line)" stroke-width="3" stroke-linejoin="round"/><ellipse cx="699" cy="264" rx="31" ry="7" fill="var(--red-dark)" stroke="var(--line)" stroke-width="3"/></g>
-            <text x="505" y="318" font-size="15" text-anchor="middle" font-weight="700">sambar, Udupi style</text>
-            <text x="695" y="318" font-size="15" text-anchor="middle" font-weight="700">kara kuzhambu</text>
-            <text x="600" y="382" font-size="22" font-weight="800" text-anchor="middle">his last kitchen <tspan class="t-term">(post-training)</tspan></text>
-          </g>
-          <g>
-            <rect x="820" y="0" width="380" height="340" rx="18" fill="var(--surface)" stroke="var(--border)" stroke-width="2"/>
-            <rect x="850" y="20" width="140" height="40" rx="6" fill="var(--leaf)"/><text x="920" y="47" font-size="16" font-weight="800" text-anchor="middle" class="t-white">MESS</text>
-            <use href="#cook" x="880" y="80" width="80" height="130" style="color:var(--red)"/>
-            <g class="pulse"><circle cx="1000" cy="66" r="22" fill="var(--fill)" stroke="var(--line)" stroke-width="2.5"/><circle cx="975" cy="92" r="5" fill="var(--fill)" stroke="var(--line)" stroke-width="2"/><text x="1000" y="76" font-size="28" font-weight="800" text-anchor="middle" font-family="Fraunces,Georgia,serif">?</text></g>
-            <rect x="840" y="190" width="340" height="26" rx="6" fill="var(--surface2)" stroke="var(--line)" stroke-width="3"/>
-            <rect x="850" y="216" width="14" height="70" fill="var(--surface2)" stroke="var(--line)" stroke-width="2.5"/><rect x="1156" y="216" width="14" height="70" fill="var(--surface2)" stroke="var(--line)" stroke-width="2.5"/>
-            <g><path d="M1040 258 Q1075 244 1110 258 L1114 330 L1036 330Z" fill="var(--turmeric)" stroke="var(--line)" stroke-width="3" stroke-linejoin="round"/><circle cx="1075" cy="238" r="20" fill="var(--line)"/></g>
-            <g transform="rotate(-12 905 300)"><path d="M880 288 L922 288 L918 294 L924 300 L918 306 L922 312 L880 312Z" fill="var(--note)" stroke="var(--line)" stroke-width="2.5" stroke-linejoin="round"/><text x="899" y="304" font-size="11" font-weight="800" text-anchor="middle">TOK</text></g>
-            <g transform="rotate(14 955 310)"><path d="M936 298 L978 298 L978 322 L936 322 L940 316 L934 310 L940 304Z" fill="var(--note)" stroke="var(--line)" stroke-width="2.5" stroke-linejoin="round"/><text x="958" y="314" font-size="11" font-weight="800" text-anchor="middle">EN</text></g>
-            <text x="1010" y="382" font-size="22" font-weight="800" text-anchor="middle">one token <tspan class="t-term">(inference)</tspan></text>
-          </g>
-        </g>
-      </svg>
-    </div>
-    <div class="points stagger">
-      <div class="pt"><b>Training years:</b> he read every cookbook and cooked everywhere. Knows food, not your family.</div>
-      <div class="pt"><b>Last kitchen:</b> same training, different house style. That is why ChatGPT, Claude and Gemini feel different.</div>
-      <div class="pt"><b>One token:</b> you order, he cooks, the token is torn. Tomorrow he does not know you.</div>
+    <div class="concept">
+      <div class="reveal from-left">
+        <div class="eyebrow">1 of 6 &middot; Model</div>
+        <h2 class="title title--long">A model is the cook. Skilled at everything. Knows <span class="hl">nothing about your house.</span> Forgets you after every meal.</h2>
+        <p class="kitchen">The samayal master. Thirty years in every kitchen. Never once inside yours.</p>
+        <div class="points stagger">
+          <div class="pt"><b>Pretraining:</b> his training years. Read every cookbook, cooked everywhere. For AI, most of the internet. Knows food, not your family.</div>
+          <div class="pt"><b>Post-training:</b> his last kitchen. Udupi hotel or Chettinad mess, same vegetables, different food. Why ChatGPT, Claude and Gemini feel different.</div>
+          <div class="pt"><b>Inference:</b> one token at the mess counter, torn after the meal. Nothing carries over unless you carry it.</div>
+        </div>
+      </div>
+      <div class="icon reveal from-right">
+        <svg viewBox="0 0 260 240" role="img" aria-label="A cook with a question mark: he does not recognise you">
+          <use href="#cook" x="60" y="70" width="110" height="170" style="color:var(--red)"/>
+          <g class="pulse"><circle cx="200" cy="50" r="34" fill="var(--fill)" stroke="var(--line)" stroke-width="3"/><circle cx="168" cy="88" r="6" fill="var(--fill)" stroke="var(--line)" stroke-width="2.5"/><text x="200" y="64" font-size="40" font-weight="800" text-anchor="middle" font-family="Fraunces,Georgia,serif">?</text></g>
+          <g transform="rotate(-12 210 205)"><path d="M184 190 L234 190 L230 198 L236 206 L230 214 L234 222 L184 222Z" fill="var(--note)" stroke="var(--line)" stroke-width="2.5" stroke-linejoin="round"/><text x="208" y="211" font-size="12" font-weight="800" text-anchor="middle">TOK</text></g>
+          <g transform="rotate(14 232 228)"><path d="M212 212 L258 212 L258 242 L212 242 L216 234 L210 227 L216 220Z" fill="var(--note)" stroke="var(--line)" stroke-width="2.5" stroke-linejoin="round"/><text x="236" y="232" font-size="12" font-weight="800" text-anchor="middle">EN</text></g>
+        </svg>
+      </div>
     </div>
   </div>
   <aside class="notes">
     <ul>
-      <li>"Imagine a cook who grew up in a kitchen in Kumbakonam and has cooked everywhere since. Sambar, biryani, payasam, Chettinad, Udupi, name it. Enormously skilled. Has never been inside your house."</li>
-      <li>Training years (pretraining): "How did he get that skilled? Thirty years of watching, tasting and cooking everything. The AI did the same with most of the internet. It knows food. It does not know your amma's sambar."</li>
-      <li>Last kitchen (post-training): "Two cooks, same thirty years. One spent a decade in a Udupi hotel, one in a Chettinad mess. Same vegetables, different food. Same knowledge, different house style. Different AI apps feel different for the same reason. Different last kitchen."</li>
-      <li>One token (inference): "Put him at a mess counter. You buy a token, hand it over, he cooks, you eat, token torn. Tomorrow he has no idea who you are. Every conversation with AI is one token. Nothing carries over unless you carry it."</li>
-      <li>The honest gap, said plainly: "A real cook remembers regulars. This one does not. Nothing you say changes the cook. That is the single most important thing to know about AI."</li>
+      <li>"Imagine a cook who grew up in a kitchen in Kumbakonam and has cooked everywhere since. Sambar, biryani, payasam, Chettinad, Udupi, name it. Enormously skilled. Has never been inside your house." That cook is the model.</li>
+      <li>Pretraining: "How did he get that skilled? Thirty years of watching, tasting and cooking everything. The AI did the same with most of the internet. It knows food. It does not know your amma's sambar."</li>
+      <li>Post-training: "Two cooks, same thirty years. One spent a decade in a Udupi hotel, one in a Chettinad mess. Same vegetables, different food. Same knowledge, different house style. Different AI apps feel different for the same reason. Different last kitchen."</li>
+      <li>Inference: "Put him at a mess counter. You buy a token, hand it over, he cooks, you eat, token torn. Tomorrow he has no idea who you are. Every conversation with AI is one token. Nothing carries over unless you carry it."</li>
+      <li>The honest gap, said plainly: "A real cook remembers regulars. This one does not. Nothing you say changes the model. That is the single most important thing to know about AI."</li>
       <li>Bridge: "So if he is brilliant, forgetful, and knows nothing about you, what decides what he can actually do for you? Now bring him from the mess to your house."</li>
     </ul>
   </aside>
 </section>
-<!-- ============================ 3. THE KITCHEN ============================ -->
-<section class="slide" id="s03-kitchen" data-minutes="3">
-  <div class="slide-content">
-    <h2 class="title reveal from-blur">Same cook. Different <span class="hl">kitchen.</span> Different food.</h2>
-    <div class="figure">
-      <svg viewBox="0 0 1200 450" role="img" aria-label="The same cook in a small home kitchen on the left and in a large kalyana mandapam kitchen on the right, with AI app names pointing at the kitchen">
-        <g class="reveal from-left">
-          <rect x="0" y="0" width="470" height="360" rx="18" fill="var(--surface)" stroke="var(--border)" stroke-width="2"/>
-          <text x="24" y="36" font-size="20" font-weight="800">Home kitchen</text>
-          <use href="#stove" x="50" y="165" width="110" height="99"/>
-          <use href="#cook" x="200" y="136" width="80" height="130" style="color:var(--red)"/>
-          <g><rect x="340" y="185" width="44" height="60" rx="8" fill="var(--fill)" stroke="var(--line)" stroke-width="3"/><rect x="332" y="240" width="60" height="26" rx="6" fill="var(--line)"/><rect x="348" y="176" width="28" height="12" rx="3" fill="var(--line)"/><text x="362" y="288" font-size="15" font-weight="800" text-anchor="middle">mixie</text></g>
-          <line x1="20" y1="266" x2="450" y2="266" stroke="var(--line)" stroke-width="3"/>
-          <g><use href="#leaf" x="40" y="292" width="56" height="24"/><use href="#leaf" x="104" y="292" width="56" height="24"/><use href="#leaf" x="168" y="292" width="56" height="24"/><use href="#leaf" x="232" y="292" width="56" height="24"/><use href="#leaf" x="296" y="292" width="56" height="24"/><use href="#leaf" x="360" y="292" width="56" height="24"/></g>
-          <text x="235" y="345" font-size="20" font-weight="800" text-anchor="middle">Feeds six.</text>
-        </g>
-        <g class="reveal from-right" style="transition-delay:.15s">
-          <rect x="530" y="0" width="670" height="360" rx="18" fill="var(--surface)" stroke="var(--border)" stroke-width="2"/>
-          <text x="554" y="36" font-size="20" font-weight="800">Kalyana mandapam kitchen</text>
-          <text x="1176" y="36" text-anchor="end" class="t-term">(harness)</text>
-          <use href="#andaa" x="550" y="150" width="120" height="110"/>
-          <use href="#andaa" x="660" y="150" width="120" height="110"/>
-          <use href="#cook" x="800" y="130" width="80" height="130" style="color:var(--red)"/>
-          <g>
-            <use href="#cook" x="910" y="95" width="40" height="65" style="color:var(--leaf)"/>
-            <use href="#cook" x="958" y="95" width="40" height="65" style="color:var(--turmeric)"/>
-            <use href="#cook" x="1006" y="95" width="40" height="65" style="color:var(--leaf)"/>
-            <use href="#cook" x="1054" y="95" width="40" height="65" style="color:var(--turmeric)"/>
-            <use href="#cook" x="1102" y="95" width="40" height="65" style="color:var(--leaf)"/>
-            <text x="1026" y="182" font-size="15" font-weight="800" text-anchor="middle">helpers</text>
-          </g>
-          <g><rect x="1090" y="205" width="70" height="92" rx="8" fill="var(--line)"/><rect x="1097" y="214" width="56" height="70" rx="4" fill="var(--fill)"/><rect x="1103" y="222" width="44" height="10" rx="2" fill="var(--turmeric)"/><rect x="1103" y="240" width="44" height="6" rx="2" fill="var(--border)"/><rect x="1103" y="252" width="36" height="6" rx="2" fill="var(--border)"/><rect x="1103" y="264" width="40" height="6" rx="2" fill="var(--border)"/><text x="1125" y="320" font-size="15" font-weight="800" text-anchor="middle">orders</text></g>
-          <g><use href="#leaf" x="920" y="262" width="56" height="24"/><use href="#leaf" x="926" y="252" width="56" height="24"/><use href="#leaf" x="932" y="242" width="56" height="24"/><use href="#leaf" x="938" y="232" width="56" height="24"/><use href="#leaf" x="944" y="222" width="56" height="24"/><text x="972" y="320" font-size="15" font-weight="800" text-anchor="middle">500 leaves</text></g>
-          <line x1="550" y1="266" x2="900" y2="266" stroke="var(--line)" stroke-width="3" opacity=".0"/>
-          <text x="865" y="345" font-size="20" font-weight="800" text-anchor="middle">Feeds five hundred and takes orders.</text>
-        </g>
-        <g class="stagger" font-size="17" font-weight="800" text-anchor="middle">
-          <g><line x1="640" y1="404" x2="640" y2="368" stroke="var(--line)" stroke-width="2.5" marker-end="url(#arrow)"/><rect x="565" y="408" width="150" height="36" rx="18" fill="var(--fill)" stroke="var(--line)" stroke-width="2"/><text x="640" y="432">ChatGPT app</text></g>
-          <g><line x1="795" y1="404" x2="795" y2="368" stroke="var(--line)" stroke-width="2.5" marker-end="url(#arrow)"/><rect x="740" y="408" width="110" height="36" rx="18" fill="var(--fill)" stroke="var(--line)" stroke-width="2"/><text x="795" y="432">Codex</text></g>
-          <g><line x1="935" y1="404" x2="935" y2="368" stroke="var(--line)" stroke-width="2.5" marker-end="url(#arrow)"/><rect x="870" y="408" width="130" height="36" rx="18" fill="var(--fill)" stroke="var(--line)" stroke-width="2"/><text x="935" y="432">AI Studio</text></g>
-          <g><line x1="1095" y1="404" x2="1095" y2="368" stroke="var(--line)" stroke-width="2.5" marker-end="url(#arrow)"/><rect x="1020" y="408" width="150" height="36" rx="18" fill="var(--fill)" stroke="var(--line)" stroke-width="2"/><text x="1095" y="432">NotebookLM</text></g>
-        </g>
-      </svg>
-    </div>
-    <div class="points stagger">
-      <div class="pt"><b>The cook:</b> thinks, writes, reasons.</div>
-      <div class="pt"><b>The kitchen:</b> everything around him. Files, web, tools, memory, the ability to actually do things.</div>
-      <div class="pt">Every AI app you have used is a kitchen. That is what makes the "same model" behave differently in different apps.</div>
-    </div>
-  </div>
-  <aside class="notes">
-    <ul>
-      <li>"Put him in your home kitchen with one gas stove and a mixie, he feeds six. Put him in a kalyana mandapam kitchen with wood fire, big andaas, ten helpers and a Swiggy tablet, he feeds five hundred and takes orders. The cook did not change. The kitchen did."</li>
-      <li>Anchor to what they have used: "When you set up a ChatGPT Project or a Custom GPT, you were arranging a kitchen. Codex is a kitchen with a grinder for one specific job. NotebookLM is a kitchen built around your own pantry. Different kitchens decide what the cook can touch."</li>
-      <li>"The word engineers use for the kitchen is harness. You will not hear it again tonight. I will just say kitchen."</li>
-      <li>Land the point: choosing an AI tool is mostly choosing a kitchen. The cooks are closer to each other than the advertising says. The kitchen decides what gets done.</li>
-    </ul>
-  </aside>
-</section>
 
-<!-- ============================ 4. NOTE AND NOTEBOOK PAGE ============================ -->
-<section class="slide" id="s04-note-page" data-minutes="3">
+<!-- ============================ 3. HARNESS ============================ -->
+<section class="slide" id="s03-harness" data-minutes="4">
   <div class="slide-content">
-    <h2 class="title title--long reveal from-blur">The note at the door is about <span class="hl">your house.</span> The notebook page is about the dish.</h2>
-    <div class="figure">
-      <svg viewBox="0 0 1200 430" role="img" aria-label="The home kitchen with a handwritten note pinned on the door and a page from the family recipe notebook on the wall">
-        <rect x="120" y="0" width="960" height="400" rx="18" fill="var(--surface)" stroke="var(--border)" stroke-width="2"/>
-        <g class="reveal from-left">
-          <text x="240" y="34" font-size="20" font-weight="800" text-anchor="middle">the note at the door</text>
-          <rect x="160" y="50" width="160" height="330" rx="6" fill="var(--surface2)" stroke="var(--line)" stroke-width="3"/>
-          <circle cx="308" cy="300" r="6" fill="var(--line)"/>
-          <use href="#note" x="172" y="66" width="136" height="163"/>
-          <g class="t-hand" font-size="17" text-anchor="middle">
-            <text x="240" y="106">12 people.</text>
-            <text x="240" y="129">Amma diabetic.</text>
-            <text x="240" y="152">No onion today.</text>
-            <text x="240" y="175">Thatha wants</text>
-            <text x="240" y="198">extra karam.</text>
-            <text x="240" y="221">Serve by 6.</text>
-          </g>
-          <rect class="write" x="200" y="226" width="80" height="2.5" fill="var(--red)"/>
-          <text x="240" y="262" text-anchor="middle" class="t-term">(context)</text>
-        </g>
-        <g class="reveal from-scale" style="transition-delay:.15s">
-          <use href="#stove" x="420" y="220" width="130" height="117"/>
-          <use href="#cook" x="580" y="178" width="100" height="162" style="color:var(--red)"/>
-          <line x1="360" y1="340" x2="1050" y2="340" stroke="var(--line)" stroke-width="3"/>
-        </g>
-        <g class="reveal from-right" style="transition-delay:.3s">
-          <text x="905" y="34" font-size="20" font-weight="800" text-anchor="middle">the notebook page</text>
-          <use href="#page" x="790" y="48" width="230" height="240"/>
-          <g stroke="var(--border)" stroke-width="2"><line x1="820" y1="130" x2="990" y2="130"/><line x1="820" y1="170" x2="990" y2="170"/><line x1="820" y1="210" x2="990" y2="210"/><line x1="820" y1="250" x2="990" y2="250"/></g>
-          <text x="905" y="118" font-size="24" font-weight="800" text-anchor="middle" font-family="Fraunces,Georgia,serif">Our sambar</text>
-          <g class="t-hand" font-size="18" text-anchor="middle">
-            <text x="905" y="162">drumstick,</text>
-            <text x="905" y="202">less tamarind,</text>
-            <text x="905" y="242">kadugu at the end.</text>
-          </g>
-          <text x="905" y="318" text-anchor="middle" class="t-term">(skill)</text>
-        </g>
-      </svg>
-    </div>
-    <div class="points stagger">
-      <div class="pt"><b>The note at the door:</b> who you are, what today needs. Handed over every single time, because he cooks for ten houses a week.</div>
-      <div class="pt"><b>The notebook page:</b> one dish, written once. Any cook who enters makes our sambar, not his.</div>
-      <div class="pt">You already know the note. The notebook is the new idea.</div>
-    </div>
-  </div>
-  <aside class="notes">
-    <ul>
-      <li>"He arrives at your house for the function. You hand him a page: twelve people, amma is diabetic, no onion today, thatha wants extra karam, serve by six. Without that page he cooks for a stranger." Then: "You already learnt this in an earlier session. Good. The new part is next."</li>
-      <li>"Every house has that notebook. Sambar the way we make it, drumstick, less tamarind, kadugu at the end. You wrote it once. Now any cook who walks in makes our sambar. That is a skill. A saved instruction for one dish you keep making."</li>
-      <li>The distinction in one breath: the note is about your house. The notebook page is about the dish. You want both saved somewhere the kitchen can reach, so you stop rewriting them.</li>
-      <li>Do not explain where the pages are stored or how they sync. If asked: "Plain text files in a folder the kitchen can read. The deep dive on that is a separate session."</li>
-    </ul>
-  </aside>
-</section>
-<!-- ============================ 5. ONE COOK, ONE DISH ============================ -->
-<section class="slide" id="s05-stations" data-minutes="3">
-  <div class="slide-content">
-    <h2 class="title reveal from-blur">Nobody asks the payasam master to <span class="hl">fry vadai.</span></h2>
-    <div class="figure">
-      <svg viewBox="0 0 1200 420" role="img" aria-label="A wedding kitchen line: five stations, each with one cook, one stove and one notebook page pinned above; you tasting at the pass on the right">
-        <line x1="20" y1="354" x2="950" y2="354" stroke="var(--line)" stroke-width="3"/>
-        <g class="stagger">
-          <g>
-            <use href="#page" x="55" y="6" width="100" height="120"/><circle cx="105" cy="8" r="6" fill="var(--red)"/><text x="105" y="60" font-size="18" font-weight="800" text-anchor="middle" font-family="Fraunces,Georgia,serif">sambar</text>
-            <use href="#cook" x="65" y="130" width="80" height="130" style="color:var(--red)"/>
-            <use href="#stove" x="52" y="258" width="106" height="95"/>
-            <text x="105" y="392" font-size="20" font-weight="800" text-anchor="middle">sambar</text>
-            <text x="105" y="416" text-anchor="middle" class="t-term">(agent)</text>
-          </g>
-          <g>
-            <use href="#page" x="245" y="6" width="100" height="120"/><circle cx="295" cy="8" r="6" fill="var(--red)"/><text x="295" y="60" font-size="18" font-weight="800" text-anchor="middle" font-family="Fraunces,Georgia,serif">rasam</text>
-            <use href="#cook" x="255" y="130" width="80" height="130" style="color:var(--turmeric)"/>
-            <use href="#stove" x="242" y="258" width="106" height="95"/>
-            <text x="295" y="392" font-size="20" font-weight="800" text-anchor="middle">rasam</text>
-          </g>
-          <g>
-            <use href="#page" x="435" y="6" width="100" height="120"/><circle cx="485" cy="8" r="6" fill="var(--red)"/><text x="485" y="60" font-size="18" font-weight="800" text-anchor="middle" font-family="Fraunces,Georgia,serif">vadai</text>
-            <use href="#cook" x="445" y="130" width="80" height="130" style="color:var(--leaf)"/>
-            <use href="#stove" x="432" y="258" width="106" height="95"/>
-            <text x="485" y="392" font-size="20" font-weight="800" text-anchor="middle">vadai</text>
-          </g>
-          <g>
-            <use href="#page" x="625" y="6" width="100" height="120"/><circle cx="675" cy="8" r="6" fill="var(--red)"/><text x="675" y="60" font-size="18" font-weight="800" text-anchor="middle" font-family="Fraunces,Georgia,serif">payasam</text>
-            <use href="#cook" x="635" y="130" width="80" height="130" style="color:var(--red-dark)"/>
-            <use href="#stove" x="622" y="258" width="106" height="95"/>
-            <text x="675" y="392" font-size="20" font-weight="800" text-anchor="middle">payasam</text>
-          </g>
-          <g>
-            <use href="#page" x="815" y="6" width="100" height="120"/><circle cx="865" cy="8" r="6" fill="var(--red)"/><text x="865" y="60" font-size="18" font-weight="800" text-anchor="middle" font-family="Fraunces,Georgia,serif">dosa</text>
-            <use href="#cook" x="825" y="130" width="80" height="130" style="color:var(--red)"/>
-            <use href="#stove" x="812" y="258" width="106" height="95"/>
-            <text x="865" y="392" font-size="20" font-weight="800" text-anchor="middle">dosa, late crowd</text>
-          </g>
-          <g>
-            <line x1="968" y1="20" x2="968" y2="400" stroke="var(--border)" stroke-width="2" stroke-dasharray="6 8"/>
-            <use href="#you" x="1030" y="118" width="90" height="140"/>
-            <rect x="985" y="256" width="200" height="26" rx="6" fill="var(--surface2)" stroke="var(--line)" stroke-width="3"/>
-            <text x="1085" y="322" font-size="26" font-weight="800" text-anchor="middle" class="t-red">You</text>
-            <text x="1085" y="348" font-size="17" font-weight="800" text-anchor="middle">at the pass, tasting</text>
-          </g>
-        </g>
-      </svg>
-    </div>
-    <div class="points stagger">
-      <div class="pt">One cook, one stove, one notebook page, one dish. That is an agent.</div>
-      <div class="pt">Several of them, each with a different dish, is a team. Different dishes can even use different cooks.</div>
-      <div class="pt">You stand at the pass. Delegate, then taste.</div>
-    </div>
-  </div>
-  <aside class="notes">
-    <ul>
-      <li>Stack the definitions: a cook, in a kitchen, with your note and one notebook page, doing one dish. Nothing new was added. Slides 2 to 4 were combined.</li>
-      <li>Why one dish each: a cook with one job is easier to trust and easier to taste-check. Same for AI agents. This is the mix-and-match idea in the title. Different stations can use different cooks.</li>
-      <li>"My setup is a wedding kitchen where some of the cooks are AI." Thirty-second aside: "My first team had no business purpose at all. It stitched my reading history, my film log and my book highlights into one taste library. Zero stakes, pure joy. That is where I learnt the kitchen bends to the house, not the other way round."</li>
-      <li>Bridge: "Now the same kitchen with real stakes."</li>
-    </ul>
-  </aside>
-</section>
-
-<!-- ============================ 6. THE EIGHT-COURSE SAPPADU ============================ -->
-<section class="slide" id="s06-sappadu" data-minutes="8">
-  <div class="slide-content">
-    <h2 class="title title--long reveal from-blur">Eight stations in a row. Taste after every one. And some shelves in the pantry <span class="hl">stay locked.</span></h2>
-    <div class="two" style="grid-template-columns:minmax(0,2.3fr) minmax(0,1fr)">
-      <div class="figure reveal from-left" style="grid-column:1">
-        <svg viewBox="0 0 900 470" role="img" aria-label="Eight stations in a line with a tasting spoon between each pair; below, a pantry with an open shelf, a locked shelf, and a small locked tin of paati's podi">
-          <g font-size="22" font-weight="800" text-anchor="middle">
-            <use href="#stove" x="12" y="14" width="64" height="58"/><text x="44" y="98">1</text>
-            <use href="#spoon" x="80" y="36" width="34" height="12"/>
-            <use href="#stove" x="122" y="14" width="64" height="58"/><text x="154" y="98">2</text>
-            <use href="#spoon" x="190" y="36" width="34" height="12"/>
-            <use href="#stove" x="232" y="14" width="64" height="58"/><text x="264" y="98">3</text>
-            <use href="#spoon" x="300" y="36" width="34" height="12"/>
-            <use href="#stove" x="342" y="14" width="64" height="58"/><text x="374" y="98">4</text>
-            <use href="#spoon" x="410" y="36" width="34" height="12"/>
-            <use href="#stove" x="452" y="14" width="64" height="58"/><text x="484" y="98">5</text>
-            <use href="#spoon" x="520" y="36" width="34" height="12"/>
-            <use href="#stove" x="562" y="14" width="64" height="58"/><text x="594" y="98">6</text>
-            <use href="#spoon" x="630" y="36" width="34" height="12"/>
-            <use href="#stove" x="672" y="14" width="64" height="58"/><text x="704" y="98">7</text>
-            <use href="#spoon" x="740" y="36" width="34" height="12"/>
-            <use href="#stove" x="782" y="14" width="64" height="58"/><text x="814" y="98">8</text>
-          </g>
-          <line x1="10" y1="118" x2="890" y2="118" stroke="var(--border)" stroke-width="2" stroke-dasharray="6 8"/>
-          <rect x="20" y="136" width="860" height="320" rx="14" fill="var(--surface)" stroke="var(--line)" stroke-width="3"/>
-          <rect x="20" y="232" width="860" height="7" fill="var(--line)"/>
-          <rect x="20" y="336" width="860" height="7" fill="var(--line)"/>
-          <g>
-            <g fill="var(--turmeric-light)" stroke="var(--line)" stroke-width="2.5"><rect x="56" y="170" width="44" height="62" rx="6"/><rect x="110" y="170" width="44" height="62" rx="6"/><rect x="164" y="170" width="44" height="62" rx="6"/><rect x="218" y="170" width="44" height="62" rx="6"/><rect x="272" y="170" width="44" height="62" rx="6"/></g>
-            <g fill="var(--line)"><rect x="62" y="160" width="32" height="12" rx="3"/><rect x="116" y="160" width="32" height="12" rx="3"/><rect x="170" y="160" width="32" height="12" rx="3"/><rect x="224" y="160" width="32" height="12" rx="3"/><rect x="278" y="160" width="32" height="12" rx="3"/></g>
-            <text x="360" y="190" font-size="26" font-weight="800">Open shelf</text>
-            <text x="360" y="218" font-size="19" class="t-muted" font-weight="700">anyone can use it</text>
-          </g>
-          <g>
-            <g fill="var(--leaf)" stroke="var(--line)" stroke-width="2.5"><rect x="56" y="274" width="44" height="62" rx="6"/><rect x="110" y="274" width="44" height="62" rx="6"/><rect x="164" y="274" width="44" height="62" rx="6"/><rect x="218" y="274" width="44" height="62" rx="6"/></g>
-            <g fill="var(--line)"><rect x="62" y="264" width="32" height="12" rx="3"/><rect x="116" y="264" width="32" height="12" rx="3"/><rect x="170" y="264" width="32" height="12" rx="3"/><rect x="224" y="264" width="32" height="12" rx="3"/></g>
-            <use href="#lock" x="282" y="286" width="40" height="48"/>
-            <text x="360" y="294" font-size="26" font-weight="800">Locked shelf</text>
-            <text x="360" y="322" font-size="19" class="t-muted" font-weight="700">opened for the cook, when I say so</text>
-          </g>
-          <g>
-            <rect x="70" y="378" width="76" height="60" rx="8" fill="var(--red)" stroke="var(--line)" stroke-width="2.5"/>
-            <rect x="64" y="370" width="88" height="14" rx="4" fill="var(--red-dark)" stroke="var(--line)" stroke-width="2.5"/>
-            <text x="108" y="417" font-size="16" font-weight="800" text-anchor="middle" class="t-white">podi</text>
-            <g class="pulse"><use href="#lock" x="164" y="380" width="46" height="55"/></g>
-            <text x="360" y="398" font-size="26" font-weight="800">Paati's podi</text>
-            <text x="360" y="426" font-size="19" class="t-muted" font-weight="700">ground by me, never handed over</text>
-          </g>
+    <div class="concept">
+      <div class="reveal from-left">
+        <div class="eyebrow">2 of 6 &middot; Harness</div>
+        <h2 class="title title--long">A harness is the kitchen around the model. It decides <span class="hl">what the model can actually do.</span></h2>
+        <p class="kitchen">Same cook. Different kitchen. Different food.</p>
+        <div class="points stagger">
+          <div class="pt"><b>The model</b> thinks, writes, reasons. That is all it does on its own.</div>
+          <div class="pt"><b>The harness</b> gives it hands: your files, the web, tools, memory, the ability to actually do things.</div>
+          <div class="pt"><b>Every AI app you have used is a harness.</b> ChatGPT app, Codex, AI Studio, NotebookLM. Same model, different kitchen, different result.</div>
+        </div>
+      </div>
+      <div class="icon reveal from-right">
+        <svg viewBox="0 0 360 250" role="img" aria-label="The same cook at a small home stove and at a big wedding-kitchen pot">
+          <use href="#cook" x="4" y="100" width="60" height="98" style="color:var(--red)"/>
+          <use href="#stove" x="66" y="128" width="80" height="72"/>
+          <text x="78" y="236" font-size="22" font-weight="800" text-anchor="middle">feeds 6</text>
+          <line x1="170" y1="30" x2="170" y2="240" stroke="var(--border)" stroke-width="2" stroke-dasharray="6 8"/>
+          <use href="#cook" x="190" y="100" width="60" height="98" style="color:var(--red)"/>
+          <use href="#andaa" x="248" y="90" width="120" height="110"/>
+          <text x="280" y="236" font-size="22" font-weight="800" text-anchor="middle">feeds 500</text>
+          <line x1="0" y1="200" x2="360" y2="200" stroke="var(--line)" stroke-width="3"/>
         </svg>
       </div>
-      <div class="stats reveal from-right" style="transition-delay:.2s">
-        <div class="stat"><span class="num" data-count="181">0</span><span class="lbl">tailored application packs</span></div>
-        <div class="stat"><span class="num" data-count="136">0</span><span class="lbl">one-page resumes</span></div>
-      </div>
-    </div>
-    <div class="points stagger">
-      <div class="pt">The pantry carries everything forward. The newest application takes minutes, not hours.</div>
-      <div class="pt">Three shelves. The most personal one never reaches any cook.</div>
-      <div class="pt">Tasting between every station. No exceptions.</div>
     </div>
   </div>
   <aside class="notes">
     <ul>
-      <li>This is the main case. Ravi flagged it as the most relatable. Give it the most time.</li>
-      <li>Walk the eight phases quickly. For each, say what comes out of that station and where you tasted before the next one started. Show one real artefact if possible: one tailored pack and the one-page resume it produced.</li>
-      <li>Spend real time on the pantry shelves. This is the part the audience has not heard and it answers the "is it safe to give AI my stuff" worry directly. "The open shelf anyone can use. The locked shelf I open for the cook. And paati's secret podi I grind myself and never hand to any cook. Decide up front what the AI never sees, and make it structurally impossible, not something you remember to be careful about."</li>
-      <li>The numbers (181 packs, 136 resumes) prove that reuse compounds. The first took hours. The latest takes minutes because the pantry already holds everything.</li>
-      <li>The takeaway is two principles, not the tooling: hand over the note and the notebook, and never skip tasting. Say those two sentences and stop.</li>
+      <li>"Put him in your home kitchen with one gas stove and a mixie, he feeds six. Put him in a kalyana mandapam kitchen with wood fire, big andaas, ten helpers and a Swiggy tablet, he feeds five hundred and takes orders. The cook did not change. The kitchen did." The kitchen is the harness.</li>
+      <li>Anchor to what they have used: "When you set up a ChatGPT Project or a Custom GPT, you were arranging a kitchen. Codex is a kitchen with a grinder for one specific job. NotebookLM is a kitchen built around your own pantry. Different harnesses decide what the model can touch."</li>
+      <li>"Harness is the engineers' word. Tonight I will mostly say kitchen."</li>
+      <li>Land the point: choosing an AI tool is mostly choosing a harness. The models are closer to each other than the advertising says. The harness decides what gets done.</li>
     </ul>
   </aside>
 </section>
-<!-- ============================ 7. LIVE DEMO ============================ -->
-<section class="slide" id="s07-demo" data-minutes="11">
+
+<!-- ============================ 4. CONTEXT ============================ -->
+<section class="slide" id="s04-context" data-minutes="4">
   <div class="slide-content">
+    <div class="concept">
+      <div class="reveal from-left">
+        <div class="eyebrow">3 of 6 &middot; Context</div>
+        <h2 class="title title--long">Context is the note you hand over <span class="hl">every single time.</span> Who you are, what today needs.</h2>
+        <p class="kitchen">The note at the door: 12 people, amma diabetic, no onion today, thatha wants extra karam, serve by 6.</p>
+        <div class="points stagger">
+          <div class="pt"><b>Every time,</b> because the model does not remember. Without the note he cooks for a stranger.</div>
+          <div class="pt"><b>You already know this one.</b> Save it once, somewhere the harness can read, so you stop rewriting it.</div>
+          <div class="pt"><b>Decide up front what the model never sees.</b> Paati's podi stays off the note. Make it impossible, not something you remember to be careful about.</div>
+        </div>
+      </div>
+      <div class="icon reveal from-right">
+        <svg viewBox="0 0 220 260" role="img" aria-label="A handwritten note pinned to a door">
+          <use href="#note" x="20" y="10" width="180" height="216"/>
+          <g class="t-hand" font-size="19" text-anchor="middle">
+            <text x="110" y="66">12 people.</text>
+            <text x="110" y="94">Amma diabetic.</text>
+            <text x="110" y="122">No onion today.</text>
+            <text x="110" y="150">Thatha wants</text>
+            <text x="110" y="178">extra karam.</text>
+            <text x="110" y="206">Serve by 6.</text>
+          </g>
+          <rect class="write" x="60" y="212" width="100" height="3" fill="var(--red)"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">
+    <ul>
+      <li>"He arrives at your house for the function. You hand him a page: twelve people, amma is diabetic, no onion today, thatha wants extra karam, serve by six. Without that page he cooks for a stranger." That page is context.</li>
+      <li>"You already learnt this in an earlier session. Good. Tonight the point is: save it once so you stop retyping it. A ChatGPT Project's instructions, a Custom GPT's setup, a file the harness can read. That is where the note lives."</li>
+      <li>The pantry shelves: "The open shelf anyone can use. The locked shelf I open for the cook when I say so. And paati's secret podi I grind myself and never hand to any cook. Decide up front what the AI never sees, and make it structurally impossible, not something you remember to be careful about." This answers the "is it safe to give AI my stuff" worry.</li>
+      <li>Do not explain where the files are stored or how they sync. If asked: "Plain text files in a folder the kitchen can read. The deep dive on that is a separate session."</li>
+    </ul>
+  </aside>
+</section>
+
+<!-- ============================ 5. SKILL ============================ -->
+<section class="slide" id="s05-skill" data-minutes="4">
+  <div class="slide-content">
+    <div class="concept">
+      <div class="reveal from-left">
+        <div class="eyebrow">4 of 6 &middot; Skill</div>
+        <h2 class="title title--long">A skill is one saved instruction for one job you keep doing. <span class="hl">Written once.</span> Any model follows it.</h2>
+        <p class="kitchen">The notebook page: our sambar, drumstick, less tamarind, kadugu at the end.</p>
+        <div class="points stagger">
+          <div class="pt"><b>Context is about your house.</b> A skill is about the dish.</div>
+          <div class="pt"><b>Write it once.</b> Any cook who walks in makes our sambar, not his.</div>
+          <div class="pt"><b>This is the new idea tonight.</b> Stop re-explaining the same job in every chat. Save the recipe.</div>
+        </div>
+      </div>
+      <div class="icon reveal from-right">
+        <svg viewBox="0 0 220 270" role="img" aria-label="A page from the family recipe notebook">
+          <use href="#page" x="20" y="10" width="180" height="216"/>
+          <g stroke="var(--border)" stroke-width="2"><line x1="46" y1="98" x2="174" y2="98"/><line x1="46" y1="134" x2="174" y2="134"/><line x1="46" y1="170" x2="174" y2="170"/></g>
+          <text x="110" y="82" font-size="24" font-weight="800" text-anchor="middle" font-family="Fraunces,Georgia,serif">Our sambar</text>
+          <g class="t-hand" font-size="18" text-anchor="middle"><text x="110" y="126">drumstick,</text><text x="110" y="162">less tamarind,</text><text x="110" y="198">kadugu at the end.</text></g>
+          <circle cx="110" cy="12" r="7" fill="var(--red)"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">
+    <ul>
+      <li>"Every house has that notebook. Sambar the way we make it, drumstick, less tamarind, kadugu at the end. You wrote it once. Now any cook who walks in makes our sambar. That is a skill. A saved instruction for one dish you keep making."</li>
+      <li>The distinction in one breath: context is about your house. A skill is about the dish. You want both saved somewhere the harness can reach, so you stop rewriting them.</li>
+      <li>Examples they can picture: the way you want a weekly report written, the format of your customer replies, how you like a lesson plan structured. Each one is one page. Each one is a skill.</li>
+      <li>Do not explain storage or syncing. If asked: "Plain text files in a folder the kitchen can read. Separate session."</li>
+    </ul>
+  </aside>
+</section>
+
+<!-- ============================ 6. AGENT ============================ -->
+<section class="slide" id="s06-agent" data-minutes="4">
+  <div class="slide-content">
+    <div class="concept">
+      <div class="reveal from-left">
+        <div class="eyebrow">5 of 6 &middot; Agent</div>
+        <h2 class="title title--long">An agent is a model, in a harness, with your context and one skill, doing <span class="hl">one job.</span></h2>
+        <p class="kitchen">One cook, one stove, one notebook page, one dish. Nobody asks the payasam master to fry vadai.</p>
+        <div class="points stagger">
+          <div class="pt"><b>Nothing new was added.</b> The four words so far, combined, pointed at one job.</div>
+          <div class="pt"><b>One job each,</b> because an agent with one job is easier to trust and easier to check. Several agents with different jobs is a team. Different jobs can use different models.</div>
+          <div class="pt"><b>You stand at the pass.</b> Delegate, then check.</div>
+        </div>
+      </div>
+      <div class="icon reveal from-right">
+        <svg viewBox="0 0 420 250" role="img" aria-label="Three stations, each with a pinned page, a cook and a stove; you with a tasting spoon at the end">
+          <g>
+            <use href="#page" x="34" y="0" width="44" height="53"/><use href="#cook" x="0" y="105" width="52" height="85" style="color:var(--red)"/><use href="#stove" x="50" y="132" width="64" height="58"/>
+            <use href="#page" x="150" y="0" width="44" height="53"/><use href="#cook" x="116" y="105" width="52" height="85" style="color:var(--turmeric)"/><use href="#stove" x="166" y="132" width="64" height="58"/>
+            <use href="#page" x="266" y="0" width="44" height="53"/><use href="#cook" x="232" y="105" width="52" height="85" style="color:var(--leaf)"/><use href="#stove" x="282" y="132" width="64" height="58"/>
+          </g>
+          <line x1="0" y1="190" x2="340" y2="190" stroke="var(--line)" stroke-width="3"/>
+          <line x1="352" y1="10" x2="352" y2="235" stroke="var(--border)" stroke-width="2" stroke-dasharray="6 8"/>
+          <use href="#you" x="360" y="70" width="58" height="90"/>
+          <text x="389" y="230" font-size="22" font-weight="800" text-anchor="middle" class="t-red">You</text>
+          <text x="170" y="230" font-size="22" font-weight="800" text-anchor="middle">one job each</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">
+    <ul>
+      <li>Stack the definitions: a model, in a harness, with your context and one skill, doing one job. Nothing new was added. The last four slides were combined.</li>
+      <li>Why one job each: an agent with one job is easier to trust and easier to check. This is the mix-and-match idea in the title. Different stations can use different models. Stop picking a winner, start assigning jobs.</li>
+      <li>"My setup is a wedding kitchen where some of the cooks are AI." Thirty-second aside: "My first team had no business purpose at all. It stitched my reading history, my film log and my book highlights into one taste library. Zero stakes, pure joy. That is where I learnt the kitchen bends to the house, not the other way round."</li>
+      <li>Bridge: "The sixth word is you."</li>
+    </ul>
+  </aside>
+</section>
+
+<!-- ============================ 7. YOU: THE HUMAN GATE ============================ -->
+<section class="slide" id="s07-you" data-minutes="5">
+  <div class="slide-content">
+    <div class="concept">
+      <div class="reveal from-left">
+        <div class="eyebrow">6 of 6 &middot; You</div>
+        <h2 class="title title--long">You are the last step. Check the output before it goes out. <span class="hl">Every time.</span></h2>
+        <p class="kitchen">Tasting before it hits the leaf. The regular cook went home for Pongal. The substitute followed the same notebook page. The sambar was still different.</p>
+        <div class="points stagger">
+          <div class="pt"><b>Same context, same skill, different model, different result.</b> The last kitchen shows up in real work.</div>
+          <div class="pt"><b>Caught at tasting,</b> not on the leaf. Nobody outside ever saw it.</div>
+          <div class="pt"><b>Context and skills protect you a lot.</b> Checking protects you completely. Reliability is exactly when you are tempted to stop looking.</div>
+        </div>
+      </div>
+      <div class="icon reveal from-right">
+        <svg viewBox="0 0 380 250" role="img" aria-label="A substitute cook at the same station, a bowl with a warning mark, and you catching it with a tasting spoon">
+          <use href="#page" x="40" y="0" width="60" height="72"/>
+          <use href="#cook" x="0" y="92" width="60" height="98" style="color:var(--red);opacity:.4"/>
+          <use href="#cook" x="80" y="92" width="60" height="98" style="color:var(--turmeric)"/>
+          <line x1="0" y1="190" x2="380" y2="190" stroke="var(--line)" stroke-width="3"/>
+          <use href="#bowl" x="160" y="158" width="64" height="36"/>
+          <g class="pulse"><path d="M170 150 L214 150 L192 112Z" fill="var(--turmeric)" stroke="var(--line)" stroke-width="3" stroke-linejoin="round"/><text x="192" y="145" font-size="24" font-weight="800" text-anchor="middle">!</text></g>
+          <use href="#you" x="262" y="80" width="72" height="110"/>
+          <text x="300" y="230" font-size="22" font-weight="800" text-anchor="middle" class="t-red">caught here</text>
+          <text x="100" y="230" font-size="18" font-weight="800" text-anchor="middle" class="t-muted">same page, new cook</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">
+    <ul>
+      <li>This is the sixth word, and it is you. The note and the notebook are about setting the kitchen up. Tasting is what you do every time food comes out.</li>
+      <li><mark>SANTHOSH: story specifics.</mark> Tell the actual story briefly: which model was swapped, which job it was doing, what changed in the output, how the review step caught it, and the decision to roll back.</li>
+      <li>The lesson is not "that cook was bad". It is that a model's last kitchen (slide 2) shows up in real work even when the skill is identical, and the only reason it did no damage is that someone checked.</li>
+      <li>Second lesson: it is tempting to stop checking once the last hundred outputs were fine. Do not. Reliability is what makes you stop looking, and that is exactly when a substitute lands.</li>
+      <li>This slide earns trust for everything before it. Do not skip it to save time. Cut the optional website aside in the demo instead.</li>
+    </ul>
+  </aside>
+</section>
+<!-- ============================ 8. LIVE DEMO ============================ -->
+<section class="slide" id="s08-demo" data-minutes="11">
+  <div class="slide-content">
+    <div class="eyebrow reveal">Live: the six words at work</div>
     <h2 class="title title--long reveal from-blur">These are cooks you <span class="hl">delegate to,</span> not a counter you stand and wait at.</h2>
     <div class="two">
       <div class="agenda stagger">
-        <div class="row"><span class="n">1</span><span>Meet the cooks.</span></div>
-        <div class="row"><span class="n">2</span><span>Write one notebook page, pin it above one station.</span></div>
+        <div class="row"><span class="n">1</span><span>Meet the cooks. Agents in a team chat.</span></div>
+        <div class="row"><span class="n">2</span><span>Write one notebook page. Give one agent a skill, live.</span></div>
         <div class="row"><span class="n">3</span><span>Place an order and walk away.</span></div>
       </div>
       <div class="figure reveal from-right" style="transition-delay:.2s">
@@ -697,6 +588,7 @@ html.presenter,html.presenter body{height:100%;overflow:hidden;background:#141b1
           </g>
           <rect x="200" y="400" width="420" height="28" rx="10" fill="var(--fill)" stroke="var(--border)" stroke-width="2"/>
           <text x="214" y="420" font-size="14" class="t-muted">Type an order</text>
+          <rect x="2" y="2" width="636" height="436" rx="16" fill="none" stroke="var(--line)" stroke-width="3"/>
         </svg>
       </div>
     </div>
@@ -714,72 +606,22 @@ html.presenter,html.presenter body{height:100%;overflow:hidden;background:#141b1
   </aside>
 </section>
 
-<!-- ============================ 8. THE SUBSTITUTE COOK ============================ -->
-<section class="slide" id="s08-substitute" data-minutes="4">
-  <div class="slide-content">
-    <h2 class="title title--long reveal from-blur">The regular cook went native for Pongal. The substitute followed the same notebook. The sambar was <span class="hl">still different.</span></h2>
-    <div class="figure">
-      <svg viewBox="0 0 1200 420" role="img" aria-label="Two cooks at the same station under the same notebook page; a bowl of sambar with a warning mark; a tasting spoon catching it at the pass; an undo arrow bringing the first cook back">
-        <g class="reveal from-scale">
-          <use href="#page" x="505" y="0" width="190" height="228"/>
-          <text x="600" y="62" font-size="22" font-weight="800" text-anchor="middle" font-family="Fraunces,Georgia,serif">Our sambar</text>
-          <g class="t-hand" font-size="15" text-anchor="middle"><text x="600" y="92">drumstick,</text><text x="600" y="114">less tamarind,</text><text x="600" y="136">kadugu at the end.</text></g>
-          <line x1="300" y1="325" x2="900" y2="325" stroke="var(--line)" stroke-width="3"/>
-          <use href="#stove" x="550" y="235" width="100" height="90"/>
-        </g>
-        <g class="reveal from-left" style="transition-delay:.15s">
-          <use href="#cook" x="370" y="195" width="80" height="130" style="color:var(--red);opacity:.45"/>
-          <text x="410" y="160" font-size="17" font-weight="800" text-anchor="middle">the regular cook</text><text x="410" y="182" font-size="17" font-weight="800" text-anchor="middle" class="t-muted">away for Pongal</text>
-        </g>
-        <g class="reveal from-right" style="transition-delay:.3s">
-          <use href="#cook" x="750" y="195" width="80" height="130" style="color:var(--turmeric)"/>
-          <text x="790" y="182" font-size="17" font-weight="800" text-anchor="middle">the substitute</text>
-          <use href="#bowl" x="690" y="292" width="66" height="38"/>
-          <g class="pulse"><path d="M748 292 L800 292 L774 246Z" fill="var(--turmeric)" stroke="var(--line)" stroke-width="3" stroke-linejoin="round"/><text x="774" y="286" font-size="26" font-weight="800" text-anchor="middle">!</text></g>
-        </g>
-        <g class="reveal" style="transition-delay:.45s">
-          <path class="dash" d="M775 312 C 860 300, 930 260, 1000 200"/>
-          <use href="#you" x="1000" y="105" width="90" height="140"/>
-          <rect x="960" y="243" width="200" height="26" rx="6" fill="var(--surface2)" stroke="var(--line)" stroke-width="3"/>
-          <text x="1060" y="306" font-size="20" font-weight="800" text-anchor="middle">caught at tasting</text>
-          <text x="1060" y="332" font-size="17" font-weight="800" text-anchor="middle" class="t-muted">not on the leaf</text>
-        </g>
-        <g class="reveal" style="transition-delay:.6s">
-          <path d="M790 345 C 720 415, 480 415, 410 350" fill="none" stroke="var(--leaf)" stroke-width="4" stroke-linecap="round" marker-end="url(#arrow-leaf)"/>
-          <text x="600" y="412" font-size="17" font-weight="800" text-anchor="middle" class="t-leaf">undo: the regular cook comes back</text>
-        </g>
-      </svg>
-    </div>
-    <div class="points stagger">
-      <div class="pt">Same note, same notebook page, different cook, different result.</div>
-      <div class="pt">Caught at tasting, not on the leaf.</div>
-      <div class="pt">The note and the notebook protect you a lot. Tasting protects you completely.</div>
-    </div>
-  </div>
-  <aside class="notes">
-    <ul>
-      <li><mark>SANTHOSH: story specifics.</mark> Tell the actual story briefly: which model was swapped, which job it was doing, what changed in the output, how the review step caught it, and the decision to roll back.</li>
-      <li>The lesson is not "that cook was bad". It is that a cook's last kitchen (slide 2) shows up in real work even when the notebook is identical, and the only reason it did no damage is that someone tasted.</li>
-      <li>Second lesson: it is tempting to stop tasting once the last hundred dishes were fine. Do not. Reliability is what makes you stop looking, and that is exactly when a substitute lands.</li>
-      <li>This slide earns trust for everything before it. Do not skip it to save time. Cut the optional website aside on slide 7 instead.</li>
-    </ul>
-  </aside>
-</section>
 <!-- ============================ 9. START TONIGHT ============================ -->
 <section class="slide" id="s09-tonight" data-minutes="4">
   <div class="slide-content">
     <div class="two" style="grid-template-columns:minmax(0,1.3fr) minmax(0,1fr)">
       <div class="reveal from-left">
-        <h2 class="title">One dish. One note. One kitchen. <span class="hl">One taste.</span></h2>
-        <p class="sub" style="margin-top:1rem;font-size:clamp(1.1rem,1.8vw,1.6rem)">That is the whole talk in miniature.</p>
+        <div class="eyebrow">Start tonight</div>
+        <h2 class="title">One job. One page of context. One app. <span class="hl">One check.</span></h2>
+        <p class="kitchen">One dish. One note. One kitchen. One taste. The whole talk in miniature.</p>
       </div>
       <div class="phone reveal from-right" style="transition-delay:.15s">
         <div class="stagger" style="display:contents">
-          <div class="step"><svg viewBox="0 0 60 26" preserveAspectRatio="xMidYMid meet"><use href="#leaf"/></svg><span><span class="k">1</span> Pick one dish you make every week (one recurring chore).</span></div>
-          <div class="step"><svg viewBox="0 0 100 120"><use href="#note"/><g stroke="var(--line)" stroke-width="3"><line x1="22" y1="40" x2="78" y2="40"/><line x1="22" y1="60" x2="78" y2="60"/><line x1="22" y1="80" x2="62" y2="80"/></g></svg><span><span class="k">2</span> Write one page about your house (your note at the door).</span></div>
-          <div class="step"><svg viewBox="0 0 100 90"><use href="#stove"/></svg><span><span class="k">3</span> Hand it to the one kitchen already on your phone (a ChatGPT Project or Custom GPT counts).</span></div>
-          <div class="step"><svg viewBox="0 0 60 20"><use href="#spoon"/></svg><span><span class="k">4</span> Taste. Fix it. Note what you fixed.</span></div>
-          <div class="step"><svg viewBox="0 0 100 120"><use href="#page"/><g stroke="var(--border)" stroke-width="3"><line x1="22" y1="45" x2="78" y2="45"/><line x1="22" y1="65" x2="78" y2="65"/><line x1="22" y1="85" x2="78" y2="85"/></g></svg><span><span class="k">5</span> Write what worked into the notebook. Reuse it next week.</span></div>
+          <div class="step"><svg viewBox="0 0 60 26" preserveAspectRatio="xMidYMid meet"><use href="#leaf"/></svg><span><span class="k">1</span> Pick one job you do every week. One recurring chore.</span></div>
+          <div class="step"><svg viewBox="0 0 100 120"><use href="#note"/><g stroke="var(--line)" stroke-width="3"><line x1="22" y1="40" x2="78" y2="40"/><line x1="22" y1="60" x2="78" y2="60"/><line x1="22" y1="80" x2="62" y2="80"/></g></svg><span><span class="k">2</span> Write one page of context about yourself. The note at the door.</span></div>
+          <div class="step"><svg viewBox="0 0 100 90"><use href="#stove"/></svg><span><span class="k">3</span> Hand it to the app already on your phone. A ChatGPT Project or Custom GPT counts. That is your harness.</span></div>
+          <div class="step"><svg viewBox="0 0 60 20"><use href="#spoon"/></svg><span><span class="k">4</span> Check the output. Fix it. Note what you fixed.</span></div>
+          <div class="step"><svg viewBox="0 0 100 120"><use href="#page"/><g stroke="var(--border)" stroke-width="3"><line x1="22" y1="45" x2="78" y2="45"/><line x1="22" y1="65" x2="78" y2="65"/><line x1="22" y1="85" x2="78" y2="85"/></g></svg><span><span class="k">5</span> Save what worked as a skill. Reuse it next week.</span></div>
         </div>
       </div>
     </div>
@@ -787,60 +629,35 @@ html.presenter,html.presenter body{height:100%;overflow:hidden;background:#141b1
   <aside class="notes">
     <ul>
       <li>Everything here can be done on a phone tonight with free or cheap tools. Say so.</li>
-      <li>Point back: step 3 is the kitchen. Step 2 is the note. Step 5 is the notebook page. Doing it for one dish, week after week, is one cook with one job. "You have just hired your first cook."</li>
-      <li>Before Q&amp;A, switch to screen share and check the order placed in slide 7. Show the result. If not done, show progress and say that is also normal.</li>
+      <li>Point back: step 3 is the harness. Step 2 is context. Step 5 is a skill. Step 4 is you. Doing it for one job, week after week, is one agent with one job. "You have just hired your first cook."</li>
+      <li>Before Q&amp;A, switch to screen share and check the order placed in the demo. Show the result. If not done, show progress and say that is also normal.</li>
     </ul>
   </aside>
 </section>
 
-<!-- ============================ 10. Q&A RECAP ============================ -->
+<!-- ============================ 10. RECAP AND Q&A ============================ -->
 <section class="slide slide--dark" id="s10-recap" data-minutes="15">
   <div class="slide-content">
     <h2 class="title reveal from-blur">Stop picking a winner. <span class="hl">Start assigning jobs.</span></h2>
-    <div class="figure reveal from-scale" style="transition-delay:.15s">
-      <svg viewBox="-70 0 1340 500" role="img" aria-label="The wedding kitchen from above, every element labelled: the cook (model), the kitchen (harness), the note at the door (context), the notebook page (skill), one cook one dish (agent), tasting (you)">
-        <rect x="250" y="30" width="700" height="440" rx="24" fill="var(--surface)" stroke="var(--border)" stroke-width="2"/>
-        <rect x="240" y="180" width="18" height="90" rx="3" fill="var(--turmeric)" stroke="var(--line)" stroke-width="2"/>
-        <use href="#note" x="270" y="196" width="44" height="53"/>
-        <g font-size="19" font-weight="800" text-anchor="middle">
-          <g><rect x="320" y="70" width="170" height="130" rx="12" fill="var(--surface2)" stroke="var(--border)" stroke-width="2"/><use href="#page" x="328" y="76" width="30" height="36"/><circle cx="405" cy="118" r="30" fill="var(--leaf)" stroke="var(--line)" stroke-width="2.5"/><circle cx="405" cy="118" r="19" fill="var(--leaf-dark)"/><use href="#top" x="452" y="76" width="30" height="30" style="color:var(--leaf)"/><text x="380" y="188">sambar</text></g>
-          <g><rect x="510" y="70" width="170" height="130" rx="12" fill="var(--surface2)" stroke="var(--border)" stroke-width="2"/><use href="#page" x="518" y="76" width="30" height="36"/><circle cx="595" cy="118" r="30" fill="var(--leaf)" stroke="var(--line)" stroke-width="2.5"/><circle cx="595" cy="118" r="19" fill="var(--leaf-dark)"/><use href="#top" x="642" y="76" width="30" height="30" style="color:var(--leaf)"/><text x="570" y="188">rasam</text></g>
-          <g><rect x="700" y="70" width="170" height="130" rx="12" fill="var(--surface2)" stroke="var(--border)" stroke-width="2"/><use href="#page" x="708" y="76" width="30" height="36"/><circle cx="785" cy="118" r="30" fill="var(--turmeric)" stroke="var(--line)" stroke-width="2.5"/><circle cx="785" cy="118" r="19" fill="var(--turmeric-light)"/><use href="#top" x="832" y="76" width="30" height="30" style="color:var(--leaf)"/><text x="760" y="188">vadai</text></g>
-          <g><rect x="320" y="230" width="170" height="130" rx="12" fill="var(--surface2)" stroke="var(--border)" stroke-width="2"/><use href="#page" x="328" y="236" width="30" height="36"/><circle cx="405" cy="278" r="30" fill="var(--leaf)" stroke="var(--line)" stroke-width="2.5"/><circle cx="405" cy="278" r="19" fill="var(--leaf-dark)"/><use href="#top" x="452" y="236" width="30" height="30" style="color:var(--leaf)"/><text x="380" y="348">payasam</text></g>
-          <g><rect x="510" y="230" width="170" height="130" rx="12" fill="var(--surface2)" stroke="var(--border)" stroke-width="2"/><use href="#page" x="518" y="236" width="30" height="36"/><circle cx="595" cy="278" r="30" fill="var(--turmeric)" stroke="var(--line)" stroke-width="2.5"/><circle cx="595" cy="278" r="19" fill="var(--turmeric-light)"/><use href="#top" x="642" y="236" width="30" height="30" style="color:var(--leaf)"/><text x="570" y="348">dosa</text></g>
-          <g><rect x="700" y="230" width="170" height="130" rx="12" fill="var(--surface2)" stroke="var(--red)" stroke-width="3.5"/><use href="#page" x="708" y="236" width="30" height="36"/><circle cx="785" cy="278" r="30" fill="var(--leaf)" stroke="var(--line)" stroke-width="2.5"/><circle cx="785" cy="278" r="19" fill="var(--leaf-dark)"/><use href="#top" x="832" y="236" width="30" height="30" style="color:var(--leaf)"/><text x="760" y="348">rice</text></g>
-        </g>
-        <rect x="320" y="392" width="550" height="26" rx="8" fill="var(--surface2)" stroke="var(--border)" stroke-width="2"/>
-        <use href="#top" x="570" y="426" width="50" height="50" style="color:var(--red)"/>
-        <g class="bob"><use href="#spoon" x="618" y="440" width="60" height="20"/></g>
-        <g stroke="var(--border)" stroke-width="2" stroke-dasharray="5 6" fill="none">
-          <path d="M200 112 L300 112 L436 168"/>
-          <path d="M200 250 L262 228"/>
-          <path d="M200 400 L250 400"/>
-          <path d="M1000 100 L775 92"/>
-          <path d="M1000 262 L876 262" style="stroke:var(--red)"/>
-          <path d="M1000 440 L625 452"/>
-        </g>
-        <g font-size="22" font-weight="800">
-          <text x="190" y="102" text-anchor="end">the cook</text><text x="190" y="128" text-anchor="end" class="t-term">(model)</text>
-          <text x="190" y="244" text-anchor="end">the note at the door</text><text x="190" y="270" text-anchor="end" class="t-term">(context)</text>
-          <text x="190" y="394" text-anchor="end">the kitchen</text><text x="190" y="420" text-anchor="end" class="t-term">(harness)</text>
-          <text x="1010" y="94" text-anchor="start">the notebook page</text><text x="1010" y="120" text-anchor="start" class="t-term">(skill)</text>
-          <text x="1010" y="256" text-anchor="start">one cook, one dish</text><text x="1010" y="282" text-anchor="start" class="t-term">(agent)</text>
-          <text x="1010" y="434" text-anchor="start">tasting</text><text x="1010" y="460" text-anchor="start" class="t-term">(you)</text>
-        </g>
-      </svg>
+    <p class="sub reveal">The six words, once more. Questions welcome.</p>
+    <div class="map stagger">
+      <div class="card"><svg viewBox="0 0 80 130"><use href="#cook" style="color:var(--red)"/></svg><div><span class="w">Model</span><span class="k">the cook: skilled, forgetful, knows nothing about you</span></div></div>
+      <div class="card"><svg viewBox="0 0 100 90"><use href="#stove"/></svg><div><span class="w">Harness</span><span class="k">the kitchen: decides what the model can do</span></div></div>
+      <div class="card"><svg viewBox="0 0 100 120"><use href="#note"/><g stroke="var(--line)" stroke-width="3"><line x1="22" y1="40" x2="78" y2="40"/><line x1="22" y1="60" x2="78" y2="60"/><line x1="22" y1="80" x2="62" y2="80"/></g></svg><div><span class="w">Context</span><span class="k">the note at the door: about your house, every time</span></div></div>
+      <div class="card"><svg viewBox="0 0 100 120"><use href="#page"/><g stroke="var(--border)" stroke-width="3"><line x1="22" y1="45" x2="78" y2="45"/><line x1="22" y1="65" x2="78" y2="65"/><line x1="22" y1="85" x2="78" y2="85"/></g></svg><div><span class="w">Skill</span><span class="k">the notebook page: about the dish, written once</span></div></div>
+      <div class="card"><svg viewBox="0 0 120 110"><use href="#andaa"/></svg><div><span class="w">Agent</span><span class="k">one cook, one dish: all of the above, one job</span></div></div>
+      <div class="card you"><svg viewBox="0 0 60 60"><g transform="translate(0 20)"><use href="#spoon" width="60" height="20"/></g></svg><div><span class="w">You</span><span class="k">tasting before it goes out, every time</span></div></div>
     </div>
-    <div class="contact reveal" style="transition-delay:.3s"><span><b>Santhosh Guru</b></span><span>santhoshguru.com</span></div>
+    <div class="contact reveal"><span><b>Santhosh Guru</b></span><span>santhoshguru.com</span></div>
   </div>
   <aside class="notes">
     <ul>
-      <li>Leave the labelled kitchen on screen for the whole Q&amp;A. It is the recap.</li>
+      <li>Leave the six words on screen for the whole Q&amp;A. It is the recap.</li>
       <li>Likely questions, one-line answers:</li>
-      <li>"Which tool should I start with?" The kitchen already on your phone. The tool matters less than the one page you hand it.</li>
-      <li>"Is it safe to give AI my personal data?" Decide which shelf stays locked. Slide 6.</li>
+      <li>"Which tool should I start with?" The harness already on your phone. The tool matters less than the one page of context you hand it.</li>
+      <li>"Is it safe to give AI my personal data?" Decide which shelf stays locked. Context slide.</li>
       <li>"How do I build a team like yours?" That is a deep-dive session. Tonight was the mental model. Offer to run it with Ravi if there is interest.</li>
-      <li>"Does this cost a lot?" The one-dish recipe is free. My wedding kitchen costs more, and I will say roughly what, because it replaced hours of work.</li>
+      <li>"Does this cost a lot?" The one-job recipe is free. My wedding kitchen costs more, and I will say roughly what, because it replaced hours of work.</li>
     </ul>
   </aside>
 </section>
