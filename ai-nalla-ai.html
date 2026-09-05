@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stop picking a winner. Start assigning jobs. | AI Nalla AI</title>
+
+<!-- =====================================================================
+     DECK: "Stop picking a winner. Start assigning jobs."
+     AI Nalla AI cohort, session 9. Speaker: Santhosh Guru (santhoshguru.com)
+
+     HOW TO USE
+       Arrows / space / scroll to move. P opens the presenter window
+       (current slide, next slide, notes, timer). Drag it to your laptop
+       screen and project the main window.
+
+     HOW TO TWEAK
+       Each slide is one section.slide with an id like s01-question and a
+       data-minutes budget. Speaker notes live in <aside class="notes">
+       inside each slide (also mirrored in ai-nalla-ai-notes.md).
+       Colours: edit :root below. Shared drawings (cook, stove, spoon,
+       note, page, lock) are <symbol>s in the hidden <svg> at the top of
+       <body>; change them once and every slide follows.
+
+     SLIDE INDEX
+        1  s01-question     The wrong question
+        2  s02-cook         Cook, training years, last kitchen, one token
+        3  s03-kitchen      Same cook, different kitchen
+        4  s04-note-page    The note at the door and the notebook page
+        5  s05-stations     One cook, one dish. The wedding kitchen
+        6  s06-sappadu      Eight stations, tasted between each. The pantry
+        7  s07-demo         Live demo agenda
+        8  s08-substitute   What broke: the substitute cook
+        9  s09-tonight      Start tonight: one dish
+       10  s10-recap        Q&A, labelled kitchen
+     ===================================================================== -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+    --paper:#FBF5E8; --ink:#1E2A1F;
+    --leaf:#2F6B3A; --leaf-dark:#1F4A28; --leaf-dim:rgba(47,107,58,.14);
+    --turmeric:#E0A100; --turmeric-light:#F6DC8A;
+    --red:#C8321F; --red-dark:#8E2113;
+    --surface:#F2E8D3; --surface2:#E6D9BB; --border:#D6C7A4;
+    --muted:#5A5443; --note:#FFF3C4; --skin:#E8B98A;
+    --bg-primary:var(--paper); --text-primary:var(--ink); --text-secondary:var(--muted);
+    --accent:var(--red); --line:var(--ink); --fill:#FFFFFF; --on-accent:#fff;
+    --font-title:'Fraunces',Georgia,'Times New Roman',serif;
+    --font-body:'Nunito',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;
+    --slide-padding:clamp(1.6rem,4.5vw,4rem);
+    --content-gap:clamp(.7rem,1.6vw,1.3rem);
+}
+.slide--dark{
+    --bg-primary:#1B3A25; --text-primary:var(--paper); --text-secondary:rgba(251,245,232,.82);
+    --surface:rgba(255,255,255,.08); --surface2:rgba(255,255,255,.16); --border:rgba(255,255,255,.24);
+    --line:#FBF5E8; --fill:#FBF5E8; --muted:rgba(251,245,232,.82);
+    --accent:#F0B429; --turmeric:#F0B429; --leaf:#4E9A5B; --leaf-dark:#2F6B3A; --red:#F06A52;
+    --note:#FFF3C4; --leaf-dim:rgba(255,255,255,.12);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{height:100%;scroll-snap-type:y mandatory;scroll-behavior:smooth;overflow-x:hidden}
+body{height:100%;font-family:var(--font-body);background:var(--bg-primary);color:var(--text-primary);overflow-x:hidden;font-weight:600}
+.slide{width:100vw;height:100vh;height:100dvh;overflow:hidden;scroll-snap-align:start;display:flex;flex-direction:column;position:relative;padding:var(--slide-padding);background:var(--bg-primary);color:var(--text-primary)}
+.slide-content{flex:1;min-height:0;display:flex;flex-direction:column;gap:var(--content-gap)}
+.notes{display:none}
+.defs{position:absolute;width:0;height:0;overflow:hidden}
+
+h1,h2{font-family:var(--font-title);font-weight:500;line-height:1.08;letter-spacing:-.01em;text-wrap:balance}
+.title{font-size:clamp(1.9rem,4.4vw,3.6rem)}
+.title--long{font-size:clamp(1.5rem,3vw,2.5rem);line-height:1.15}
+.hl{color:var(--accent);font-style:italic}
+.term{color:var(--text-secondary);font-weight:700}
+.sub{color:var(--text-secondary);font-size:clamp(1rem,1.5vw,1.3rem);font-weight:700}
+
+.figure{flex:1;min-height:0;display:flex;align-items:center;justify-content:center}
+.figure svg{width:100%;height:100%;display:block;font-family:var(--font-body);font-weight:700}
+svg text{fill:var(--text-primary)}
+svg .t-muted{fill:var(--text-secondary)}
+svg .t-term{fill:var(--text-secondary);font-weight:800;font-size:18px}
+svg .t-hand{font-family:var(--font-title);font-style:italic;font-weight:500}
+svg .t-white{fill:#fff}
+svg .t-red{fill:var(--red)}
+svg .t-leaf{fill:var(--leaf)}
+
+.points{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(.8rem,2.4vw,2.2rem);font-size:clamp(1rem,1.45vw,1.35rem);line-height:1.35}
+.points .pt{position:relative;padding-left:1.5em;text-align:left}
+.points .pt::before{content:"";position:absolute;left:0;top:.42em;width:.72em;height:.72em;border-radius:50%;background:var(--turmeric);box-shadow:inset 0 0 0 2px var(--ink)}
+.slide--dark .points .pt::before{box-shadow:inset 0 0 0 2px var(--paper)}
+.points b{font-weight:800}
+
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:clamp(1.2rem,3vw,3rem);align-items:center;flex:1;min-height:0}
+.two .figure{height:100%}
+
+.stats{display:flex;flex-direction:column;gap:clamp(.8rem,2vw,1.6rem);justify-content:center}
+.stat .num{display:block;font-family:var(--font-title);font-size:clamp(3rem,6.4vw,5.6rem);line-height:1;color:var(--accent);font-weight:600}
+.stat .lbl{display:block;font-size:clamp(1rem,1.4vw,1.3rem);color:var(--text-secondary);margin-top:.25em}
+
+.agenda{display:flex;flex-direction:column;gap:clamp(1.2rem,3vw,2.6rem)}
+.agenda .row{display:flex;gap:1.1rem;align-items:center;font-size:clamp(1.3rem,2.2vw,2.1rem);line-height:1.25;font-family:var(--font-title);font-weight:500}
+.agenda .n{flex:0 0 auto;width:2.2em;height:2.2em;border-radius:50%;background:var(--accent);color:var(--on-accent);display:grid;place-items:center;font-weight:800;font-size:.85em;font-family:var(--font-title)}
+
+.phone{width:clamp(300px,30vw,460px);aspect-ratio:9/15.5;max-height:100%;border:8px solid var(--ink);border-radius:2.6rem;background:#fff;padding:clamp(1.2rem,2.2vw,1.8rem) clamp(.9rem,1.6vw,1.3rem);display:flex;flex-direction:column;justify-content:center;gap:clamp(.55rem,1.2vw,1rem);position:relative;box-shadow:0 18px 40px rgba(30,42,31,.14);margin:auto}
+.phone::before{content:"";position:absolute;top:.6rem;left:50%;transform:translateX(-50%);width:34%;height:.55rem;border-radius:1rem;background:var(--ink)}
+.step{display:flex;gap:.8rem;align-items:flex-start;font-size:clamp(1rem,1.45vw,1.4rem);line-height:1.3}
+.step svg{flex:0 0 auto;width:2.3em;height:2.3em}
+.step .k{font-weight:800;color:var(--leaf);font-family:var(--font-title);font-size:1.15em;min-width:1.1em}
+
+.contact{display:flex;justify-content:space-between;align-items:baseline;color:var(--text-secondary);font-size:clamp(1rem,1.5vw,1.3rem);font-weight:700}
+.contact b{color:var(--text-primary);font-weight:800}
+
+/* Animation toolkit */
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1),filter .6s ease;will-change:opacity,transform}
+.slide.visible .reveal{opacity:1;transform:none;filter:none}
+.reveal.fade-only{transform:none}
+.reveal.from-left{transform:translateX(-24px)}
+.reveal.from-right{transform:translateX(24px)}
+.reveal.from-scale{transform:scale(.96)}
+.reveal.from-blur{filter:blur(8px);transform:none}
+.stagger>*{opacity:0;transform:translateY(14px);transition:opacity .55s cubic-bezier(.16,1,.3,1),transform .55s cubic-bezier(.16,1,.3,1)}
+.slide.visible .stagger>*{opacity:1;transform:none}
+.slide.visible .stagger>*:nth-child(1){transition-delay:.05s}
+.slide.visible .stagger>*:nth-child(2){transition-delay:.13s}
+.slide.visible .stagger>*:nth-child(3){transition-delay:.21s}
+.slide.visible .stagger>*:nth-child(4){transition-delay:.29s}
+.slide.visible .stagger>*:nth-child(5){transition-delay:.37s}
+.slide.visible .stagger>*:nth-child(6){transition-delay:.45s}
+@keyframes rise{0%{transform:translateY(0);opacity:0}30%{opacity:.75}100%{transform:translateY(-14px);opacity:0}}
+.steam{transform-box:fill-box;transform-origin:center;animation:rise 2.8s ease-in-out infinite;fill:none;stroke:var(--muted);stroke-width:3;stroke-linecap:round}
+.steam.d1{animation-delay:.9s}.steam.d2{animation-delay:1.8s}
+@keyframes flame{0%,100%{transform:scaleY(1)}50%{transform:scaleY(1.12)}}
+.flame{transform-box:fill-box;transform-origin:bottom center;animation:flame 1.6s ease-in-out infinite}
+@keyframes softpulse{0%,100%{opacity:1}50%{opacity:.5}}
+.pulse{animation:softpulse 2.4s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+.bob{transform-box:fill-box;transform-origin:center;animation:bob 2.6s ease-in-out infinite}
+@keyframes flow{to{stroke-dashoffset:-16}}
+.dash{stroke:var(--accent);stroke-width:3;stroke-dasharray:6 6;stroke-linecap:round;fill:none;animation:flow 1.1s linear infinite}
+@keyframes write{0%{transform:scaleX(0);opacity:1}45%{transform:scaleX(1);opacity:1}80%{transform:scaleX(1);opacity:1}100%{transform:scaleX(1);opacity:0}}
+.write{transform-box:fill-box;transform-origin:left center;animation:write 3s ease-in-out infinite}
+
+/* embed mode (presenter iframes) */
+html.embed{scroll-behavior:auto}
+html.embed .nav-dots,html.embed .progress-bar{display:none!important}
+html.embed .reveal,html.embed .stagger>*{opacity:1;transform:none;filter:none;transition:none}
+
+/* presenter window */
+html.presenter,html.presenter body{height:100%;overflow:hidden;background:#141b16;color:var(--paper)}
+.pres{height:100%;display:grid;grid-template-rows:auto 1fr auto;font-family:var(--font-body)}
+.pres header,.pres footer{display:flex;justify-content:space-between;align-items:center;padding:.6rem 1.2rem;background:#0f150f;font-size:.95rem;color:rgba(251,245,232,.7)}
+.pres header .timer{font-family:var(--font-title);font-size:2rem;color:var(--paper);letter-spacing:.02em}
+.pres header .timer small{font-size:1rem;color:rgba(251,245,232,.6);margin-left:.8rem;font-family:var(--font-body)}
+.pres header .timer.over{color:#F06A52}
+.pres main{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);grid-template-rows:auto 1fr;gap:1rem;padding:1rem 1.2rem;min-height:0}
+.pres .cur{grid-row:1/3}
+.pres .frame{position:relative;width:100%;aspect-ratio:16/9;background:#000;border-radius:8px;overflow:hidden;border:1px solid rgba(255,255,255,.15)}
+.pres .frame iframe{position:absolute;top:0;left:0;width:1280px;height:720px;border:0;transform-origin:0 0;pointer-events:none}
+.pres .meta{display:flex;justify-content:space-between;margin-top:.5rem;font-size:1rem;color:rgba(251,245,232,.75)}
+.pres .meta b{color:var(--paper)}
+.pres h4{font-size:.8rem;text-transform:uppercase;letter-spacing:.12em;color:rgba(251,245,232,.5);margin-bottom:.4rem}
+.pres .notes-box{min-height:0;overflow:auto;background:#1b241d;border-radius:8px;padding:1rem 1.2rem;font-size:1.25rem;line-height:1.45;color:var(--paper)}
+.pres .notes-box ul{padding-left:1.1em}
+.pres .notes-box li{margin-bottom:.6em}
+.pres .notes-box mark{background:#F0B429;color:#141b16;padding:0 .2em;border-radius:3px}
+.pres .nexttitle{margin-top:.4rem;font-size:.95rem;color:rgba(251,245,232,.7)}
+
+@media (max-height:700px){:root{--slide-padding:clamp(1rem,3.5vw,2.4rem);--content-gap:clamp(.5rem,1.2vw,.9rem)}}
+@media (max-height:600px){.nav-dots,.decorative{display:none}}
+@media (max-height:500px){:root{--slide-padding:clamp(.75rem,3vw,1.5rem)}}
+@media (max-width:820px){.points{grid-template-columns:1fr}.two{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.2s!important}
+    html{scroll-behavior:auto}
+    .steam,.flame,.pulse,.bob,.dash,.write{animation:none}
+    .write{transform:scaleX(1);opacity:1}
+}
+</style>
+</head>
+<body>
+<!-- Shared drawings. Every slide reuses these with <use href="#..."> -->
+<svg class="defs" aria-hidden="true" focusable="false">
+<defs>
+  <!-- the cook. Towel colour comes from CSS `color` on the <use>. -->
+  <symbol id="cook" viewBox="0 0 80 130">
+    <rect x="34" y="38" width="12" height="22" fill="var(--skin)"/>
+    <path d="M12 60 Q40 44 68 60 L72 102 L8 102Z" fill="var(--fill)" stroke="var(--line)" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M16 60 L30 61 L27 94 L12 92Z" fill="currentColor"/>
+    <rect x="10" y="102" width="60" height="24" rx="3" fill="var(--fill)" stroke="var(--line)" stroke-width="3"/>
+    <line x1="12" y1="120" x2="68" y2="120" stroke="var(--turmeric)" stroke-width="3"/>
+    <path d="M10 66 L3 94" stroke="var(--line)" stroke-width="6" stroke-linecap="round"/>
+    <path d="M70 66 L77 94" stroke="var(--line)" stroke-width="6" stroke-linecap="round"/>
+    <circle cx="40" cy="26" r="17" fill="var(--skin)" stroke="var(--line)" stroke-width="3"/>
+    <path d="M23 22 Q40 2 57 22 Q40 15 23 22Z" fill="var(--line)"/>
+    <circle cx="34" cy="27" r="2.2" fill="var(--line)"/><circle cx="46" cy="27" r="2.2" fill="var(--line)"/>
+    <path d="M31 35 Q40 30 49 35 Q40 39 31 35Z" fill="var(--line)"/>
+  </symbol>
+  <!-- you, at the pass, spoon raised -->
+  <symbol id="you" viewBox="0 0 90 140">
+    <rect x="34" y="38" width="12" height="22" fill="var(--skin)"/>
+    <path d="M12 60 Q40 44 68 60 L72 108 L8 108Z" fill="var(--leaf)" stroke="var(--line)" stroke-width="3" stroke-linejoin="round"/>
+    <rect x="10" y="108" width="60" height="24" rx="3" fill="var(--fill)" stroke="var(--line)" stroke-width="3"/>
+    <path d="M10 66 L3 94" stroke="var(--line)" stroke-width="6" stroke-linecap="round"/>
+    <path d="M70 66 L82 44" stroke="var(--line)" stroke-width="6" stroke-linecap="round"/>
+    <g class="bob"><line x1="82" y1="44" x2="82" y2="22" stroke="var(--line)" stroke-width="4" stroke-linecap="round"/><ellipse cx="82" cy="15" rx="8" ry="6" fill="var(--turmeric)" stroke="var(--line)" stroke-width="3"/></g>
+    <circle cx="40" cy="26" r="17" fill="var(--skin)" stroke="var(--line)" stroke-width="3"/>
+    <path d="M23 22 Q40 2 57 22 Q40 15 23 22Z" fill="var(--line)"/>
+    <circle cx="34" cy="27" r="2.2" fill="var(--line)"/><circle cx="46" cy="27" r="2.2" fill="var(--line)"/>
+    <path d="M33 35 Q40 40 47 35" stroke="var(--line)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  </symbol>
+  <!-- person seen from above. Shoulder colour from `color`. -->
+  <symbol id="top" viewBox="0 0 40 40">
+    <ellipse cx="20" cy="26" rx="18" ry="10" fill="currentColor" stroke="var(--line)" stroke-width="2.5"/>
+    <circle cx="20" cy="18" r="9" fill="var(--line)"/>
+  </symbol>
+  <!-- gas stove with a pot and steam -->
+  <symbol id="stove" viewBox="0 0 100 90">
+    <path class="steam" d="M38 20 q4 -6 0 -12"/><path class="steam d1" d="M50 18 q4 -6 0 -12"/><path class="steam d2" d="M62 20 q4 -6 0 -12"/>
+    <rect x="6" y="60" width="88" height="26" rx="6" fill="var(--surface2)" stroke="var(--line)" stroke-width="3"/>
+    <circle cx="22" cy="73" r="4" fill="var(--line)"/><circle cx="78" cy="73" r="4" fill="var(--line)"/>
+    <path d="M22 32 Q50 24 78 32 L74 60 L26 60Z" fill="var(--leaf)" stroke="var(--line)" stroke-width="3" stroke-linejoin="round"/>
+    <ellipse cx="50" cy="32" rx="30" ry="6" fill="var(--leaf-dark)" stroke="var(--line)" stroke-width="3"/>
+    <circle cx="50" cy="27" r="4" fill="var(--line)"/>
+  </symbol>
+  <!-- big andaa on a wood fire -->
+  <symbol id="andaa" viewBox="0 0 120 110">
+    <path class="steam" d="M46 18 q5 -7 0 -14"/><path class="steam d1" d="M60 16 q5 -7 0 -14"/><path class="steam d2" d="M74 18 q5 -7 0 -14"/>
+    <path d="M14 30 Q60 18 106 30 L96 78 L24 78Z" fill="var(--leaf)" stroke="var(--line)" stroke-width="3" stroke-linejoin="round"/>
+    <ellipse cx="60" cy="30" rx="46" ry="8" fill="var(--leaf-dark)" stroke="var(--line)" stroke-width="3"/>
+    <g class="flame"><path d="M44 96 Q40 84 50 78 Q52 88 58 84 Q60 94 54 98Z" fill="var(--turmeric)"/><path d="M66 96 Q62 86 70 80 Q72 90 78 86 Q80 94 74 98Z" fill="var(--red)"/></g>
+    <rect x="22" y="94" width="76" height="8" rx="4" fill="var(--line)"/>
+    <rect x="34" y="102" width="52" height="7" rx="3.5" fill="var(--line)" opacity=".7"/>
+  </symbol>
+  <!-- tasting spoon -->
+  <symbol id="spoon" viewBox="0 0 60 20">
+    <line x1="4" y1="10" x2="40" y2="10" stroke="var(--line)" stroke-width="4" stroke-linecap="round"/>
+    <ellipse cx="47" cy="10" rx="10" ry="7" fill="var(--turmeric)" stroke="var(--line)" stroke-width="3"/>
+  </symbol>
+  <!-- pinned note -->
+  <symbol id="note" viewBox="0 0 100 120">
+    <rect x="4" y="8" width="92" height="108" rx="3" fill="var(--note)" stroke="var(--line)" stroke-width="3"/>
+    <circle cx="50" cy="10" r="6" fill="var(--red)" stroke="var(--line)" stroke-width="2"/>
+  </symbol>
+  <!-- notebook page -->
+  <symbol id="page" viewBox="0 0 100 120">
+    <rect x="4" y="12" width="92" height="104" rx="3" fill="var(--paper)" stroke="var(--line)" stroke-width="3"/>
+    <g fill="none" stroke="var(--line)" stroke-width="2.5"><circle cx="20" cy="12" r="5"/><circle cx="40" cy="12" r="5"/><circle cx="60" cy="12" r="5"/><circle cx="80" cy="12" r="5"/></g>
+  </symbol>
+  <!-- padlock -->
+  <symbol id="lock" viewBox="0 0 30 36">
+    <path d="M8 16 V11 a7 7 0 0 1 14 0 V16" fill="none" stroke="var(--line)" stroke-width="3.5"/>
+    <rect x="3" y="15" width="24" height="19" rx="4" fill="var(--red)" stroke="var(--line)" stroke-width="3"/>
+    <circle cx="15" cy="24" r="2.5" fill="var(--paper)"/>
+  </symbol>
+  <!-- banana leaf -->
+  <symbol id="leaf" viewBox="0 0 60 26">
+    <ellipse cx="30" cy="13" rx="28" ry="11" fill="var(--leaf)" stroke="var(--line)" stroke-width="2.5"/>
+    <line x1="6" y1="13" x2="54" y2="13" stroke="var(--leaf-dark)" stroke-width="2"/>
+  </symbol>
+  <!-- bowl of sambar -->
+  <symbol id="bowl" viewBox="0 0 70 40">
+    <path d="M4 12 Q35 40 66 12Z" fill="var(--fill)" stroke="var(--line)" stroke-width="3" stroke-linejoin="round"/>
+    <ellipse cx="35" cy="12" rx="31" ry="7" fill="var(--turmeric)" stroke="var(--line)" stroke-width="3"/>
+  </symbol>
+  <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10Z" fill="var(--line)"/></marker>
+  <marker id="arrow-leaf" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10Z" fill="var(--leaf)"/></marker>
+  <marker id="arrow-red" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10Z" fill="var(--red)"/></marker>
+</defs>
+</svg>
+<!-- ============================ 1. THE WRONG QUESTION ============================ -->
+<section class="slide slide--dark" id="s01-question" data-minutes="3">
+  <div class="slide-content">
+    <div class="reveal fade-only" style="display:flex;justify-content:space-between;align-items:center">
+      <svg viewBox="0 0 60 20" style="width:clamp(2.2rem,3.4vw,3rem);height:auto;transform:rotate(-30deg)"><use href="#spoon"/></svg>
+      <span class="sub">AI Nalla AI, session 9</span>
+    </div>
+    <h1 class="title reveal from-blur">"Which AI tool should I use?" is the <span class="hl">wrong question.</span></h1>
+    <div class="figure">
+      <svg viewBox="0 0 1200 470" role="img" aria-label="A cluttered grid of AI tool names on the left; a wedding kitchen seen from above on the right, with six stations and you tasting at the pass">
+        <g class="reveal from-left" style="transition-delay:.15s">
+          <text x="270" y="330" text-anchor="middle" font-size="380" font-family="Fraunces,Georgia,serif" style="fill:rgba(255,255,255,.07)">?</text>
+          <g font-size="21" font-weight="800" text-anchor="middle">
+            <g transform="rotate(-6 115 72)"><rect x="40" y="40" width="150" height="64" rx="14" fill="var(--surface)" stroke="var(--border)" stroke-width="2"/><text x="115" y="80">ChatGPT</text></g>
+            <g transform="rotate(4 285 62)"><rect x="210" y="30" width="150" height="64" rx="14" fill="var(--surface)" stroke="var(--border)" stroke-width="2"/><text x="285" y="70">Claude</text></g>
+            <g transform="rotate(-3 455 82)"><rect x="380" y="50" width="150" height="64" rx="14" fill="var(--surface)" stroke="var(--border)" stroke-width="2"/><text x="455" y="90">Gemini</text></g>
+            <g transform="rotate(5 135 182)"><rect x="60" y="150" width="150" height="64" rx="14" fill="var(--surface)" stroke="var(--border)" stroke-width="2"/><text x="135" y="190">Codex</text></g>
+            <g transform="rotate(-4 295 172)"><rect x="220" y="140" width="150" height="64" rx="14" fill="var(--surface)" stroke="var(--border)" stroke-width="2"/><text x="295" y="180">NotebookLM</text></g>
+            <g transform="rotate(6 495 182)"><rect x="420" y="150" width="150" height="64" rx="14" fill="var(--surface)" stroke="var(--border)" stroke-width="2"/><text x="495" y="190">AI Studio</text></g>
+            <g transform="rotate(3 105 292)"><rect x="30" y="260" width="150" height="64" rx="14" fill="var(--surface)" stroke="var(--border)" stroke-width="2"/><text x="105" y="300">Perplexity</text></g>
+            <g transform="rotate(-5 305 282)"><rect x="230" y="250" width="150" height="64" rx="14" fill="var(--surface)" stroke="var(--border)" stroke-width="2"/><text x="305" y="290">Copilot</text></g>
+            <g transform="rotate(4 475 287)"><rect x="400" y="255" width="150" height="64" rx="14" fill="var(--surface)" stroke="var(--border)" stroke-width="2"/><text x="475" y="295">Grok</text></g>
+            <g transform="rotate(-4 165 402)"><rect x="90" y="370" width="150" height="64" rx="14" fill="var(--surface)" stroke="var(--border)" stroke-width="2"/><text x="165" y="410">Cursor</text></g>
+            <g transform="rotate(5 335 397)"><rect x="260" y="365" width="150" height="64" rx="14" fill="var(--surface)" stroke="var(--border)" stroke-width="2"/><text x="335" y="405">Midjourney</text></g>
+            <g transform="rotate(-3 515 402)"><rect x="440" y="370" width="150" height="64" rx="14" fill="var(--surface)" stroke="var(--border)" stroke-width="2"/><text x="515" y="410">Sora</text></g>
+          </g>
+        </g>
+        <line x1="610" y1="30" x2="610" y2="440" stroke="var(--border)" stroke-width="2" stroke-dasharray="6 8"/>
+        <g class="reveal from-right" style="transition-delay:.3s">
+          <rect x="640" y="20" width="540" height="440" rx="24" fill="var(--surface)" stroke="var(--border)" stroke-width="2"/>
+          <g font-size="19" font-weight="800" text-anchor="middle">
+            <g><rect x="670" y="50" width="140" height="120" rx="12" fill="var(--surface2)" stroke="var(--border)" stroke-width="2"/><circle cx="740" cy="95" r="28" fill="var(--leaf)" stroke="var(--line)" stroke-width="2.5"/><circle cx="740" cy="95" r="18" fill="var(--leaf-dark)"/><use href="#top" x="772" y="58" width="30" height="30" style="color:var(--leaf)"/><text x="722" y="160">sambar</text></g>
+            <g><rect x="840" y="50" width="140" height="120" rx="12" fill="var(--surface2)" stroke="var(--border)" stroke-width="2"/><circle cx="910" cy="95" r="28" fill="var(--leaf)" stroke="var(--line)" stroke-width="2.5"/><circle cx="910" cy="95" r="18" fill="var(--leaf-dark)"/><use href="#top" x="942" y="58" width="30" height="30" style="color:var(--leaf)"/><text x="892" y="160">rasam</text></g>
+            <g><rect x="1010" y="50" width="140" height="120" rx="12" fill="var(--surface2)" stroke="var(--border)" stroke-width="2"/><circle cx="1080" cy="95" r="28" fill="var(--turmeric)" stroke="var(--line)" stroke-width="2.5"/><circle cx="1080" cy="95" r="18" fill="var(--turmeric-light)"/><use href="#top" x="1112" y="58" width="30" height="30" style="color:var(--leaf)"/><text x="1062" y="160">vadai</text></g>
+            <g><rect x="670" y="200" width="140" height="120" rx="12" fill="var(--surface2)" stroke="var(--border)" stroke-width="2"/><circle cx="740" cy="245" r="28" fill="var(--leaf)" stroke="var(--line)" stroke-width="2.5"/><circle cx="740" cy="245" r="18" fill="var(--leaf-dark)"/><use href="#top" x="772" y="208" width="30" height="30" style="color:var(--leaf)"/><text x="722" y="310">payasam</text></g>
+            <g><rect x="840" y="200" width="140" height="120" rx="12" fill="var(--surface2)" stroke="var(--border)" stroke-width="2"/><circle cx="910" cy="245" r="28" fill="var(--turmeric)" stroke="var(--line)" stroke-width="2.5"/><circle cx="910" cy="245" r="18" fill="var(--turmeric-light)"/><use href="#top" x="942" y="208" width="30" height="30" style="color:var(--leaf)"/><text x="892" y="310">dosa</text></g>
+            <g><rect x="1010" y="200" width="140" height="120" rx="12" fill="var(--surface2)" stroke="var(--border)" stroke-width="2"/><circle cx="1080" cy="245" r="28" fill="var(--leaf)" stroke="var(--line)" stroke-width="2.5"/><circle cx="1080" cy="245" r="18" fill="var(--leaf-dark)"/><use href="#top" x="1112" y="208" width="30" height="30" style="color:var(--leaf)"/><text x="1062" y="310">rice</text></g>
+          </g>
+          <rect x="670" y="350" width="480" height="26" rx="8" fill="var(--surface2)" stroke="var(--border)" stroke-width="2"/>
+          <use href="#top" x="880" y="392" width="56" height="56" style="color:var(--red)"/>
+          <g class="bob"><use href="#spoon" x="932" y="406" width="66" height="22"/></g>
+          <text x="1010" y="428" font-size="26" font-weight="800" class="t-red">You</text>
+          <text x="700" y="428" font-size="18" font-weight="800">the pass</text>
+        </g>
+      </svg>
+    </div>
+    <div class="contact reveal" style="transition-delay:.4s"><span><b>Santhosh Guru</b></span><span>santhoshguru.com</span></div>
+  </div>
+  <aside class="notes">
+    <ul>
+      <li>Open with the question everyone has asked. Say it is reasonable, and say it is exactly why the toolkit feels baffling.</li>
+      <li>The claim: the value is not in any one chatbot. It is in the combination. A cook, a kitchen that gives him hands, your notes as his memory, and you tasting everything.</li>
+      <li>The AI Nalla AI frame: nalla samayal does not come from hiring the most famous cook. It comes from a good kitchen, a clear note, a recipe you trust, and someone tasting before it hits the leaf. Nalla AI is the same.</li>
+      <li>Tell them what they leave with: nine words explained through one kitchen, a way to decide which job goes to which tool, one dish to cook this week, and an honest story about the time it went wrong.</li>
+      <li>Set expectation: mostly show and tell. Four short kitchen slides, then real systems.</li>
+    </ul>
+  </aside>
+</section>
+
+<!-- ============================ 2. THE COOK ============================ -->
+<section class="slide" id="s02-cook" data-minutes="5">
+  <div class="slide-content">
+    <h2 class="title title--long reveal from-blur">The cook knows every cuisine. He has never been inside your house. And he <span class="hl">forgets you</span> the moment the token is torn.</h2>
+    <div class="figure">
+      <svg viewBox="0 0 1200 400" role="img" aria-label="Three panels: a cook surrounded by dishes; two identical cooks under Udupi hotel and Chettinad mess signs; a mess counter with a torn token">
+        <g class="stagger">
+          <g>
+            <rect x="0" y="0" width="380" height="340" rx="18" fill="var(--surface)" stroke="var(--border)" stroke-width="2"/>
+            <use href="#cook" x="150" y="110" width="80" height="130" style="color:var(--red)"/>
+            <g font-size="14" class="t-muted" text-anchor="middle" font-weight="700">
+              <ellipse cx="70" cy="70" rx="28" ry="12" fill="var(--turmeric)" stroke="var(--line)" stroke-width="2.5"/><text x="70" y="102">sambar</text>
+              <ellipse cx="190" cy="48" rx="28" ry="12" fill="var(--leaf)" stroke="var(--line)" stroke-width="2.5"/><text x="190" y="80">biryani</text>
+              <ellipse cx="310" cy="70" rx="28" ry="12" fill="var(--fill)" stroke="var(--line)" stroke-width="2.5"/><text x="310" y="102">payasam</text>
+              <ellipse cx="50" cy="170" rx="28" ry="12" fill="var(--red)" stroke="var(--line)" stroke-width="2.5"/><text x="50" y="202">rasam</text>
+              <ellipse cx="330" cy="170" rx="28" ry="12" fill="var(--fill)" stroke="var(--line)" stroke-width="2.5"/><text x="330" y="202">idli</text>
+              <ellipse cx="70" cy="265" rx="28" ry="12" fill="var(--turmeric-light)" stroke="var(--line)" stroke-width="2.5"/><text x="70" y="297">dosa</text>
+              <ellipse cx="310" cy="265" rx="28" ry="12" fill="var(--red-dark)" stroke="var(--line)" stroke-width="2.5"/><text x="310" y="297">kuzhambu</text>
+              <ellipse cx="190" cy="290" rx="28" ry="12" fill="var(--leaf-dark)" stroke="var(--line)" stroke-width="2.5"/><text x="190" y="322">poriyal</text>
+            </g>
+            <text x="190" y="382" font-size="22" font-weight="800" text-anchor="middle">30 years of learning <tspan class="t-term">(pretraining)</tspan></text>
+          </g>
+          <g>
+            <rect x="410" y="0" width="380" height="340" rx="18" fill="var(--surface)" stroke="var(--border)" stroke-width="2"/>
+            <rect x="430" y="18" width="150" height="40" rx="6" fill="var(--leaf)"/><text x="505" y="45" font-size="15" font-weight="800" text-anchor="middle" class="t-white">UDUPI HOTEL</text>
+            <rect x="620" y="18" width="150" height="40" rx="6" fill="var(--red)"/><text x="695" y="45" font-size="14" font-weight="800" text-anchor="middle" class="t-white">CHETTINAD MESS</text>
+            <g><rect x="588" y="78" width="6" height="34" rx="3" fill="var(--leaf)" transform="rotate(-20 591 95)"/><circle cx="604" cy="98" r="9" fill="var(--red)" stroke="var(--line)" stroke-width="2"/><ellipse cx="620" cy="92" rx="7" ry="10" fill="var(--leaf-dark)" stroke="var(--line)" stroke-width="2"/></g>
+            <text x="600" y="132" font-size="15" font-weight="800" text-anchor="middle">same vegetables</text>
+            <use href="#cook" x="470" y="125" width="70" height="114" style="color:var(--red)"/>
+            <use href="#cook" x="660" y="125" width="70" height="114" style="color:var(--red)"/>
+            <use href="#bowl" x="472" y="252" width="66" height="38"/>
+            <g><path d="M666 264 Q699 292 732 264Z" fill="var(--fill)" stroke="var(--line)" stroke-width="3" stroke-linejoin="round"/><ellipse cx="699" cy="264" rx="31" ry="7" fill="var(--red-dark)" stroke="var(--line)" stroke-width="3"/></g>
+            <text x="505" y="318" font-size="15" text-anchor="middle" font-weight="700">sambar, Udupi style</text>
+            <text x="695" y="318" font-size="15" text-anchor="middle" font-weight="700">kara kuzhambu</text>
+            <text x="600" y="382" font-size="22" font-weight="800" text-anchor="middle">his last kitchen <tspan class="t-term">(post-training)</tspan></text>
+          </g>
+          <g>
+            <rect x="820" y="0" width="380" height="340" rx="18" fill="var(--surface)" stroke="var(--border)" stroke-width="2"/>
+            <rect x="850" y="20" width="140" height="40" rx="6" fill="var(--leaf)"/><text x="920" y="47" font-size="16" font-weight="800" text-anchor="middle" class="t-white">MESS</text>
+            <use href="#cook" x="880" y="80" width="80" height="130" style="color:var(--red)"/>
+            <g class="pulse"><circle cx="1000" cy="66" r="22" fill="var(--fill)" stroke="var(--line)" stroke-width="2.5"/><circle cx="975" cy="92" r="5" fill="var(--fill)" stroke="var(--line)" stroke-width="2"/><text x="1000" y="76" font-size="28" font-weight="800" text-anchor="middle" font-family="Fraunces,Georgia,serif">?</text></g>
+            <rect x="840" y="190" width="340" height="26" rx="6" fill="var(--surface2)" stroke="var(--line)" stroke-width="3"/>
+            <rect x="850" y="216" width="14" height="70" fill="var(--surface2)" stroke="var(--line)" stroke-width="2.5"/><rect x="1156" y="216" width="14" height="70" fill="var(--surface2)" stroke="var(--line)" stroke-width="2.5"/>
+            <g><path d="M1040 258 Q1075 244 1110 258 L1114 330 L1036 330Z" fill="var(--turmeric)" stroke="var(--line)" stroke-width="3" stroke-linejoin="round"/><circle cx="1075" cy="238" r="20" fill="var(--line)"/></g>
+            <g transform="rotate(-12 905 300)"><path d="M880 288 L922 288 L918 294 L924 300 L918 306 L922 312 L880 312Z" fill="var(--note)" stroke="var(--line)" stroke-width="2.5" stroke-linejoin="round"/><text x="899" y="304" font-size="11" font-weight="800" text-anchor="middle">TOK</text></g>
+            <g transform="rotate(14 955 310)"><path d="M936 298 L978 298 L978 322 L936 322 L940 316 L934 310 L940 304Z" fill="var(--note)" stroke="var(--line)" stroke-width="2.5" stroke-linejoin="round"/><text x="958" y="314" font-size="11" font-weight="800" text-anchor="middle">EN</text></g>
+            <text x="1010" y="382" font-size="22" font-weight="800" text-anchor="middle">one token <tspan class="t-term">(inference)</tspan></text>
+          </g>
+        </g>
+      </svg>
+    </div>
+    <div class="points stagger">
+      <div class="pt"><b>Training years:</b> he read every cookbook and cooked everywhere. Knows food, not your family.</div>
+      <div class="pt"><b>Last kitchen:</b> same training, different house style. That is why ChatGPT, Claude and Gemini feel different.</div>
+      <div class="pt"><b>One token:</b> you order, he cooks, the token is torn. Tomorrow he does not know you.</div>
+    </div>
+  </div>
+  <aside class="notes">
+    <ul>
+      <li>"Imagine a cook who grew up in a kitchen in Kumbakonam and has cooked everywhere since. Sambar, biryani, payasam, Chettinad, Udupi, name it. Enormously skilled. Has never been inside your house."</li>
+      <li>Training years (pretraining): "How did he get that skilled? Thirty years of watching, tasting and cooking everything. The AI did the same with most of the internet. It knows food. It does not know your amma's sambar."</li>
+      <li>Last kitchen (post-training): "Two cooks, same thirty years. One spent a decade in a Udupi hotel, one in a Chettinad mess. Same vegetables, different food. Same knowledge, different house style. Different AI apps feel different for the same reason. Different last kitchen."</li>
+      <li>One token (inference): "Put him at a mess counter. You buy a token, hand it over, he cooks, you eat, token torn. Tomorrow he has no idea who you are. Every conversation with AI is one token. Nothing carries over unless you carry it."</li>
+      <li>The honest gap, said plainly: "A real cook remembers regulars. This one does not. Nothing you say changes the cook. That is the single most important thing to know about AI."</li>
+      <li>Bridge: "So if he is brilliant, forgetful, and knows nothing about you, what decides what he can actually do for you? Now bring him from the mess to your house."</li>
+    </ul>
+  </aside>
+</section>
+<!-- ============================ 3. THE KITCHEN ============================ -->
+<section class="slide" id="s03-kitchen" data-minutes="3">
+  <div class="slide-content">
+    <h2 class="title reveal from-blur">Same cook. Different <span class="hl">kitchen.</span> Different food.</h2>
+    <div class="figure">
+      <svg viewBox="0 0 1200 450" role="img" aria-label="The same cook in a small home kitchen on the left and in a large kalyana mandapam kitchen on the right, with AI app names pointing at the kitchen">
+        <g class="reveal from-left">
+          <rect x="0" y="0" width="470" height="360" rx="18" fill="var(--surface)" stroke="var(--border)" stroke-width="2"/>
+          <text x="24" y="36" font-size="20" font-weight="800">Home kitchen</text>
+          <use href="#stove" x="50" y="165" width="110" height="99"/>
+          <use href="#cook" x="200" y="136" width="80" height="130" style="color:var(--red)"/>
+          <g><rect x="340" y="185" width="44" height="60" rx="8" fill="var(--fill)" stroke="var(--line)" stroke-width="3"/><rect x="332" y="240" width="60" height="26" rx="6" fill="var(--line)"/><rect x="348" y="176" width="28" height="12" rx="3" fill="var(--line)"/><text x="362" y="288" font-size="15" font-weight="800" text-anchor="middle">mixie</text></g>
+          <line x1="20" y1="266" x2="450" y2="266" stroke="var(--line)" stroke-width="3"/>
+          <g><use href="#leaf" x="40" y="292" width="56" height="24"/><use href="#leaf" x="104" y="292" width="56" height="24"/><use href="#leaf" x="168" y="292" width="56" height="24"/><use href="#leaf" x="232" y="292" width="56" height="24"/><use href="#leaf" x="296" y="292" width="56" height="24"/><use href="#leaf" x="360" y="292" width="56" height="24"/></g>
+          <text x="235" y="345" font-size="20" font-weight="800" text-anchor="middle">Feeds six.</text>
+        </g>
+        <g class="reveal from-right" style="transition-delay:.15s">
+          <rect x="530" y="0" width="670" height="360" rx="18" fill="var(--surface)" stroke="var(--border)" stroke-width="2"/>
+          <text x="554" y="36" font-size="20" font-weight="800">Kalyana mandapam kitchen</text>
+          <text x="1176" y="36" text-anchor="end" class="t-term">(harness)</text>
+          <use href="#andaa" x="550" y="150" width="120" height="110"/>
+          <use href="#andaa" x="660" y="150" width="120" height="110"/>
+          <use href="#cook" x="800" y="130" width="80" height="130" style="color:var(--red)"/>
+          <g>
+            <use href="#cook" x="910" y="95" width="40" height="65" style="color:var(--leaf)"/>
+            <use href="#cook" x="958" y="95" width="40" height="65" style="color:var(--turmeric)"/>
+            <use href="#cook" x="1006" y="95" width="40" height="65" style="color:var(--leaf)"/>
+            <use href="#cook" x="1054" y="95" width="40" height="65" style="color:var(--turmeric)"/>
+            <use href="#cook" x="1102" y="95" width="40" height="65" style="color:var(--leaf)"/>
+            <text x="1026" y="182" font-size="15" font-weight="800" text-anchor="middle">helpers</text>
+          </g>
+          <g><rect x="1090" y="205" width="70" height="92" rx="8" fill="var(--line)"/><rect x="1097" y="214" width="56" height="70" rx="4" fill="var(--fill)"/><rect x="1103" y="222" width="44" height="10" rx="2" fill="var(--turmeric)"/><rect x="1103" y="240" width="44" height="6" rx="2" fill="var(--border)"/><rect x="1103" y="252" width="36" height="6" rx="2" fill="var(--border)"/><rect x="1103" y="264" width="40" height="6" rx="2" fill="var(--border)"/><text x="1125" y="320" font-size="15" font-weight="800" text-anchor="middle">orders</text></g>
+          <g><use href="#leaf" x="920" y="262" width="56" height="24"/><use href="#leaf" x="926" y="252" width="56" height="24"/><use href="#leaf" x="932" y="242" width="56" height="24"/><use href="#leaf" x="938" y="232" width="56" height="24"/><use href="#leaf" x="944" y="222" width="56" height="24"/><text x="972" y="320" font-size="15" font-weight="800" text-anchor="middle">500 leaves</text></g>
+          <line x1="550" y1="266" x2="900" y2="266" stroke="var(--line)" stroke-width="3" opacity=".0"/>
+          <text x="865" y="345" font-size="20" font-weight="800" text-anchor="middle">Feeds five hundred and takes orders.</text>
+        </g>
+        <g class="stagger" font-size="17" font-weight="800" text-anchor="middle">
+          <g><line x1="640" y1="404" x2="640" y2="368" stroke="var(--line)" stroke-width="2.5" marker-end="url(#arrow)"/><rect x="565" y="408" width="150" height="36" rx="18" fill="var(--fill)" stroke="var(--line)" stroke-width="2"/><text x="640" y="432">ChatGPT app</text></g>
+          <g><line x1="795" y1="404" x2="795" y2="368" stroke="var(--line)" stroke-width="2.5" marker-end="url(#arrow)"/><rect x="740" y="408" width="110" height="36" rx="18" fill="var(--fill)" stroke="var(--line)" stroke-width="2"/><text x="795" y="432">Codex</text></g>
+          <g><line x1="935" y1="404" x2="935" y2="368" stroke="var(--line)" stroke-width="2.5" marker-end="url(#arrow)"/><rect x="870" y="408" width="130" height="36" rx="18" fill="var(--fill)" stroke="var(--line)" stroke-width="2"/><text x="935" y="432">AI Studio</text></g>
+          <g><line x1="1095" y1="404" x2="1095" y2="368" stroke="var(--line)" stroke-width="2.5" marker-end="url(#arrow)"/><rect x="1020" y="408" width="150" height="36" rx="18" fill="var(--fill)" stroke="var(--line)" stroke-width="2"/><text x="1095" y="432">NotebookLM</text></g>
+        </g>
+      </svg>
+    </div>
+    <div class="points stagger">
+      <div class="pt"><b>The cook:</b> thinks, writes, reasons.</div>
+      <div class="pt"><b>The kitchen:</b> everything around him. Files, web, tools, memory, the ability to actually do things.</div>
+      <div class="pt">Every AI app you have used is a kitchen. That is what makes the "same model" behave differently in different apps.</div>
+    </div>
+  </div>
+  <aside class="notes">
+    <ul>
+      <li>"Put him in your home kitchen with one gas stove and a mixie, he feeds six. Put him in a kalyana mandapam kitchen with wood fire, big andaas, ten helpers and a Swiggy tablet, he feeds five hundred and takes orders. The cook did not change. The kitchen did."</li>
+      <li>Anchor to what they have used: "When you set up a ChatGPT Project or a Custom GPT, you were arranging a kitchen. Codex is a kitchen with a grinder for one specific job. NotebookLM is a kitchen built around your own pantry. Different kitchens decide what the cook can touch."</li>
+      <li>"The word engineers use for the kitchen is harness. You will not hear it again tonight. I will just say kitchen."</li>
+      <li>Land the point: choosing an AI tool is mostly choosing a kitchen. The cooks are closer to each other than the advertising says. The kitchen decides what gets done.</li>
+    </ul>
+  </aside>
+</section>
+
+<!-- ============================ 4. NOTE AND NOTEBOOK PAGE ============================ -->
+<section class="slide" id="s04-note-page" data-minutes="3">
+  <div class="slide-content">
+    <h2 class="title title--long reveal from-blur">The note at the door is about <span class="hl">your house.</span> The notebook page is about the dish.</h2>
+    <div class="figure">
+      <svg viewBox="0 0 1200 430" role="img" aria-label="The home kitchen with a handwritten note pinned on the door and a page from the family recipe notebook on the wall">
+        <rect x="120" y="0" width="960" height="400" rx="18" fill="var(--surface)" stroke="var(--border)" stroke-width="2"/>
+        <g class="reveal from-left">
+          <text x="240" y="34" font-size="20" font-weight="800" text-anchor="middle">the note at the door</text>
+          <rect x="160" y="50" width="160" height="330" rx="6" fill="var(--surface2)" stroke="var(--line)" stroke-width="3"/>
+          <circle cx="308" cy="300" r="6" fill="var(--line)"/>
+          <use href="#note" x="172" y="66" width="136" height="163"/>
+          <g class="t-hand" font-size="17" text-anchor="middle">
+            <text x="240" y="106">12 people.</text>
+            <text x="240" y="129">Amma diabetic.</text>
+            <text x="240" y="152">No onion today.</text>
+            <text x="240" y="175">Thatha wants</text>
+            <text x="240" y="198">extra karam.</text>
+            <text x="240" y="221">Serve by 6.</text>
+          </g>
+          <rect class="write" x="200" y="226" width="80" height="2.5" fill="var(--red)"/>
+          <text x="240" y="262" text-anchor="middle" class="t-term">(context)</text>
+        </g>
+        <g class="reveal from-scale" style="transition-delay:.15s">
+          <use href="#stove" x="420" y="220" width="130" height="117"/>
+          <use href="#cook" x="580" y="178" width="100" height="162" style="color:var(--red)"/>
+          <line x1="360" y1="340" x2="1050" y2="340" stroke="var(--line)" stroke-width="3"/>
+        </g>
+        <g class="reveal from-right" style="transition-delay:.3s">
+          <text x="905" y="34" font-size="20" font-weight="800" text-anchor="middle">the notebook page</text>
+          <use href="#page" x="790" y="48" width="230" height="240"/>
+          <g stroke="var(--border)" stroke-width="2"><line x1="820" y1="130" x2="990" y2="130"/><line x1="820" y1="170" x2="990" y2="170"/><line x1="820" y1="210" x2="990" y2="210"/><line x1="820" y1="250" x2="990" y2="250"/></g>
+          <text x="905" y="118" font-size="24" font-weight="800" text-anchor="middle" font-family="Fraunces,Georgia,serif">Our sambar</text>
+          <g class="t-hand" font-size="18" text-anchor="middle">
+            <text x="905" y="162">drumstick,</text>
+            <text x="905" y="202">less tamarind,</text>
+            <text x="905" y="242">kadugu at the end.</text>
+          </g>
+          <text x="905" y="318" text-anchor="middle" class="t-term">(skill)</text>
+        </g>
+      </svg>
+    </div>
+    <div class="points stagger">
+      <div class="pt"><b>The note at the door:</b> who you are, what today needs. Handed over every single time, because he cooks for ten houses a week.</div>
+      <div class="pt"><b>The notebook page:</b> one dish, written once. Any cook who enters makes our sambar, not his.</div>
+      <div class="pt">You already know the note. The notebook is the new idea.</div>
+    </div>
+  </div>
+  <aside class="notes">
+    <ul>
+      <li>"He arrives at your house for the function. You hand him a page: twelve people, amma is diabetic, no onion today, thatha wants extra karam, serve by six. Without that page he cooks for a stranger." Then: "You already learnt this in an earlier session. Good. The new part is next."</li>
+      <li>"Every house has that notebook. Sambar the way we make it, drumstick, less tamarind, kadugu at the end. You wrote it once. Now any cook who walks in makes our sambar. That is a skill. A saved instruction for one dish you keep making."</li>
+      <li>The distinction in one breath: the note is about your house. The notebook page is about the dish. You want both saved somewhere the kitchen can reach, so you stop rewriting them.</li>
+      <li>Do not explain where the pages are stored or how they sync. If asked: "Plain text files in a folder the kitchen can read. The deep dive on that is a separate session."</li>
+    </ul>
+  </aside>
+</section>
+<!-- ============================ 5. ONE COOK, ONE DISH ============================ -->
+<section class="slide" id="s05-stations" data-minutes="3">
+  <div class="slide-content">
+    <h2 class="title reveal from-blur">Nobody asks the payasam master to <span class="hl">fry vadai.</span></h2>
+    <div class="figure">
+      <svg viewBox="0 0 1200 420" role="img" aria-label="A wedding kitchen line: five stations, each with one cook, one stove and one notebook page pinned above; you tasting at the pass on the right">
+        <line x1="20" y1="354" x2="950" y2="354" stroke="var(--line)" stroke-width="3"/>
+        <g class="stagger">
+          <g>
+            <use href="#page" x="55" y="6" width="100" height="120"/><circle cx="105" cy="8" r="6" fill="var(--red)"/><text x="105" y="60" font-size="18" font-weight="800" text-anchor="middle" font-family="Fraunces,Georgia,serif">sambar</text>
+            <use href="#cook" x="65" y="130" width="80" height="130" style="color:var(--red)"/>
+            <use href="#stove" x="52" y="258" width="106" height="95"/>
+            <text x="105" y="392" font-size="20" font-weight="800" text-anchor="middle">sambar</text>
+            <text x="105" y="416" text-anchor="middle" class="t-term">(agent)</text>
+          </g>
+          <g>
+            <use href="#page" x="245" y="6" width="100" height="120"/><circle cx="295" cy="8" r="6" fill="var(--red)"/><text x="295" y="60" font-size="18" font-weight="800" text-anchor="middle" font-family="Fraunces,Georgia,serif">rasam</text>
+            <use href="#cook" x="255" y="130" width="80" height="130" style="color:var(--turmeric)"/>
+            <use href="#stove" x="242" y="258" width="106" height="95"/>
+            <text x="295" y="392" font-size="20" font-weight="800" text-anchor="middle">rasam</text>
+          </g>
+          <g>
+            <use href="#page" x="435" y="6" width="100" height="120"/><circle cx="485" cy="8" r="6" fill="var(--red)"/><text x="485" y="60" font-size="18" font-weight="800" text-anchor="middle" font-family="Fraunces,Georgia,serif">vadai</text>
+            <use href="#cook" x="445" y="130" width="80" height="130" style="color:var(--leaf)"/>
+            <use href="#stove" x="432" y="258" width="106" height="95"/>
+            <text x="485" y="392" font-size="20" font-weight="800" text-anchor="middle">vadai</text>
+          </g>
+          <g>
+            <use href="#page" x="625" y="6" width="100" height="120"/><circle cx="675" cy="8" r="6" fill="var(--red)"/><text x="675" y="60" font-size="18" font-weight="800" text-anchor="middle" font-family="Fraunces,Georgia,serif">payasam</text>
+            <use href="#cook" x="635" y="130" width="80" height="130" style="color:var(--red-dark)"/>
+            <use href="#stove" x="622" y="258" width="106" height="95"/>
+            <text x="675" y="392" font-size="20" font-weight="800" text-anchor="middle">payasam</text>
+          </g>
+          <g>
+            <use href="#page" x="815" y="6" width="100" height="120"/><circle cx="865" cy="8" r="6" fill="var(--red)"/><text x="865" y="60" font-size="18" font-weight="800" text-anchor="middle" font-family="Fraunces,Georgia,serif">dosa</text>
+            <use href="#cook" x="825" y="130" width="80" height="130" style="color:var(--red)"/>
+            <use href="#stove" x="812" y="258" width="106" height="95"/>
+            <text x="865" y="392" font-size="20" font-weight="800" text-anchor="middle">dosa, late crowd</text>
+          </g>
+          <g>
+            <line x1="968" y1="20" x2="968" y2="400" stroke="var(--border)" stroke-width="2" stroke-dasharray="6 8"/>
+            <use href="#you" x="1030" y="118" width="90" height="140"/>
+            <rect x="985" y="256" width="200" height="26" rx="6" fill="var(--surface2)" stroke="var(--line)" stroke-width="3"/>
+            <text x="1085" y="322" font-size="26" font-weight="800" text-anchor="middle" class="t-red">You</text>
+            <text x="1085" y="348" font-size="17" font-weight="800" text-anchor="middle">at the pass, tasting</text>
+          </g>
+        </g>
+      </svg>
+    </div>
+    <div class="points stagger">
+      <div class="pt">One cook, one stove, one notebook page, one dish. That is an agent.</div>
+      <div class="pt">Several of them, each with a different dish, is a team. Different dishes can even use different cooks.</div>
+      <div class="pt">You stand at the pass. Delegate, then taste.</div>
+    </div>
+  </div>
+  <aside class="notes">
+    <ul>
+      <li>Stack the definitions: a cook, in a kitchen, with your note and one notebook page, doing one dish. Nothing new was added. Slides 2 to 4 were combined.</li>
+      <li>Why one dish each: a cook with one job is easier to trust and easier to taste-check. Same for AI agents. This is the mix-and-match idea in the title. Different stations can use different cooks.</li>
+      <li>"My setup is a wedding kitchen where some of the cooks are AI." Thirty-second aside: "My first team had no business purpose at all. It stitched my reading history, my film log and my book highlights into one taste library. Zero stakes, pure joy. That is where I learnt the kitchen bends to the house, not the other way round."</li>
+      <li>Bridge: "Now the same kitchen with real stakes."</li>
+    </ul>
+  </aside>
+</section>
+
+<!-- ============================ 6. THE EIGHT-COURSE SAPPADU ============================ -->
+<section class="slide" id="s06-sappadu" data-minutes="8">
+  <div class="slide-content">
+    <h2 class="title title--long reveal from-blur">Eight stations in a row. Taste after every one. And some shelves in the pantry <span class="hl">stay locked.</span></h2>
+    <div class="two" style="grid-template-columns:minmax(0,2.3fr) minmax(0,1fr)">
+      <div class="figure reveal from-left" style="grid-column:1">
+        <svg viewBox="0 0 900 470" role="img" aria-label="Eight stations in a line with a tasting spoon between each pair; below, a pantry with an open shelf, a locked shelf, and a small locked tin of paati's podi">
+          <g font-size="22" font-weight="800" text-anchor="middle">
+            <use href="#stove" x="12" y="14" width="64" height="58"/><text x="44" y="98">1</text>
+            <use href="#spoon" x="80" y="36" width="34" height="12"/>
+            <use href="#stove" x="122" y="14" width="64" height="58"/><text x="154" y="98">2</text>
+            <use href="#spoon" x="190" y="36" width="34" height="12"/>
+            <use href="#stove" x="232" y="14" width="64" height="58"/><text x="264" y="98">3</text>
+            <use href="#spoon" x="300" y="36" width="34" height="12"/>
+            <use href="#stove" x="342" y="14" width="64" height="58"/><text x="374" y="98">4</text>
+            <use href="#spoon" x="410" y="36" width="34" height="12"/>
+            <use href="#stove" x="452" y="14" width="64" height="58"/><text x="484" y="98">5</text>
+            <use href="#spoon" x="520" y="36" width="34" height="12"/>
+            <use href="#stove" x="562" y="14" width="64" height="58"/><text x="594" y="98">6</text>
+            <use href="#spoon" x="630" y="36" width="34" height="12"/>
+            <use href="#stove" x="672" y="14" width="64" height="58"/><text x="704" y="98">7</text>
+            <use href="#spoon" x="740" y="36" width="34" height="12"/>
+            <use href="#stove" x="782" y="14" width="64" height="58"/><text x="814" y="98">8</text>
+          </g>
+          <line x1="10" y1="118" x2="890" y2="118" stroke="var(--border)" stroke-width="2" stroke-dasharray="6 8"/>
+          <rect x="20" y="136" width="860" height="320" rx="14" fill="var(--surface)" stroke="var(--line)" stroke-width="3"/>
+          <rect x="20" y="232" width="860" height="7" fill="var(--line)"/>
+          <rect x="20" y="336" width="860" height="7" fill="var(--line)"/>
+          <g>
+            <g fill="var(--turmeric-light)" stroke="var(--line)" stroke-width="2.5"><rect x="56" y="170" width="44" height="62" rx="6"/><rect x="110" y="170" width="44" height="62" rx="6"/><rect x="164" y="170" width="44" height="62" rx="6"/><rect x="218" y="170" width="44" height="62" rx="6"/><rect x="272" y="170" width="44" height="62" rx="6"/></g>
+            <g fill="var(--line)"><rect x="62" y="160" width="32" height="12" rx="3"/><rect x="116" y="160" width="32" height="12" rx="3"/><rect x="170" y="160" width="32" height="12" rx="3"/><rect x="224" y="160" width="32" height="12" rx="3"/><rect x="278" y="160" width="32" height="12" rx="3"/></g>
+            <text x="360" y="190" font-size="26" font-weight="800">Open shelf</text>
+            <text x="360" y="218" font-size="19" class="t-muted" font-weight="700">anyone can use it</text>
+          </g>
+          <g>
+            <g fill="var(--leaf)" stroke="var(--line)" stroke-width="2.5"><rect x="56" y="274" width="44" height="62" rx="6"/><rect x="110" y="274" width="44" height="62" rx="6"/><rect x="164" y="274" width="44" height="62" rx="6"/><rect x="218" y="274" width="44" height="62" rx="6"/></g>
+            <g fill="var(--line)"><rect x="62" y="264" width="32" height="12" rx="3"/><rect x="116" y="264" width="32" height="12" rx="3"/><rect x="170" y="264" width="32" height="12" rx="3"/><rect x="224" y="264" width="32" height="12" rx="3"/></g>
+            <use href="#lock" x="282" y="286" width="40" height="48"/>
+            <text x="360" y="294" font-size="26" font-weight="800">Locked shelf</text>
+            <text x="360" y="322" font-size="19" class="t-muted" font-weight="700">opened for the cook, when I say so</text>
+          </g>
+          <g>
+            <rect x="70" y="378" width="76" height="60" rx="8" fill="var(--red)" stroke="var(--line)" stroke-width="2.5"/>
+            <rect x="64" y="370" width="88" height="14" rx="4" fill="var(--red-dark)" stroke="var(--line)" stroke-width="2.5"/>
+            <text x="108" y="417" font-size="16" font-weight="800" text-anchor="middle" class="t-white">podi</text>
+            <g class="pulse"><use href="#lock" x="164" y="380" width="46" height="55"/></g>
+            <text x="360" y="398" font-size="26" font-weight="800">Paati's podi</text>
+            <text x="360" y="426" font-size="19" class="t-muted" font-weight="700">ground by me, never handed over</text>
+          </g>
+        </svg>
+      </div>
+      <div class="stats reveal from-right" style="transition-delay:.2s">
+        <div class="stat"><span class="num" data-count="181">0</span><span class="lbl">tailored application packs</span></div>
+        <div class="stat"><span class="num" data-count="136">0</span><span class="lbl">one-page resumes</span></div>
+      </div>
+    </div>
+    <div class="points stagger">
+      <div class="pt">The pantry carries everything forward. The newest application takes minutes, not hours.</div>
+      <div class="pt">Three shelves. The most personal one never reaches any cook.</div>
+      <div class="pt">Tasting between every station. No exceptions.</div>
+    </div>
+  </div>
+  <aside class="notes">
+    <ul>
+      <li>This is the main case. Ravi flagged it as the most relatable. Give it the most time.</li>
+      <li>Walk the eight phases quickly. For each, say what comes out of that station and where you tasted before the next one started. Show one real artefact if possible: one tailored pack and the one-page resume it produced.</li>
+      <li>Spend real time on the pantry shelves. This is the part the audience has not heard and it answers the "is it safe to give AI my stuff" worry directly. "The open shelf anyone can use. The locked shelf I open for the cook. And paati's secret podi I grind myself and never hand to any cook. Decide up front what the AI never sees, and make it structurally impossible, not something you remember to be careful about."</li>
+      <li>The numbers (181 packs, 136 resumes) prove that reuse compounds. The first took hours. The latest takes minutes because the pantry already holds everything.</li>
+      <li>The takeaway is two principles, not the tooling: hand over the note and the notebook, and never skip tasting. Say those two sentences and stop.</li>
+    </ul>
+  </aside>
+</section>
+<!-- ============================ 7. LIVE DEMO ============================ -->
+<section class="slide" id="s07-demo" data-minutes="11">
+  <div class="slide-content">
+    <h2 class="title title--long reveal from-blur">These are cooks you <span class="hl">delegate to,</span> not a counter you stand and wait at.</h2>
+    <div class="two">
+      <div class="agenda stagger">
+        <div class="row"><span class="n">1</span><span>Meet the cooks.</span></div>
+        <div class="row"><span class="n">2</span><span>Write one notebook page, pin it above one station.</span></div>
+        <div class="row"><span class="n">3</span><span>Place an order and walk away.</span></div>
+      </div>
+      <div class="figure reveal from-right" style="transition-delay:.2s">
+        <svg viewBox="0 0 640 440" role="img" aria-label="A stylised team chat workspace: channels in a sidebar, conversations where some teammates are AI cooks">
+          <rect x="2" y="2" width="636" height="436" rx="16" fill="var(--fill)" stroke="var(--line)" stroke-width="3"/>
+          <rect x="1" y="1" width="638" height="40" rx="16" fill="var(--surface2)"/><rect x="1" y="24" width="638" height="18" fill="var(--surface2)"/>
+          <circle cx="24" cy="21" r="6" fill="var(--red)"/><circle cx="44" cy="21" r="6" fill="var(--turmeric)"/><circle cx="64" cy="21" r="6" fill="var(--leaf)"/>
+          <rect x="1" y="42" width="180" height="396" fill="var(--surface)"/>
+          <text x="22" y="76" font-size="16" font-weight="800">Wedding kitchen</text>
+          <g font-size="15" font-weight="700">
+            <text x="22" y="114" class="t-muted"># kitchen</text>
+            <rect x="12" y="130" width="158" height="30" rx="8" fill="var(--leaf-dim)"/><text x="22" y="151"># sambar</text>
+            <text x="22" y="188" class="t-muted"># rasam</text>
+            <text x="22" y="224" class="t-muted"># payasam</text>
+            <text x="22" y="260" class="t-muted"># tasting</text>
+            <text x="22" y="296" class="t-muted"># tonight</text>
+          </g>
+          <g>
+            <circle cx="216" cy="88" r="17" fill="var(--leaf)"/><use href="#cook" x="204" y="68" width="24" height="39" style="color:var(--red)"/><rect x="224" y="94" width="20" height="14" rx="4" fill="var(--red)"/><text x="234" y="105" font-size="9" font-weight="800" text-anchor="middle" class="t-white">AI</text>
+            <text x="248" y="82" font-size="14" font-weight="800">sambar cook</text>
+            <rect x="248" y="90" width="300" height="12" rx="6" fill="var(--border)"/><rect x="248" y="108" width="220" height="12" rx="6" fill="var(--border)"/>
+          </g>
+          <g>
+            <circle cx="216" cy="160" r="17" fill="var(--red)"/><text x="216" y="166" font-size="14" font-weight="800" text-anchor="middle" class="t-white">You</text>
+            <text x="248" y="154" font-size="14" font-weight="800">You</text>
+            <rect x="248" y="162" width="250" height="12" rx="6" fill="var(--border)"/>
+          </g>
+          <g>
+            <circle cx="216" cy="232" r="17" fill="var(--leaf)"/><use href="#cook" x="204" y="212" width="24" height="39" style="color:var(--red)"/><rect x="224" y="238" width="20" height="14" rx="4" fill="var(--red)"/><text x="234" y="249" font-size="9" font-weight="800" text-anchor="middle" class="t-white">AI</text>
+            <text x="248" y="226" font-size="14" font-weight="800">sambar cook</text>
+            <rect x="248" y="234" width="340" height="12" rx="6" fill="var(--border)"/><rect x="248" y="252" width="310" height="12" rx="6" fill="var(--border)"/><rect x="248" y="270" width="180" height="12" rx="6" fill="var(--border)"/>
+            <rect x="248" y="292" width="150" height="36" rx="8" fill="var(--surface)" stroke="var(--border)" stroke-width="2"/><use href="#page" x="258" y="298" width="20" height="24"/><text x="286" y="316" font-size="13" font-weight="700">Our sambar</text>
+          </g>
+          <g>
+            <circle cx="216" cy="356" r="17" fill="var(--turmeric)"/><use href="#cook" x="204" y="336" width="24" height="39" style="color:var(--leaf)"/><rect x="224" y="362" width="20" height="14" rx="4" fill="var(--red)"/><text x="234" y="373" font-size="9" font-weight="800" text-anchor="middle" class="t-white">AI</text>
+            <text x="248" y="350" font-size="14" font-weight="800">rasam cook</text>
+            <rect x="248" y="358" width="200" height="12" rx="6" fill="var(--border)"/>
+            <g class="pulse"><circle cx="470" cy="364" r="4" fill="var(--muted)"/><circle cx="484" cy="364" r="4" fill="var(--muted)"/><circle cx="498" cy="364" r="4" fill="var(--muted)"/></g>
+          </g>
+          <rect x="200" y="400" width="420" height="28" rx="10" fill="var(--fill)" stroke="var(--border)" stroke-width="2"/>
+          <text x="214" y="420" font-size="14" class="t-muted">Type an order</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">
+    <ul>
+      <li>Switch to screen share. Slide is a placeholder for the agenda and for recovery if the demo stalls.</li>
+      <li>Step 1 (3 min). Show the workspace. Open one or two real conversations, including the one where the agents helped plan tonight's session. "It looks like a team chat where some teammates are AI. It is a wedding kitchen where some cooks are AI."</li>
+      <li>Step 2 (5 min). Build one skill live. Paste a pre-written notebook page (do not type from scratch; it burns time and adds risk). Attach it to one agent. Show before and after: same request without the page, then with it. "Same cook. Our sambar now, not his."</li>
+      <li>Step 3 (2 min). Place one real order with an agent that takes a few minutes. Say aloud: "I am not going to stand at the counter. We will come back before Q&amp;A." Switch back to slides. The place-the-order-and-walk-away moment is the lesson.</li>
+      <li>Optional (2 min, only if ahead): show how AI search bots read santhoshguru.com live.</li>
+      <li>Fallback: recorded dry run in a second tab. If anything fails, switch within ten seconds and narrate over the recording. Do not debug live.</li>
+      <li>Skip entirely: how the agent is built, how files sync, anything GitHub. Agreed with Ravi. If asked, one sentence and offer the deep-dive session.</li>
+    </ul>
+  </aside>
+</section>
+
+<!-- ============================ 8. THE SUBSTITUTE COOK ============================ -->
+<section class="slide" id="s08-substitute" data-minutes="4">
+  <div class="slide-content">
+    <h2 class="title title--long reveal from-blur">The regular cook went native for Pongal. The substitute followed the same notebook. The sambar was <span class="hl">still different.</span></h2>
+    <div class="figure">
+      <svg viewBox="0 0 1200 420" role="img" aria-label="Two cooks at the same station under the same notebook page; a bowl of sambar with a warning mark; a tasting spoon catching it at the pass; an undo arrow bringing the first cook back">
+        <g class="reveal from-scale">
+          <use href="#page" x="505" y="0" width="190" height="228"/>
+          <text x="600" y="62" font-size="22" font-weight="800" text-anchor="middle" font-family="Fraunces,Georgia,serif">Our sambar</text>
+          <g class="t-hand" font-size="15" text-anchor="middle"><text x="600" y="92">drumstick,</text><text x="600" y="114">less tamarind,</text><text x="600" y="136">kadugu at the end.</text></g>
+          <line x1="300" y1="325" x2="900" y2="325" stroke="var(--line)" stroke-width="3"/>
+          <use href="#stove" x="550" y="235" width="100" height="90"/>
+        </g>
+        <g class="reveal from-left" style="transition-delay:.15s">
+          <use href="#cook" x="370" y="195" width="80" height="130" style="color:var(--red);opacity:.45"/>
+          <text x="410" y="160" font-size="17" font-weight="800" text-anchor="middle">the regular cook</text><text x="410" y="182" font-size="17" font-weight="800" text-anchor="middle" class="t-muted">away for Pongal</text>
+        </g>
+        <g class="reveal from-right" style="transition-delay:.3s">
+          <use href="#cook" x="750" y="195" width="80" height="130" style="color:var(--turmeric)"/>
+          <text x="790" y="182" font-size="17" font-weight="800" text-anchor="middle">the substitute</text>
+          <use href="#bowl" x="690" y="292" width="66" height="38"/>
+          <g class="pulse"><path d="M748 292 L800 292 L774 246Z" fill="var(--turmeric)" stroke="var(--line)" stroke-width="3" stroke-linejoin="round"/><text x="774" y="286" font-size="26" font-weight="800" text-anchor="middle">!</text></g>
+        </g>
+        <g class="reveal" style="transition-delay:.45s">
+          <path class="dash" d="M775 312 C 860 300, 930 260, 1000 200"/>
+          <use href="#you" x="1000" y="105" width="90" height="140"/>
+          <rect x="960" y="243" width="200" height="26" rx="6" fill="var(--surface2)" stroke="var(--line)" stroke-width="3"/>
+          <text x="1060" y="306" font-size="20" font-weight="800" text-anchor="middle">caught at tasting</text>
+          <text x="1060" y="332" font-size="17" font-weight="800" text-anchor="middle" class="t-muted">not on the leaf</text>
+        </g>
+        <g class="reveal" style="transition-delay:.6s">
+          <path d="M790 345 C 720 415, 480 415, 410 350" fill="none" stroke="var(--leaf)" stroke-width="4" stroke-linecap="round" marker-end="url(#arrow-leaf)"/>
+          <text x="600" y="412" font-size="17" font-weight="800" text-anchor="middle" class="t-leaf">undo: the regular cook comes back</text>
+        </g>
+      </svg>
+    </div>
+    <div class="points stagger">
+      <div class="pt">Same note, same notebook page, different cook, different result.</div>
+      <div class="pt">Caught at tasting, not on the leaf.</div>
+      <div class="pt">The note and the notebook protect you a lot. Tasting protects you completely.</div>
+    </div>
+  </div>
+  <aside class="notes">
+    <ul>
+      <li><mark>SANTHOSH: story specifics.</mark> Tell the actual story briefly: which model was swapped, which job it was doing, what changed in the output, how the review step caught it, and the decision to roll back.</li>
+      <li>The lesson is not "that cook was bad". It is that a cook's last kitchen (slide 2) shows up in real work even when the notebook is identical, and the only reason it did no damage is that someone tasted.</li>
+      <li>Second lesson: it is tempting to stop tasting once the last hundred dishes were fine. Do not. Reliability is what makes you stop looking, and that is exactly when a substitute lands.</li>
+      <li>This slide earns trust for everything before it. Do not skip it to save time. Cut the optional website aside on slide 7 instead.</li>
+    </ul>
+  </aside>
+</section>
+<!-- ============================ 9. START TONIGHT ============================ -->
+<section class="slide" id="s09-tonight" data-minutes="4">
+  <div class="slide-content">
+    <div class="two" style="grid-template-columns:minmax(0,1.3fr) minmax(0,1fr)">
+      <div class="reveal from-left">
+        <h2 class="title">One dish. One note. One kitchen. <span class="hl">One taste.</span></h2>
+        <p class="sub" style="margin-top:1rem;font-size:clamp(1.1rem,1.8vw,1.6rem)">That is the whole talk in miniature.</p>
+      </div>
+      <div class="phone reveal from-right" style="transition-delay:.15s">
+        <div class="stagger" style="display:contents">
+          <div class="step"><svg viewBox="0 0 60 26" preserveAspectRatio="xMidYMid meet"><use href="#leaf"/></svg><span><span class="k">1</span> Pick one dish you make every week (one recurring chore).</span></div>
+          <div class="step"><svg viewBox="0 0 100 120"><use href="#note"/><g stroke="var(--line)" stroke-width="3"><line x1="22" y1="40" x2="78" y2="40"/><line x1="22" y1="60" x2="78" y2="60"/><line x1="22" y1="80" x2="62" y2="80"/></g></svg><span><span class="k">2</span> Write one page about your house (your note at the door).</span></div>
+          <div class="step"><svg viewBox="0 0 100 90"><use href="#stove"/></svg><span><span class="k">3</span> Hand it to the one kitchen already on your phone (a ChatGPT Project or Custom GPT counts).</span></div>
+          <div class="step"><svg viewBox="0 0 60 20"><use href="#spoon"/></svg><span><span class="k">4</span> Taste. Fix it. Note what you fixed.</span></div>
+          <div class="step"><svg viewBox="0 0 100 120"><use href="#page"/><g stroke="var(--border)" stroke-width="3"><line x1="22" y1="45" x2="78" y2="45"/><line x1="22" y1="65" x2="78" y2="65"/><line x1="22" y1="85" x2="78" y2="85"/></g></svg><span><span class="k">5</span> Write what worked into the notebook. Reuse it next week.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">
+    <ul>
+      <li>Everything here can be done on a phone tonight with free or cheap tools. Say so.</li>
+      <li>Point back: step 3 is the kitchen. Step 2 is the note. Step 5 is the notebook page. Doing it for one dish, week after week, is one cook with one job. "You have just hired your first cook."</li>
+      <li>Before Q&amp;A, switch to screen share and check the order placed in slide 7. Show the result. If not done, show progress and say that is also normal.</li>
+    </ul>
+  </aside>
+</section>
+
+<!-- ============================ 10. Q&A RECAP ============================ -->
+<section class="slide slide--dark" id="s10-recap" data-minutes="15">
+  <div class="slide-content">
+    <h2 class="title reveal from-blur">Stop picking a winner. <span class="hl">Start assigning jobs.</span></h2>
+    <div class="figure reveal from-scale" style="transition-delay:.15s">
+      <svg viewBox="-70 0 1340 500" role="img" aria-label="The wedding kitchen from above, every element labelled: the cook (model), the kitchen (harness), the note at the door (context), the notebook page (skill), one cook one dish (agent), tasting (you)">
+        <rect x="250" y="30" width="700" height="440" rx="24" fill="var(--surface)" stroke="var(--border)" stroke-width="2"/>
+        <rect x="240" y="180" width="18" height="90" rx="3" fill="var(--turmeric)" stroke="var(--line)" stroke-width="2"/>
+        <use href="#note" x="270" y="196" width="44" height="53"/>
+        <g font-size="19" font-weight="800" text-anchor="middle">
+          <g><rect x="320" y="70" width="170" height="130" rx="12" fill="var(--surface2)" stroke="var(--border)" stroke-width="2"/><use href="#page" x="328" y="76" width="30" height="36"/><circle cx="405" cy="118" r="30" fill="var(--leaf)" stroke="var(--line)" stroke-width="2.5"/><circle cx="405" cy="118" r="19" fill="var(--leaf-dark)"/><use href="#top" x="452" y="76" width="30" height="30" style="color:var(--leaf)"/><text x="380" y="188">sambar</text></g>
+          <g><rect x="510" y="70" width="170" height="130" rx="12" fill="var(--surface2)" stroke="var(--border)" stroke-width="2"/><use href="#page" x="518" y="76" width="30" height="36"/><circle cx="595" cy="118" r="30" fill="var(--leaf)" stroke="var(--line)" stroke-width="2.5"/><circle cx="595" cy="118" r="19" fill="var(--leaf-dark)"/><use href="#top" x="642" y="76" width="30" height="30" style="color:var(--leaf)"/><text x="570" y="188">rasam</text></g>
+          <g><rect x="700" y="70" width="170" height="130" rx="12" fill="var(--surface2)" stroke="var(--border)" stroke-width="2"/><use href="#page" x="708" y="76" width="30" height="36"/><circle cx="785" cy="118" r="30" fill="var(--turmeric)" stroke="var(--line)" stroke-width="2.5"/><circle cx="785" cy="118" r="19" fill="var(--turmeric-light)"/><use href="#top" x="832" y="76" width="30" height="30" style="color:var(--leaf)"/><text x="760" y="188">vadai</text></g>
+          <g><rect x="320" y="230" width="170" height="130" rx="12" fill="var(--surface2)" stroke="var(--border)" stroke-width="2"/><use href="#page" x="328" y="236" width="30" height="36"/><circle cx="405" cy="278" r="30" fill="var(--leaf)" stroke="var(--line)" stroke-width="2.5"/><circle cx="405" cy="278" r="19" fill="var(--leaf-dark)"/><use href="#top" x="452" y="236" width="30" height="30" style="color:var(--leaf)"/><text x="380" y="348">payasam</text></g>
+          <g><rect x="510" y="230" width="170" height="130" rx="12" fill="var(--surface2)" stroke="var(--border)" stroke-width="2"/><use href="#page" x="518" y="236" width="30" height="36"/><circle cx="595" cy="278" r="30" fill="var(--turmeric)" stroke="var(--line)" stroke-width="2.5"/><circle cx="595" cy="278" r="19" fill="var(--turmeric-light)"/><use href="#top" x="642" y="236" width="30" height="30" style="color:var(--leaf)"/><text x="570" y="348">dosa</text></g>
+          <g><rect x="700" y="230" width="170" height="130" rx="12" fill="var(--surface2)" stroke="var(--red)" stroke-width="3.5"/><use href="#page" x="708" y="236" width="30" height="36"/><circle cx="785" cy="278" r="30" fill="var(--leaf)" stroke="var(--line)" stroke-width="2.5"/><circle cx="785" cy="278" r="19" fill="var(--leaf-dark)"/><use href="#top" x="832" y="236" width="30" height="30" style="color:var(--leaf)"/><text x="760" y="348">rice</text></g>
+        </g>
+        <rect x="320" y="392" width="550" height="26" rx="8" fill="var(--surface2)" stroke="var(--border)" stroke-width="2"/>
+        <use href="#top" x="570" y="426" width="50" height="50" style="color:var(--red)"/>
+        <g class="bob"><use href="#spoon" x="618" y="440" width="60" height="20"/></g>
+        <g stroke="var(--border)" stroke-width="2" stroke-dasharray="5 6" fill="none">
+          <path d="M200 112 L300 112 L436 168"/>
+          <path d="M200 250 L262 228"/>
+          <path d="M200 400 L250 400"/>
+          <path d="M1000 100 L775 92"/>
+          <path d="M1000 262 L876 262" style="stroke:var(--red)"/>
+          <path d="M1000 440 L625 452"/>
+        </g>
+        <g font-size="22" font-weight="800">
+          <text x="190" y="102" text-anchor="end">the cook</text><text x="190" y="128" text-anchor="end" class="t-term">(model)</text>
+          <text x="190" y="244" text-anchor="end">the note at the door</text><text x="190" y="270" text-anchor="end" class="t-term">(context)</text>
+          <text x="190" y="394" text-anchor="end">the kitchen</text><text x="190" y="420" text-anchor="end" class="t-term">(harness)</text>
+          <text x="1010" y="94" text-anchor="start">the notebook page</text><text x="1010" y="120" text-anchor="start" class="t-term">(skill)</text>
+          <text x="1010" y="256" text-anchor="start">one cook, one dish</text><text x="1010" y="282" text-anchor="start" class="t-term">(agent)</text>
+          <text x="1010" y="434" text-anchor="start">tasting</text><text x="1010" y="460" text-anchor="start" class="t-term">(you)</text>
+        </g>
+      </svg>
+    </div>
+    <div class="contact reveal" style="transition-delay:.3s"><span><b>Santhosh Guru</b></span><span>santhoshguru.com</span></div>
+  </div>
+  <aside class="notes">
+    <ul>
+      <li>Leave the labelled kitchen on screen for the whole Q&amp;A. It is the recap.</li>
+      <li>Likely questions, one-line answers:</li>
+      <li>"Which tool should I start with?" The kitchen already on your phone. The tool matters less than the one page you hand it.</li>
+      <li>"Is it safe to give AI my personal data?" Decide which shelf stays locked. Slide 6.</li>
+      <li>"How do I build a team like yours?" That is a deep-dive session. Tonight was the mental model. Offer to run it with Ravi if there is interest.</li>
+      <li>"Does this cost a lot?" The one-dish recipe is free. My wedding kitchen costs more, and I will say roughly what, because it replaced hours of work.</li>
+    </ul>
+  </aside>
+</section>
+<script>
+(function () {
+  const qs = new URLSearchParams(location.search);
+  const MODE = qs.has('presenter') ? 'presenter' : (qs.has('embed') ? 'embed' : 'deck');
+  const slides = [...document.querySelectorAll('.slide')];
+  const notes = slides.map(s => { const a = s.querySelector('.notes'); return a ? a.innerHTML : ''; });
+  const titles = slides.map(s => { const h = s.querySelector('h1,h2'); return h ? h.textContent.replace(/\s+/g, ' ').trim() : ''; });
+  const minutes = slides.map(s => +s.dataset.minutes || 0);
+  const cumulative = minutes.map((m, i) => minutes.slice(0, i + 1).reduce((a, b) => a + b, 0));
+  const BASE = location.href.split('#')[0].split('?')[0];
+  const pad = n => String(n).padStart(2, '0');
+  const fmt = s => pad(Math.floor(s / 60)) + ':' + pad(Math.floor(s % 60));
+
+  if (MODE === 'presenter') { buildPresenter(); return; }
+  document.documentElement.classList.add(MODE);
+
+  class Deck {
+    constructor() {
+      this.current = 0; this.n = slides.length; this.presWin = null;
+      this.observe(); this.keys(); this.progress(); this.dots(); this.messages();
+      const h = location.hash.match(/^#(\d+)$/); if (h) this.goTo(+h[1] - 1, true);
+    }
+    observe() {
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          e.target.classList.toggle('visible', e.isIntersecting);
+          if (e.isIntersecting) {
+            this.current = slides.indexOf(e.target);
+            this.update(); this.countUp(e.target); this.notify();
+          }
+        });
+      }, { threshold: 0.5 });
+      slides.forEach(s => io.observe(s));
+    }
+    countUp(slide) {
+      slide.querySelectorAll('[data-count]').forEach(el => {
+        if (el.dataset.done) return; el.dataset.done = '1';
+        const end = parseFloat(el.dataset.count), dur = 1100, t0 = performance.now();
+        if (MODE === 'embed') { el.textContent = end.toLocaleString(); return; }
+        (function tick(now) {
+          const p = Math.min(1, (now - t0) / dur), k = 1 - Math.pow(1 - p, 3);
+          el.textContent = Math.round(end * k).toLocaleString();
+          if (p < 1) requestAnimationFrame(tick);
+        })(t0);
+      });
+    }
+    keys() {
+      document.addEventListener('keydown', e => {
+        if (e.metaKey || e.ctrlKey || e.altKey) return;
+        if (['ArrowRight', 'ArrowDown', ' ', 'PageDown'].includes(e.key)) { e.preventDefault(); this.goTo(this.current + 1); }
+        else if (['ArrowLeft', 'ArrowUp', 'PageUp'].includes(e.key)) { e.preventDefault(); this.goTo(this.current - 1); }
+        else if (e.key === 'Home') { e.preventDefault(); this.goTo(0); }
+        else if (e.key === 'End') { e.preventDefault(); this.goTo(this.n - 1); }
+        else if ((e.key === 'p' || e.key === 'P') && MODE === 'deck') { e.preventDefault(); this.openPresenter(); }
+      });
+    }
+    goTo(i, instant) {
+      if (i < 0 || i >= this.n) return;
+      slides[i].scrollIntoView({ behavior: (instant || MODE === 'embed') ? 'instant' : 'smooth' });
+    }
+    progress() {
+      const bar = document.createElement('div'); bar.className = 'progress-bar';
+      bar.style.cssText = 'position:fixed;top:0;left:0;height:4px;background:var(--red);z-index:100;transition:width .3s ease;';
+      document.body.prepend(bar); this.bar = bar;
+    }
+    dots() {
+      const nav = document.createElement('nav'); nav.className = 'nav-dots';
+      nav.style.cssText = 'position:fixed;right:1.2rem;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:.5rem;z-index:100;';
+      slides.forEach((_, i) => {
+        const d = document.createElement('button'); d.setAttribute('aria-label', 'Slide ' + (i + 1));
+        d.style.cssText = 'width:9px;height:9px;border-radius:50%;border:none;background:var(--muted);opacity:.35;cursor:pointer;padding:0;transition:all .3s;';
+        d.addEventListener('click', () => this.goTo(i)); nav.appendChild(d);
+      });
+      document.body.appendChild(nav); this.dotEls = nav.querySelectorAll('button');
+    }
+    update() {
+      this.bar.style.width = ((this.current + 1) / this.n * 100) + '%';
+      this.dotEls.forEach((d, i) => { d.style.opacity = i === this.current ? '1' : '.35'; d.style.background = i === this.current ? 'var(--red)' : 'var(--muted)'; });
+    }
+    messages() {
+      window.addEventListener('message', e => {
+        const d = e.data || {};
+        if (d.type === 'goto') this.goTo(d.index, true);
+        if (d.type === 'hello' && e.source) { e.source.postMessage({ type: 'slide', index: this.current }, '*'); if (MODE === 'deck') this.presWin = e.source; }
+      });
+    }
+    notify() {
+      if (MODE !== 'deck') return;
+      if (this.presWin && !this.presWin.closed) this.presWin.postMessage({ type: 'slide', index: this.current }, '*');
+      try { localStorage.setItem('ai-nalla-ai-slide', JSON.stringify({ index: this.current, t: Date.now() })); } catch (_) {}
+    }
+    openPresenter() {
+      this.presWin = window.open(BASE + '?presenter=1', 'ai-nalla-ai-presenter', 'width=1280,height=800');
+    }
+  }
+  document.addEventListener('DOMContentLoaded', () => { window.deck = new Deck(); });
+  if (document.readyState !== 'loading') window.deck = new Deck();
+
+  function buildPresenter() {
+    document.documentElement.classList.add('presenter');
+    document.title = 'Presenter: ' + document.title;
+    document.body.innerHTML = `
+      <div class="pres">
+        <header>
+          <div><b>Stop picking a winner. Start assigning jobs.</b> &nbsp; AI Nalla AI, session 9</div>
+          <div class="timer" id="timer">00:00<small id="target"></small></div>
+          <div id="clock"></div>
+        </header>
+        <main>
+          <section class="cur">
+            <div class="frame"><iframe id="cur" src="${BASE}?embed=1" title="Current slide"></iframe></div>
+            <div class="meta"><span>Slide <b id="counter"></b></span><span id="budget"></span></div>
+          </section>
+          <section class="next"><h4>Next</h4><div class="frame"><iframe id="nxt" src="${BASE}?embed=1" title="Next slide"></iframe></div><div class="nexttitle" id="nexttitle"></div></section>
+          <section class="notes-wrap" style="min-height:0;display:flex;flex-direction:column"><h4>Notes</h4><div class="notes-box" id="notes"></div></section>
+        </main>
+        <footer><span>Arrows or space move both screens. R resets the timer. Timer starts on your first move.</span><span>Open the deck with P from the main window so the two stay linked.</span></footer>
+      </div>`;
+    const cur = document.getElementById('cur'), nxt = document.getElementById('nxt');
+    let index = 0, started = null;
+    const fit = () => document.querySelectorAll('.frame').forEach(f => { const fr = f.querySelector('iframe'); fr.style.transform = 'scale(' + (f.clientWidth / 1280) + ')'; });
+    window.addEventListener('resize', fit); fit();
+    const send = (w, i) => { try { w.contentWindow.postMessage({ type: 'goto', index: i }, '*'); } catch (_) {} };
+    function render() {
+      send(cur, index); send(nxt, Math.min(index + 1, slides.length - 1));
+      document.getElementById('counter').textContent = (index + 1) + ' / ' + slides.length;
+      document.getElementById('budget').textContent = minutes[index] + ' min for this slide, leave it by ' + fmt(cumulative[index] * 60);
+      document.getElementById('nexttitle').textContent = index + 1 < slides.length ? titles[index + 1] : 'End of deck';
+      nxt.style.opacity = index + 1 < slides.length ? '1' : '.25';
+      document.getElementById('notes').innerHTML = notes[index] || '<p>No notes.</p>';
+      document.getElementById('target').textContent = 'plan ' + fmt(cumulative[index] * 60);
+    }
+    function go(i, fromDeck) {
+      if (i < 0 || i >= slides.length) return;
+      index = i; if (!started) started = Date.now(); render();
+      if (!fromDeck && window.opener && !window.opener.closed) window.opener.postMessage({ type: 'goto', index: i }, '*');
+    }
+    document.addEventListener('keydown', e => {
+      if (['ArrowRight', 'ArrowDown', ' ', 'PageDown'].includes(e.key)) { e.preventDefault(); go(index + 1); }
+      else if (['ArrowLeft', 'ArrowUp', 'PageUp'].includes(e.key)) { e.preventDefault(); go(index - 1); }
+      else if (e.key === 'Home') go(0);
+      else if (e.key === 'End') go(slides.length - 1);
+      else if (e.key === 'r' || e.key === 'R') started = Date.now();
+    });
+    window.addEventListener('message', e => { const d = e.data || {}; if (d.type === 'slide' && typeof d.index === 'number') go(d.index, true); });
+    window.addEventListener('storage', e => { if (e.key === 'ai-nalla-ai-slide') { try { go(JSON.parse(e.newValue).index, true); } catch (_) {} } });
+    setInterval(() => {
+      const el = document.getElementById('timer'), t = started ? (Date.now() - started) / 1000 : 0;
+      el.firstChild.textContent = fmt(t);
+      el.classList.toggle('over', started && t > cumulative[index] * 60);
+      document.getElementById('clock').textContent = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    }, 500);
+    let ready = 0; [cur, nxt].forEach(f => f.addEventListener('load', () => { if (++ready === 2) render(); }));
+    if (window.opener && !window.opener.closed) window.opener.postMessage({ type: 'hello' }, '*');
+    render();
+  }
+})();
+</script>
+</body>
+</html>

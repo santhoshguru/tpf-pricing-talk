@@ -6,9 +6,17 @@ Speaker: Santhosh Guru.
 **Live:** https://santhoshguru.github.io/tpf-pricing-talk/
 
 ## What this is
-A single self-contained HTML slide deck (no build step, no framework). Open
-`index.html` in any browser. Navigate with arrow keys / space / scroll; progress
+Self-contained HTML slide decks (no build step, no framework). Open any of the
+HTML files in a browser. Navigate with arrow keys / space / scroll; progress
 bar on top, nav dots on the right.
+
+## Decks in this repo
+- `index.html` — What Pricing Pages Confess (TPF Chennai). Live at the URL above.
+- `ai-nalla-ai.html` — Stop picking a winner. Start assigning jobs. (AI Nalla AI
+  cohort, session 9). Live: https://santhoshguru.github.io/tpf-pricing-talk/ai-nalla-ai.html
+  Press `P` inside the deck to open the presenter window (current slide, next
+  slide, notes, timer). Full speaker notes also in `ai-nalla-ai-notes.md`.
+- `webgility-deck.html` — password-protected interview deck (StatiCrypt).
 
 ## Structure
 - `index.html` — the entire deck (HTML + CSS + JS inline). A `SLIDE INDEX` with
