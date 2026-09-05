@@ -69,7 +69,7 @@ Kitchen line: The notebook page: our sambar, drumstick, less tamarind, kadugu at
 
 ## Slide 6. An agent is a model, in a harness, with your context and one skill, doing one job. (4 min)
 
-Kitchen line: One cook, one stove, one notebook page, one dish. Nobody asks the payasam master to fry vadai.
+Kitchen line: One cook, one stove, one notebook page, one dish. Nobody asks the barotta master to make Tirunelveli alwa.
 
 - Stack the definitions: a model, in a harness, with your context and one skill, doing one job. Nothing new was added. The last four slides were combined.
 - Why one job each: an agent with one job is easier to trust and easier to check. This is the mix-and-match idea in the title. Different stations can use different models. Stop picking a winner, start assigning jobs.
